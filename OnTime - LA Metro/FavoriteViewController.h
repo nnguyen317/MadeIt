@@ -1,0 +1,23 @@
+//
+//  FavoriteViewController.h
+//  OnTime - LA Metro
+//
+//  Created by Nam Nguyen on 1/12/14.
+//  Copyright (c) 2014 Nam Nguyen. All rights reserved.
+//
+
+#import <UIKit/UIKit.h>
+#import "Favorites.h"
+#import "AppDelegate.h"
+#import "Metro.h"
+#import "StopTimes.h"
+#import "StopArrivalTimeCell.h"
+#import "MEDynamicTransition.h"
+
+@interface FavoriteViewController : UITableViewController <ECSlidingViewControllerDelegate>
+@property (nonatomic,strong) NSManagedObjectContext* managedObjectContext;
+@property (nonatomic) IBOutlet UIBarButtonItem* revealButtonItem;
+@property (weak, nonatomic) IBOutlet UINavigationItem *navBarItem;
+@property (nonatomic, strong) MEDynamicTransition *dynamicTransition;
+
+@end

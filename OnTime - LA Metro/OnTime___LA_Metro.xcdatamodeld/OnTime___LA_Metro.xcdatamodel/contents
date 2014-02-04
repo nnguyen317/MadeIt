@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="3401" systemVersion="13A603" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="Favorites" representedClassName="Favorites" syncable="YES">
+        <attribute name="agency_id" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="direction_id" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="route_id" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="stop_id" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="stop_name" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="Favorites" positionX="160" positionY="192" width="128" height="118"/>
+    </elements>
+</model>
