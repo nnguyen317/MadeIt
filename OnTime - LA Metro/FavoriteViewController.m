@@ -32,14 +32,7 @@
 @synthesize managedObjectContext = _managedObjectContext;
 @synthesize revealButtonItem = _revealButtonItem;
 
-- (id)initWithStyle:(UITableViewStyle)style
-{
-    self = [super initWithStyle:style];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
+
 
 - (UIPanGestureRecognizer *)dynamicTransitionPanGesture {
     if (_dynamicTransitionPanGesture) return _dynamicTransitionPanGesture;

@@ -96,6 +96,8 @@
 		04D7BE3D1886EC4800D32902 /* reveal-icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04D7BE391886EC4800D32902 /* reveal-icon@2x.png */; };
 		3D10F33D18959B7100D463D5 /* SideBarCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D10F33C18959B7100D463D5 /* SideBarCell.m */; };
 		3D10F33E18959B7100D463D5 /* SideBarCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D10F33C18959B7100D463D5 /* SideBarCell.m */; };
+		3D2D2F1818A0B04E00C1D44E /* FavoritesCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D2D2F1718A0B04E00C1D44E /* FavoritesCell.m */; };
+		3D2D2F1918A0B04E00C1D44E /* FavoritesCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D2D2F1718A0B04E00C1D44E /* FavoritesCell.m */; };
 		3D30279E188342C300DB90A7 /* Favorites.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D30279D188342C300DB90A7 /* Favorites.m */; };
 		3D30279F188342C300DB90A7 /* Favorites.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D30279D188342C300DB90A7 /* Favorites.m */; };
 		3D4EF3E8186E0A9100907761 /* StationsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D4EF3E7186E0A9100907761 /* StationsCell.m */; };
@@ -220,6 +222,8 @@
 		04D7BE391886EC4800D32902 /* reveal-icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "reveal-icon@2x.png"; sourceTree = "<group>"; };
 		3D10F33B18959B7100D463D5 /* SideBarCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SideBarCell.h; sourceTree = "<group>"; };
 		3D10F33C18959B7100D463D5 /* SideBarCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SideBarCell.m; sourceTree = "<group>"; };
+		3D2D2F1618A0B04E00C1D44E /* FavoritesCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FavoritesCell.h; sourceTree = "<group>"; };
+		3D2D2F1718A0B04E00C1D44E /* FavoritesCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FavoritesCell.m; sourceTree = "<group>"; };
 		3D30279C188342C300DB90A7 /* Favorites.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Favorites.h; sourceTree = "<group>"; };
 		3D30279D188342C300DB90A7 /* Favorites.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Favorites.m; sourceTree = "<group>"; };
 		3D4EF3E6186E0A9100907761 /* StationsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StationsCell.h; sourceTree = "<group>"; };
@@ -479,6 +483,8 @@
 				04832536188D7C7800FE2C30 /* StopSequenceCell.m */,
 				3D10F33B18959B7100D463D5 /* SideBarCell.h */,
 				3D10F33C18959B7100D463D5 /* SideBarCell.m */,
+				3D2D2F1618A0B04E00C1D44E /* FavoritesCell.h */,
+				3D2D2F1718A0B04E00C1D44E /* FavoritesCell.m */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -589,6 +595,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3D2D2F1818A0B04E00C1D44E /* FavoritesCell.m in Sources */,
 				3DFAD04C185C1D9F000F3854 /* StopsViewController.m in Sources */,
 				3D30279E188342C300DB90A7 /* Favorites.m in Sources */,
 				04077E43185BB98F0076E6F8 /* AppDelegate.m in Sources */,
@@ -656,6 +663,7 @@
 				0475317C189EB02600E34BDF /* MEDynamicTransition.m in Sources */,
 				04077E5C185BB98F0076E6F8 /* OnTime___LA_MetroTests.m in Sources */,
 				0427900118620D5D000717FA /* SearchDatabase.m in Sources */,
+				3D2D2F1918A0B04E00C1D44E /* FavoritesCell.m in Sources */,
 				042790051862200C000717FA /* Agency.m in Sources */,
 				04C8C138188C5C5200905637 /* TweetFeedCell.m in Sources */,
 				04C8C12E188C496500905637 /* MetroTwitterFeed.m in Sources */,

@@ -14,10 +14,11 @@
 #import "StopArrivalTimeCell.h"
 #import "MEDynamicTransition.h"
 
-@interface FavoriteViewController : UITableViewController <ECSlidingViewControllerDelegate>
+@interface FavoriteViewController : UIViewController <UITableViewDataSource, UITableViewDelegate,ECSlidingViewControllerDelegate>
 @property (nonatomic,strong) NSManagedObjectContext* managedObjectContext;
 @property (nonatomic) IBOutlet UIBarButtonItem* revealButtonItem;
 @property (weak, nonatomic) IBOutlet UINavigationItem *navBarItem;
 @property (nonatomic, strong) MEDynamicTransition *dynamicTransition;
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
 
 @end
