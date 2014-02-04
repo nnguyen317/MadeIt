@@ -98,8 +98,9 @@
 		3D10F33E18959B7100D463D5 /* SideBarCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D10F33C18959B7100D463D5 /* SideBarCell.m */; };
 		3D2D2F1818A0B04E00C1D44E /* FavoritesCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D2D2F1718A0B04E00C1D44E /* FavoritesCell.m */; };
 		3D2D2F1918A0B04E00C1D44E /* FavoritesCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D2D2F1718A0B04E00C1D44E /* FavoritesCell.m */; };
-		3D30279E188342C300DB90A7 /* Favorites.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D30279D188342C300DB90A7 /* Favorites.m */; };
-		3D30279F188342C300DB90A7 /* Favorites.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D30279D188342C300DB90A7 /* Favorites.m */; };
+		3D2D2F1A18A0C1A200C1D44E /* OnTime___LA_Metro.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 04077E44185BB98F0076E6F8 /* OnTime___LA_Metro.xcdatamodeld */; };
+		3D2D2F1D18A0C61F00C1D44E /* Favorites.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D2D2F1C18A0C61F00C1D44E /* Favorites.m */; };
+		3D2D2F1E18A0C61F00C1D44E /* Favorites.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D2D2F1C18A0C61F00C1D44E /* Favorites.m */; };
 		3D4EF3E8186E0A9100907761 /* StationsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D4EF3E7186E0A9100907761 /* StationsCell.m */; };
 		3D4EF3E9186E0A9100907761 /* StationsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D4EF3E7186E0A9100907761 /* StationsCell.m */; };
 		3D619CF01888EF5100E70205 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D619CEE1888EE0100E70205 /* QuartzCore.framework */; };
@@ -224,8 +225,8 @@
 		3D10F33C18959B7100D463D5 /* SideBarCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SideBarCell.m; sourceTree = "<group>"; };
 		3D2D2F1618A0B04E00C1D44E /* FavoritesCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FavoritesCell.h; sourceTree = "<group>"; };
 		3D2D2F1718A0B04E00C1D44E /* FavoritesCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FavoritesCell.m; sourceTree = "<group>"; };
-		3D30279C188342C300DB90A7 /* Favorites.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Favorites.h; sourceTree = "<group>"; };
-		3D30279D188342C300DB90A7 /* Favorites.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Favorites.m; sourceTree = "<group>"; };
+		3D2D2F1B18A0C61F00C1D44E /* Favorites.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Favorites.h; sourceTree = "<group>"; };
+		3D2D2F1C18A0C61F00C1D44E /* Favorites.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Favorites.m; sourceTree = "<group>"; };
 		3D4EF3E6186E0A9100907761 /* StationsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StationsCell.h; sourceTree = "<group>"; };
 		3D4EF3E7186E0A9100907761 /* StationsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StationsCell.m; sourceTree = "<group>"; };
 		3D619CEE1888EE0100E70205 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
@@ -332,8 +333,6 @@
 				04077E42185BB98F0076E6F8 /* AppDelegate.m */,
 				04077E65185BB9C60076E6F8 /* MainStoryboard.storyboard */,
 				04077E47185BB98F0076E6F8 /* Images.xcassets */,
-				3D30279C188342C300DB90A7 /* Favorites.h */,
-				3D30279D188342C300DB90A7 /* Favorites.m */,
 				04077E44185BB98F0076E6F8 /* OnTime___LA_Metro.xcdatamodeld */,
 				04077E39185BB98F0076E6F8 /* Supporting Files */,
 				04077E6C185D8B520076E6F8 /* MetroModel.xcdatamodeld */,
@@ -451,6 +450,8 @@
 			isa = PBXGroup;
 			children = (
 				3DFAD056185E4097000F3854 /* Route.h */,
+				3D2D2F1B18A0C61F00C1D44E /* Favorites.h */,
+				3D2D2F1C18A0C61F00C1D44E /* Favorites.m */,
 				3DFAD057185E4097000F3854 /* Route.m */,
 				3DFAD05F185E63B2000F3854 /* Stop.h */,
 				3DFAD060185E63B2000F3854 /* Stop.m */,
@@ -597,7 +598,6 @@
 			files = (
 				3D2D2F1818A0B04E00C1D44E /* FavoritesCell.m in Sources */,
 				3DFAD04C185C1D9F000F3854 /* StopsViewController.m in Sources */,
-				3D30279E188342C300DB90A7 /* Favorites.m in Sources */,
 				04077E43185BB98F0076E6F8 /* AppDelegate.m in Sources */,
 				3D95BB091887A64700F334C1 /* MenuViewController.m in Sources */,
 				0467B4D5187D246100495813 /* AddFavoritesViewController.m in Sources */,
@@ -609,6 +609,7 @@
 				3D8D9C991894397900096E46 /* NewsFeedViewController.m in Sources */,
 				047730F41866C3E7003FEBDC /* StopTimeViewController.m in Sources */,
 				04077E3F185BB98F0076E6F8 /* main.m in Sources */,
+				3D2D2F1D18A0C61F00C1D44E /* Favorites.m in Sources */,
 				0483253B188D7D4900FE2C30 /* StopSequenceViewController.m in Sources */,
 				0475317F189EB97200E34BDF /* METransitions.m in Sources */,
 				04077E6E185D8B520076E6F8 /* MetroModel.xcdatamodeld in Sources */,
@@ -649,6 +650,7 @@
 			files = (
 				04753180189EB97200E34BDF /* METransitions.m in Sources */,
 				04A3E708188283FF0056603F /* FavoriteViewController.m in Sources */,
+				3D2D2F1A18A0C1A200C1D44E /* OnTime___LA_Metro.xcdatamodeld in Sources */,
 				3D4EF3E9186E0A9100907761 /* StationsCell.m in Sources */,
 				3DFAD04D185C1D9F000F3854 /* StopsViewController.m in Sources */,
 				3D75C60C189DAFE5009FBE6D /* AllStopTimeViewController.m in Sources */,
@@ -680,10 +682,10 @@
 				04077E87185E268B0076E6F8 /* FMResultSet.m in Sources */,
 				04832538188D7C7800FE2C30 /* StopSequenceCell.m in Sources */,
 				04077E83185E268B0076E6F8 /* FMDatabaseAdditions.m in Sources */,
-				3D30279F188342C300DB90A7 /* Favorites.m in Sources */,
 				0427900918622BD8000717FA /* AgencyViewController.m in Sources */,
 				04077E6F185D8B520076E6F8 /* MetroModel.xcdatamodeld in Sources */,
 				047730F118662696003FEBDC /* StopTimes.m in Sources */,
+				3D2D2F1E18A0C61F00C1D44E /* Favorites.m in Sources */,
 				04753170189E567200E34BDF /* ECSlidingSegue.m in Sources */,
 				0475316C189E567200E34BDF /* ECSlidingAnimationController.m in Sources */,
 				3DFAD062185E63B2000F3854 /* Stop.m in Sources */,

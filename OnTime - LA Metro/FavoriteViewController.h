@@ -20,5 +20,7 @@
 @property (weak, nonatomic) IBOutlet UINavigationItem *navBarItem;
 @property (nonatomic, strong) MEDynamicTransition *dynamicTransition;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (weak, nonatomic) IBOutlet UISegmentedControl *segmentedControl;
+- (IBAction)control:(id)sender;
 
 @end

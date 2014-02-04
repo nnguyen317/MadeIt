@@ -20,6 +20,8 @@
 @property (nonatomic, strong) UITextField *pickerViewTextField;
 @property (nonatomic, strong) NSMutableArray *pickerContainer;
 @property (nonatomic, strong) UIPickerView *pickerView;
+@property (nonatomic, strong) NSMutableArray *boundList;
+@property (nonatomic, strong) NSString *trip_headsign;
 @property int lastTag;
 
 
@@ -44,6 +46,8 @@
 @synthesize agency = _agency;
 @synthesize stops = _stops;
 @synthesize routes = _routes;
+@synthesize boundList = _boundList;
+@synthesize trip_headsign = _trip_headsign;
 
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -126,8 +130,10 @@
             }
             break;
         case 103:
-            [tempArray addObject:@"0"];
-            [tempArray addObject:@"1"];
+            self.boundList = [metro getStopBounds:self.routes.routeId];
+            for (int i=0; i<self.boundList.count; i++) {
+                [tempArray addObject:self.boundList[i][@"trip_headsign"]];
+            }
             break;
         default:
             break;
@@ -161,7 +167,7 @@
     BOOL update = YES;
     
     for (Favorites *favorites in stationArray) {
-        if([favorites.route_id isEqualToString:routeId] && [favorites.agency_id isEqualToString:agencyId] && [favorites.direction_id isEqualToString:directionId] && [favorites.stop_id isEqualToString:stopId]){
+        if([favorites.route_id isEqualToString:routeId] && [favorites.agency_id isEqualToString:agencyId] && [favorites.direction_id isEqualToString:directionId] && [favorites.stop_id isEqualToString:stopId] && [favorites.trip_headsign isEqualToString:self.trip_headsign]){
             update = NO;
         }
     }
@@ -174,8 +180,10 @@
         newEntry.route_id = routeId;
         newEntry.stop_id = stopId;
         newEntry.stop_name = stopName;
-        newEntry.direction_id = directionId;
+        newEntry.direction_id = [NSString stringWithFormat:@"%@",directionId];
+        newEntry.trip_headsign = self.trip_headsign;
     }
+    
     if (![self.managedObjectContext save:&error]) {
         NSLog(@"Whoops, couldn't save: %@", [error localizedDescription]);
     }
@@ -233,7 +241,8 @@
             break;
         case 103:
             [_directionButton setTitle:_pickerContainer[row] forState:UIControlStateNormal];
-            directionId = _pickerContainer[row];
+            self.trip_headsign = self.boundList[row][@"trip_headsign"];
+            directionId = self.boundList[row][@"direction_id"];
             break;
         default:
             break;

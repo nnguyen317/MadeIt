@@ -6,8 +6,9 @@
         <attribute name="route_id" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="stop_id" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="stop_name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="trip_headsign" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Favorites" positionX="160" positionY="192" width="128" height="118"/>
+        <element name="Favorites" positionX="0" positionY="0" width="0" height="0"/>
     </elements>
 </model>

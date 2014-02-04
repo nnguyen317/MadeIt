@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface FavoritesCell : UITableViewCell
+@property (weak, nonatomic) IBOutlet UILabel *directionBoundLabel;
 
 @end

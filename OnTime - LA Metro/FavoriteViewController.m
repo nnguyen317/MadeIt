@@ -12,6 +12,8 @@
 #import "UIViewController+ECSlidingViewController.h"
 #import "MEDynamicTransition.h"
 #import "METransitions.h"
+#import "FavoritesCell.h"
+#import "AllStopTimeViewController.h"
 
 @interface FavoriteViewController ()
 {
@@ -25,14 +27,16 @@
 @property (nonatomic, strong) NSArray *stationList;
 @property (nonatomic, strong) UIPanGestureRecognizer *dynamicTransitionPanGesture;
 @property (nonatomic, strong) METransitions *transitions;
+@property (nonatomic, strong) NSArray *segmentItems;
+@property (nonatomic, strong) NSString *selectedSegment;
 
 @end
 
 @implementation FavoriteViewController
 @synthesize managedObjectContext = _managedObjectContext;
 @synthesize revealButtonItem = _revealButtonItem;
-
-
+@synthesize segmentItems = _segmentItems;
+@synthesize selectedSegment = _selectedSegment;
 
 - (UIPanGestureRecognizer *)dynamicTransitionPanGesture {
     if (_dynamicTransitionPanGesture) return _dynamicTransitionPanGesture;
@@ -46,12 +50,9 @@
 {
     [super viewDidLoad];
 
-    
+    self.segmentItems = @[@"Current",@"All"];
+    self.selectedSegment = self.segmentItems[0];
 
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
- 
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
 }
 
 
@@ -81,20 +82,26 @@
     }
     
     [self getTableData];
+    
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
     [timer invalidate];
-    timerContainer = [[NSMutableArray alloc] init];
-    [self.tableView reloadData];
-    [self startTimer];
+    
+    NSArray *cells = [self.tableView visibleCells];
+    
+    if (![self.selectedSegment isEqualToString:@"All"]) {
+        for(id cell in cells){
+            if ([cell isKindOfClass:[StopArrivalTimeCell class]]) {
+                [cell endTimer];
+            }
+        }
+    }
 }
 
 - (IBAction)revealMenu:(id)sender
 {
     [self.slidingViewController anchorTopViewToRightAnimated:YES];
-}
-
-- (void)viewWillDisappear:(BOOL)animated
-{
-    [timer invalidate];
 }
 
 - (void)didReceiveMemoryWarning
@@ -118,54 +125,74 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"StopTimeCell";
-    StopArrivalTimeCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
-    timerSeconds = 0;
+    id cell = nil;
     
-    if (cell == nil) {
-        cell = [[StopArrivalTimeCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-    }
-    
-    // Configure the cell...
-    [cell endTimer];
-    StopTimes *stopTimes = tableData[indexPath.section];
-    Metro *metro = [[Metro alloc] init];
-    
-    if (stopTimes) {
-        int arrivalTotalSeconds = 0;
-        NSString *arrivalTime = stopTimes.arrivalTime;
-        arrivalTotalSeconds = [metro getTotalSecondsFromDate:arrivalTime];
+    if ([self.selectedSegment isEqualToString:@"Current"]) {
+        CellIdentifier = @"StopTimeCell";
+        StopArrivalTimeCell *newCell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+        timerSeconds = 0;
         
-        if(arrivalTotalSeconds >= 86400) {
-            arrivalTotalSeconds -= 86400;
+        if (newCell == nil) {
+            newCell = [[StopArrivalTimeCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
         }
         
-        cell.totalSeconds = arrivalTotalSeconds;
-        int currHours   = arrivalTotalSeconds / 3600;
-        int currMinute = (arrivalTotalSeconds / 60) % 60;
-        int currSeconds = arrivalTotalSeconds % 60;
+        // Configure the cell...
+        [cell endTimer];
+        StopTimes *stopTimes = tableData[indexPath.section];
+        Metro *metro = [[Metro alloc] init];
         
-        
-        if(arrivalTotalSeconds > grandTotalSeconds ){
-            NSString *timerText = [NSString stringWithFormat:@"%02d%@%02d%@%02d",currHours,@":",currMinute,@":",currSeconds];
-            cell.arrivalTimerLabel.textColor = [UIColor blackColor];
-            cell.arrivalTimeLabel.textColor = [UIColor blackColor];
-            cell.directionBoundLabel.textColor = [UIColor blackColor];
-            cell.arrivalTimerLabel.text = timerText;
-            cell.arrivalTimeLabel.text = [NSString stringWithFormat:@"Arrival time: %@",[metro convertToTime:[stopTimes.arrivalTime integerValue]]];
-            cell.directionBoundLabel.text = [NSString stringWithFormat:@"%@ Bound",stopTimes.tripHeadsign];
-            cell.directionId = stopTimes.directionId;
-            cell.currHours = currHours;
-            cell.currMinutes = currMinute;
-            cell.currSeconds = currSeconds;
+        if (stopTimes) {
+            int arrivalTotalSeconds = 0;
+            NSString *arrivalTime = stopTimes.arrivalTime;
+            arrivalTotalSeconds = [metro getTotalSecondsFromDate:arrivalTime];
             
-            NSDictionary *favoritesSection = @{@"totalSeconds":[NSNumber numberWithInt:arrivalTotalSeconds],
-                                               @"startTimer":[NSNumber numberWithInt:0],
-                                               };
-            [timerContainer addObject:favoritesSection];
-            [cell startTimer];
+            if(arrivalTotalSeconds >= 86400) {
+                arrivalTotalSeconds -= 86400;
+            }
+            
+            newCell.totalSeconds = arrivalTotalSeconds;
+            int currHours   = arrivalTotalSeconds / 3600;
+            int currMinute = (arrivalTotalSeconds / 60) % 60;
+            int currSeconds = arrivalTotalSeconds % 60;
+            
+            
+            if(arrivalTotalSeconds > grandTotalSeconds ){
+                NSString *timerText = [NSString stringWithFormat:@"%02d%@%02d%@%02d",currHours,@":",currMinute,@":",currSeconds];
+                newCell.arrivalTimerLabel.textColor = [UIColor blackColor];
+                newCell.arrivalTimeLabel.textColor = [UIColor blackColor];
+                newCell.directionBoundLabel.textColor = [UIColor blackColor];
+                newCell.arrivalTimerLabel.text = timerText;
+                newCell.arrivalTimeLabel.text = [NSString stringWithFormat:@"Arrival time: %@",[metro convertToTime:[stopTimes.arrivalTime integerValue]]];
+                newCell.directionBoundLabel.text = [NSString stringWithFormat:@"%@ Bound",stopTimes.tripHeadsign];
+                newCell.directionId = stopTimes.directionId;
+                newCell.currHours = currHours;
+                newCell.currMinutes = currMinute;
+                newCell.currSeconds = currSeconds;
+                
+                NSDictionary *favoritesSection = @{@"totalSeconds":[NSNumber numberWithInt:arrivalTotalSeconds],
+                                                   @"startTimer":[NSNumber numberWithInt:0],
+                                                   };
+                [timerContainer addObject:favoritesSection];
+                [newCell startTimer];
+            }
+            
             
         }
         
+        cell = newCell;
+        
+    } else if ([self.selectedSegment isEqualToString:@"All"]) {
+        CellIdentifier = @"allTimes";
+        FavoritesCell *newCell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+        if (newCell == nil) {
+            newCell = [[FavoritesCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+        }
+        
+        Favorites *favorite = tableData[indexPath.section];
+        
+        newCell.directionBoundLabel.text = [NSString stringWithFormat:@"%@ Bound",favorite.trip_headsign];
+        
+        cell = newCell;
     }
     
     return cell;
@@ -173,8 +200,15 @@
 
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-    StopTimes *stopTime = tableData[section];
-    return stopTime.stopName;
+    NSString *stop_name = [[NSString alloc]init];
+    if ([self.selectedSegment isEqualToString:@"Current"]) {
+        StopTimes *stopTime = tableData[section];
+        stop_name = stopTime.stopName;
+    } else {
+        Favorites *favorite = tableData[section];
+        stop_name = favorite.stop_name;
+    }
+    return stop_name;
 }
 
 - (void) getTableData {
@@ -193,12 +227,26 @@
     tableData = [[NSMutableArray alloc] init];
     grandTotalSeconds = 0;
     for (Favorites *favorites in _stationList) {
-        NSMutableArray *stopTimeArray = [metro getArrivalTimeFromStopSingle:favorites.route_id withStopId:favorites.stop_id andDirectionId:favorites.direction_id forAgency:favorites.agency_id forDatabase:favorites.agency_id];
-        if(stopTimeArray.count > 0){
-            StopTimes *stopTimes = stopTimeArray[0];
-            [tableData addObject:stopTimes];
+        
+        if ([self.selectedSegment isEqualToString:@"Current"]) {
+            NSMutableArray *stopTimeArray = [metro getArrivalTimeFromStopSingle:favorites.route_id withStopId:favorites.stop_id andDirectionId:favorites.direction_id forAgency:favorites.agency_id forDatabase:favorites.agency_id];
+            if(stopTimeArray.count > 0){
+                StopTimes *stopTimes = [stopTimeArray firstObject];
+                [tableData addObject:stopTimes];
+            }
+        } else {
+            [tableData addObject:favorites];
         }
     }
+    
+    [timer invalidate];
+    timerContainer = [[NSMutableArray alloc] init];
+    [self.tableView reloadData];
+    
+    if ([self.selectedSegment isEqualToString:@"Current"]) {
+        [self startTimer];
+    }
+    
     
     
 }
@@ -229,21 +277,19 @@
 {
                 NSArray *cells = [self.tableView visibleCells];
                 for (StopArrivalTimeCell *cell in cells) {
-                    if(cell.totalSeconds <= 0){
-                        cell.arrivalTimerLabel.textColor = [UIColor grayColor];
-                        cell.arrivalTimeLabel.textColor = [UIColor grayColor];
-                        cell.directionBoundLabel.textColor = [UIColor grayColor];
-                        [self performSelector:@selector(deleteRow) withObject:nil afterDelay:10];
-                        break;
-                    } else {
-                    }
+                        if(cell.totalSeconds <= 0){
+                            cell.arrivalTimerLabel.textColor = [UIColor grayColor];
+                            cell.arrivalTimeLabel.textColor = [UIColor grayColor];
+                            cell.directionBoundLabel.textColor = [UIColor grayColor];
+                            [self performSelector:@selector(deleteRow) withObject:nil afterDelay:10];
+                            break;
+                        } else {
+                        }
                 }
 }
 
 -(void)deleteRow{
     NSArray *cells = [self.tableView visibleCells];
-    
-    int index = 0;
     
     for (StopArrivalTimeCell *cell in cells)
     {
@@ -254,15 +300,13 @@
         if(totalCellSeconds <= 0){
             [self getTableData];
             NSMutableArray *indexes = [[NSMutableArray alloc] init];
-
-            [indexes addObject:[NSIndexPath indexPathForRow:0 inSection:index]];
+            NSIndexPath *cellIndexPath = [self.tableView indexPathForCell:cell];
+            [indexes addObject:cellIndexPath];
             [self.tableView beginUpdates];
             [self.tableView insertRowsAtIndexPaths:indexes withRowAnimation:UITableViewRowAnimationFade];
             [self.tableView deleteRowsAtIndexPaths:indexes withRowAnimation:UITableViewRowAnimationFade];
             [self.tableView endUpdates];
             break;
-        } else {
-            index++;
         }
     }
 }
@@ -276,57 +320,39 @@
         StopSequenceViewController *stopSequenceController = [segue destinationViewController];
         stopSequenceController.stopTimes = stopTimes;
         stopSequenceController.stopTimes.routeId = favorites.route_id;
+        stopSequenceController.stopTimes.stopId = favorites.stop_id;
+    } else if([segue.identifier isEqualToString:@"listTimes"]) {
+        NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
+        Favorites *favorites = tableData[indexPath.section];
+        StopTimes *stopTimes = [[StopTimes alloc]init];
+        AllStopTimeViewController *allStopTimeController = [segue destinationViewController];
+        allStopTimeController.navItem.title = favorites.stop_name;
+        allStopTimeController.bounds = @{@"trip_headsign":favorites.trip_headsign,@"direction_id":favorites.direction_id};
+        allStopTimeController.stopTimes = stopTimes;
+        allStopTimeController.stopTimes.routeId = favorites.route_id;
+        allStopTimeController.stopTimes.stopId = favorites.stop_id;
     }
 }
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
+
+- (IBAction)control:(id)sender {
+    UISegmentedControl *segmentedControl = (UISegmentedControl *)sender;
+    if (![self.segmentItems[segmentedControl.selectedSegmentIndex] isEqualToString:self.selectedSegment]) {
+        self.selectedSegment = self.segmentItems[segmentedControl.selectedSegmentIndex];
+        
+        if ([self.segmentItems[segmentedControl.selectedSegmentIndex] isEqualToString:@"All"]){
+            if([self.tableView numberOfRowsInSection:0] > 0){
+                NSArray *cells = [self.tableView visibleCells];
+                
+                for(id cell in cells){
+                    if ([cell isKindOfClass:[StopArrivalTimeCell class]]) {
+                        [cell endTimer];
+                    }
+                }
+            }
+        }
+        
+        [self getTableData];
+    }
 }
-*/
-
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    }   
-    else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
-{
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
-
-/*
-#pragma mark - Navigation
-
-// In a story board-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-
- */
 
 @end

@@ -96,6 +96,9 @@
                                     <segment title="Current"/>
                                     <segment title="All"/>
                                 </segments>
+                                <connections>
+                                    <action selector="control:" destination="aEv-pR-hFa" eventType="valueChanged" id="I6c-Wi-lxi"/>
+                                </connections>
                             </segmentedControl>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="JSr-bO-POB">
                                 <rect key="frame" x="0.0" y="95" width="320" height="385"/>
@@ -143,7 +146,7 @@
                                             <segue destination="Hza-kP-flG" kind="push" identifier="showStopTimes" id="Tgw-NI-aog"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="StopTimeCell" id="f8O-ib-F7I" customClass="StopArrivalTimeCell">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="allTimes" id="f8O-ib-F7I" customClass="FavoritesCell">
                                         <rect key="frame" x="0.0" y="66" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="f8O-ib-F7I" id="uRM-em-y7D">
@@ -166,7 +169,8 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <outlet property="directionBoundLabel" destination="cG1-Ws-fNe" id="3G7-yc-Dex"/>
+                                            <outlet property="directionBoundLabel" destination="cG1-Ws-fNe" id="wWT-N1-eZI"/>
+                                            <segue destination="hGW-fM-7la" kind="push" identifier="listTimes" id="Ij1-Ta-BCa"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -189,6 +193,7 @@
                     <connections>
                         <outlet property="navBarItem" destination="YAg-yD-U0g" id="71N-hL-9xc"/>
                         <outlet property="revealButtonItem" destination="M2q-1L-XPV" id="pRy-vF-2vh"/>
+                        <outlet property="segmentedControl" destination="EeS-8j-48t" id="ZaQ-sw-Ksv"/>
                         <outlet property="tableView" destination="JSr-bO-POB" id="lhf-iv-1IW"/>
                     </connections>
                 </viewController>
@@ -437,7 +442,7 @@
             <objects>
                 <tableViewController id="hGW-fM-7la" customClass="AllStopTimeViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="e3n-ad-1Se">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="431"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
@@ -456,7 +461,7 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pwv-QM-glZ">
-                                            <rect key="frame" x="227" y="11" width="73" height="21"/>
+                                            <rect key="frame" x="214" y="11" width="73" height="21"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                             <nil key="highlightedColor"/>
@@ -483,7 +488,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="00C-YE-M0W" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2311" y="301"/>
+            <point key="canvasLocation" x="2208" y="-42"/>
         </scene>
         <!--Date Picker View Controller-->
         <scene sceneID="tu0-aN-Q7D">
@@ -706,7 +711,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WTt-p2-y04" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1400" y="-366"/>
+            <point key="canvasLocation" x="1754" y="-636"/>
         </scene>
         <!--Init View Controller-->
         <scene sceneID="9eF-kI-gRE">
@@ -939,5 +944,6 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
         <segue reference="Tgw-NI-aog"/>
+        <segue reference="Ij1-Ta-BCa"/>
     </inferredMetricsTieBreakers>
 </document>
