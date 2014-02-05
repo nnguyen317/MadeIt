@@ -30,7 +30,7 @@
 @property (nonatomic, strong) METransitions *transitions;
 @property (nonatomic, strong) NSArray *segmentItems;
 @property (nonatomic, strong) NSString *selectedSegment;
-@property (nonatomic, strong) NSString *slideState;
+@property (nonatomic) NSInteger doorOpen;
 @end
 
 @implementation FavoriteViewController
@@ -38,7 +38,7 @@
 @synthesize revealButtonItem = _revealButtonItem;
 @synthesize segmentItems = _segmentItems;
 @synthesize selectedSegment = _selectedSegment;
-@synthesize slideState = _slideState;
+@synthesize doorOpen = _doorOpen;
 
 - (UIPanGestureRecognizer *)dynamicTransitionPanGesture {
     if (_dynamicTransitionPanGesture) return _dynamicTransitionPanGesture;
@@ -54,7 +54,6 @@
 
     self.segmentItems = @[@"Current",@"All"];
     self.selectedSegment = self.segmentItems[0];
-    self.slideState = [[NSString alloc] init];
 }
 
 
@@ -76,11 +75,11 @@
             self.dynamicTransitionPanGesture = [[UIPanGestureRecognizer alloc] initWithTarget:dynamicTransition action:@selector(handlePanGesture:)];
         }
         
-        [self.navigationController.view removeGestureRecognizer:self.slidingViewController.panGesture];
-        [self.navigationController.view addGestureRecognizer:self.dynamicTransitionPanGesture];
+        [self.view removeGestureRecognizer:self.slidingViewController.panGesture];
+        [self.view addGestureRecognizer:self.dynamicTransitionPanGesture];
     } else {
-        [self.navigationController.view removeGestureRecognizer:self.dynamicTransitionPanGesture];
-        [self.navigationController.view addGestureRecognizer:self.slidingViewController.panGesture];
+        [self.view removeGestureRecognizer:self.dynamicTransitionPanGesture];
+        [self.view addGestureRecognizer:self.slidingViewController.panGesture];
     }
     
     [self getTableData];
@@ -272,7 +271,6 @@
     }
     
     
-    
 }
 
 -(int)getTotalSecondsFromDate:(NSString *)arrivalTimeString{
@@ -413,10 +411,42 @@
 
 - (void)swipeableTableViewCell:(SWTableViewCell *)cell scrollingToState:(SWCellState)state {
     
-    self.slideState = [self.slideState stringByAppendingString:[NSString stringWithFormat:@"%u",state]];
+    NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
+ 
+    if (state == 2) {
+        self.doorOpen = indexPath.section;
+        // Remove the pan gesture to disallow sliding
+        if ([(NSObject *)self.slidingViewController.delegate isKindOfClass:[MEDynamicTransition class]]) {
+            MEDynamicTransition *dynamicTransition = (MEDynamicTransition *)self.slidingViewController.delegate;
+            if (!self.dynamicTransitionPanGesture) {
+                self.dynamicTransitionPanGesture = [[UIPanGestureRecognizer alloc] initWithTarget:dynamicTransition action:@selector(handlePanGesture:)];
+            }
+            
+            [self.view removeGestureRecognizer:self.dynamicTransitionPanGesture];
+        } else {
+            
+            [self.view removeGestureRecognizer:self.slidingViewController.panGesture];
+
+        }
+    }
     
-    NSLog(@"This is %@",self.slideState);
-    [cell hid]
+    if (self.doorOpen == indexPath.section && state != 2) {
+        self.doorOpen = 99;
+        // Add the pan gesture to allow sliding
+        if ([(NSObject *)self.slidingViewController.delegate isKindOfClass:[MEDynamicTransition class]]) {
+            MEDynamicTransition *dynamicTransition = (MEDynamicTransition *)self.slidingViewController.delegate;
+            if (!self.dynamicTransitionPanGesture) {
+                self.dynamicTransitionPanGesture = [[UIPanGestureRecognizer alloc] initWithTarget:dynamicTransition action:@selector(handlePanGesture:)];
+            }
+            
+            [self.view removeGestureRecognizer:self.slidingViewController.panGesture];
+            [self.view addGestureRecognizer:self.dynamicTransitionPanGesture];
+        } else {
+            [self.view removeGestureRecognizer:self.dynamicTransitionPanGesture];
+            [self.view addGestureRecognizer:self.slidingViewController.panGesture];
+        }
+    }
+    
 }
 
 @end
