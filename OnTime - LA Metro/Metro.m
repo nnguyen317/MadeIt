@@ -260,7 +260,7 @@
                        JOIN stops as T3 \
                        on T2.stop_id=T3.stop_id AND T3.stop_id = '%@' \
                        JOIN calendar as T4 \
-                       on T1.service_id=T4.service_id AND T4.%@ LIMIT 1",routeID,directionId,newcurrentTime,serviceId2,stopId,newDayQuery];
+                       on T1.service_id=T4.service_id AND T4.%@ ORDER BY T2.arrival_time LIMIT 1",routeID,directionId,newcurrentTime,serviceId2,stopId,newDayQuery];
             
             NSMutableArray *stopTimes2 = [[NSMutableArray alloc]init];
             stopTimes2 = [self databaseSearch:stopSql withClassName:@"StopTimes" andClass:[StopTimes class] forDatabase:databaseName];
@@ -274,7 +274,7 @@
                        JOIN stops as T3 \
                        on T2.stop_id=T3.stop_id AND T3.stop_id = '%@' \
                        JOIN calendar as T4 \
-                       on T1.service_id=T4.service_id AND T4.%@ LIMIT 1",routeID,directionId,currentTime,serviceId,stopId,dayQuery];
+                       on T1.service_id=T4.service_id AND T4.%@ ORDER BY T2.arrival_time LIMIT 1",routeID,directionId,currentTime,serviceId,stopId,dayQuery];
             
             [stopTimes addObjectsFromArray:[self databaseSearch:stopSql withClassName:@"StopTimes" andClass:[StopTimes class] forDatabase:databaseName]];
         }
@@ -288,7 +288,7 @@
                    JOIN stops as T3 \
                    on T2.stop_id=T3.stop_id AND T3.stop_id = '%@' \
                    JOIN calendar as T4 \
-                   on T1.service_id=T4.service_id AND T4.%@ LIMIT 1",routeID,directionId,currentTime,serviceId,stopId,dayQuery];
+                   on T1.service_id=T4.service_id AND T4.%@ ORDER BY T2.arrival_time LIMIT 1",routeID,directionId,currentTime,serviceId,stopId,dayQuery];
         
         [stopTimes addObjectsFromArray:[self databaseSearch:stopSql withClassName:@"StopTimes" andClass:[StopTimes class] forDatabase:databaseName]];
     }

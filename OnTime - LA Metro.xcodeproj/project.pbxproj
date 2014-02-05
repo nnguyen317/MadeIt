@@ -42,6 +42,18 @@
 		042790051862200C000717FA /* Agency.m in Sources */ = {isa = PBXBuildFile; fileRef = 042790031862200C000717FA /* Agency.m */; };
 		0427900818622BD8000717FA /* AgencyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0427900718622BD8000717FA /* AgencyViewController.m */; };
 		0427900918622BD8000717FA /* AgencyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0427900718622BD8000717FA /* AgencyViewController.m */; };
+		044819F318A13DCB008EACFD /* NSMutableArray+SWUtilityButtons.m in Sources */ = {isa = PBXBuildFile; fileRef = 044819E818A13DCB008EACFD /* NSMutableArray+SWUtilityButtons.m */; };
+		044819F418A13DCB008EACFD /* NSMutableArray+SWUtilityButtons.m in Sources */ = {isa = PBXBuildFile; fileRef = 044819E818A13DCB008EACFD /* NSMutableArray+SWUtilityButtons.m */; };
+		044819F518A13DCB008EACFD /* SWCellScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 044819EA18A13DCB008EACFD /* SWCellScrollView.m */; };
+		044819F618A13DCB008EACFD /* SWCellScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 044819EA18A13DCB008EACFD /* SWCellScrollView.m */; };
+		044819F718A13DCB008EACFD /* SWLongPressGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 044819EC18A13DCB008EACFD /* SWLongPressGestureRecognizer.m */; };
+		044819F818A13DCB008EACFD /* SWLongPressGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 044819EC18A13DCB008EACFD /* SWLongPressGestureRecognizer.m */; };
+		044819F918A13DCB008EACFD /* SWTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 044819EE18A13DCB008EACFD /* SWTableViewCell.m */; };
+		044819FA18A13DCB008EACFD /* SWTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 044819EE18A13DCB008EACFD /* SWTableViewCell.m */; };
+		044819FB18A13DCB008EACFD /* SWUtilityButtonTapGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 044819F018A13DCB008EACFD /* SWUtilityButtonTapGestureRecognizer.m */; };
+		044819FC18A13DCB008EACFD /* SWUtilityButtonTapGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 044819F018A13DCB008EACFD /* SWUtilityButtonTapGestureRecognizer.m */; };
+		044819FD18A13DCB008EACFD /* SWUtilityButtonView.m in Sources */ = {isa = PBXBuildFile; fileRef = 044819F218A13DCB008EACFD /* SWUtilityButtonView.m */; };
+		044819FE18A13DCB008EACFD /* SWUtilityButtonView.m in Sources */ = {isa = PBXBuildFile; fileRef = 044819F218A13DCB008EACFD /* SWUtilityButtonView.m */; };
 		044E774C189352A2007D46ED /* DatePickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 044E774B189352A2007D46ED /* DatePickerViewController.m */; };
 		044E774D189352A2007D46ED /* DatePickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 044E774B189352A2007D46ED /* DatePickerViewController.m */; };
 		0467B4D5187D246100495813 /* AddFavoritesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0467B4D4187D246100495813 /* AddFavoritesViewController.m */; };
@@ -171,6 +183,19 @@
 		042790031862200C000717FA /* Agency.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Agency.m; sourceTree = "<group>"; };
 		0427900618622BD8000717FA /* AgencyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AgencyViewController.h; sourceTree = "<group>"; };
 		0427900718622BD8000717FA /* AgencyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AgencyViewController.m; sourceTree = "<group>"; };
+		044819E618A13DCB008EACFD /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
+		044819E718A13DCB008EACFD /* NSMutableArray+SWUtilityButtons.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableArray+SWUtilityButtons.h"; sourceTree = "<group>"; };
+		044819E818A13DCB008EACFD /* NSMutableArray+SWUtilityButtons.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableArray+SWUtilityButtons.m"; sourceTree = "<group>"; };
+		044819E918A13DCB008EACFD /* SWCellScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWCellScrollView.h; sourceTree = "<group>"; };
+		044819EA18A13DCB008EACFD /* SWCellScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWCellScrollView.m; sourceTree = "<group>"; };
+		044819EB18A13DCB008EACFD /* SWLongPressGestureRecognizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWLongPressGestureRecognizer.h; sourceTree = "<group>"; };
+		044819EC18A13DCB008EACFD /* SWLongPressGestureRecognizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWLongPressGestureRecognizer.m; sourceTree = "<group>"; };
+		044819ED18A13DCB008EACFD /* SWTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWTableViewCell.h; sourceTree = "<group>"; };
+		044819EE18A13DCB008EACFD /* SWTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWTableViewCell.m; sourceTree = "<group>"; };
+		044819EF18A13DCB008EACFD /* SWUtilityButtonTapGestureRecognizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWUtilityButtonTapGestureRecognizer.h; sourceTree = "<group>"; };
+		044819F018A13DCB008EACFD /* SWUtilityButtonTapGestureRecognizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWUtilityButtonTapGestureRecognizer.m; sourceTree = "<group>"; };
+		044819F118A13DCB008EACFD /* SWUtilityButtonView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWUtilityButtonView.h; sourceTree = "<group>"; };
+		044819F218A13DCB008EACFD /* SWUtilityButtonView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWUtilityButtonView.m; sourceTree = "<group>"; };
 		044E774A189352A2007D46ED /* DatePickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DatePickerViewController.h; sourceTree = "<group>"; };
 		044E774B189352A2007D46ED /* DatePickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DatePickerViewController.m; sourceTree = "<group>"; };
 		0467B4D3187D246100495813 /* AddFavoritesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddFavoritesViewController.h; sourceTree = "<group>"; };
@@ -324,6 +349,7 @@
 		04077E38185BB98F0076E6F8 /* OnTime - LA Metro */ = {
 			isa = PBXGroup;
 			children = (
+				044819E518A13DCB008EACFD /* PodFiles */,
 				0475315B189E567200E34BDF /* ECSlidingViewController */,
 				3DFAD05E185E6399000F3854 /* Views */,
 				3DFAD05D185E6387000F3854 /* Models */,
@@ -385,6 +411,26 @@
 				04077E7F185E268B0076E6F8 /* FMResultSet.m */,
 			);
 			name = FMDB;
+			sourceTree = "<group>";
+		};
+		044819E518A13DCB008EACFD /* PodFiles */ = {
+			isa = PBXGroup;
+			children = (
+				044819E618A13DCB008EACFD /* Constants.h */,
+				044819E718A13DCB008EACFD /* NSMutableArray+SWUtilityButtons.h */,
+				044819E818A13DCB008EACFD /* NSMutableArray+SWUtilityButtons.m */,
+				044819E918A13DCB008EACFD /* SWCellScrollView.h */,
+				044819EA18A13DCB008EACFD /* SWCellScrollView.m */,
+				044819EB18A13DCB008EACFD /* SWLongPressGestureRecognizer.h */,
+				044819EC18A13DCB008EACFD /* SWLongPressGestureRecognizer.m */,
+				044819ED18A13DCB008EACFD /* SWTableViewCell.h */,
+				044819EE18A13DCB008EACFD /* SWTableViewCell.m */,
+				044819EF18A13DCB008EACFD /* SWUtilityButtonTapGestureRecognizer.h */,
+				044819F018A13DCB008EACFD /* SWUtilityButtonTapGestureRecognizer.m */,
+				044819F118A13DCB008EACFD /* SWUtilityButtonView.h */,
+				044819F218A13DCB008EACFD /* SWUtilityButtonView.m */,
+			);
+			path = PodFiles;
 			sourceTree = "<group>";
 		};
 		0475315B189E567200E34BDF /* ECSlidingViewController */ = {
@@ -600,6 +646,7 @@
 				3DFAD04C185C1D9F000F3854 /* StopsViewController.m in Sources */,
 				04077E43185BB98F0076E6F8 /* AppDelegate.m in Sources */,
 				3D95BB091887A64700F334C1 /* MenuViewController.m in Sources */,
+				044819F318A13DCB008EACFD /* NSMutableArray+SWUtilityButtons.m in Sources */,
 				0467B4D5187D246100495813 /* AddFavoritesViewController.m in Sources */,
 				04C8C137188C5C5200905637 /* TweetFeedCell.m in Sources */,
 				04C8C10B188B13D600905637 /* RootViewController.m in Sources */,
@@ -613,21 +660,26 @@
 				0483253B188D7D4900FE2C30 /* StopSequenceViewController.m in Sources */,
 				0475317F189EB97200E34BDF /* METransitions.m in Sources */,
 				04077E6E185D8B520076E6F8 /* MetroModel.xcdatamodeld in Sources */,
+				044819F918A13DCB008EACFD /* SWTableViewCell.m in Sources */,
 				04832537188D7C7800FE2C30 /* StopSequenceCell.m in Sources */,
 				04753173189E567200E34BDF /* UIViewController+ECSlidingViewController.m in Sources */,
 				044E774C189352A2007D46ED /* DatePickerViewController.m in Sources */,
 				04C8C12D188C496500905637 /* MetroTwitterFeed.m in Sources */,
 				04077E82185E268B0076E6F8 /* FMDatabaseAdditions.m in Sources */,
+				044819F718A13DCB008EACFD /* SWLongPressGestureRecognizer.m in Sources */,
 				3DFAD058185E4097000F3854 /* Route.m in Sources */,
 				047730F018662696003FEBDC /* StopTimes.m in Sources */,
 				0475317B189EB02600E34BDF /* MEDynamicTransition.m in Sources */,
 				04D6DB32186538E00043DC27 /* Timer.m in Sources */,
+				044819F518A13DCB008EACFD /* SWCellScrollView.m in Sources */,
 				04077E84185E268B0076E6F8 /* FMDatabasePool.m in Sources */,
 				04A3E707188283FF0056603F /* FavoriteViewController.m in Sources */,
+				044819FB18A13DCB008EACFD /* SWUtilityButtonTapGestureRecognizer.m in Sources */,
 				047730FC18676F52003FEBDC /* StopArrivalTimeCell.m in Sources */,
 				04077E86185E268B0076E6F8 /* FMResultSet.m in Sources */,
 				0475316D189E567200E34BDF /* ECSlidingInteractiveTransition.m in Sources */,
 				04077E46185BB98F0076E6F8 /* OnTime___LA_Metro.xcdatamodeld in Sources */,
+				044819FD18A13DCB008EACFD /* SWUtilityButtonView.m in Sources */,
 				0427900818622BD8000717FA /* AgencyViewController.m in Sources */,
 				3DF90572186142A3008A2D35 /* Metro.m in Sources */,
 				0475316F189E567200E34BDF /* ECSlidingSegue.m in Sources */,
@@ -655,12 +707,14 @@
 				3DFAD04D185C1D9F000F3854 /* StopsViewController.m in Sources */,
 				3D75C60C189DAFE5009FBE6D /* AllStopTimeViewController.m in Sources */,
 				047730FD18676F52003FEBDC /* StopArrivalTimeCell.m in Sources */,
+				044819FE18A13DCB008EACFD /* SWUtilityButtonView.m in Sources */,
 				04077E81185E268B0076E6F8 /* FMDatabase.m in Sources */,
 				3D8D9C9A1894397900096E46 /* NewsFeedViewController.m in Sources */,
 				3DFAD059185E4097000F3854 /* Route.m in Sources */,
 				3DFAD055185E3E9B000F3854 /* RoutesViewController.m in Sources */,
 				3D10F33E18959B7100D463D5 /* SideBarCell.m in Sources */,
 				0483253C188D7D4900FE2C30 /* StopSequenceViewController.m in Sources */,
+				044819F618A13DCB008EACFD /* SWCellScrollView.m in Sources */,
 				04C8C110188B1C2100905637 /* InitViewController.m in Sources */,
 				0475317C189EB02600E34BDF /* MEDynamicTransition.m in Sources */,
 				04077E5C185BB98F0076E6F8 /* OnTime___LA_MetroTests.m in Sources */,
@@ -674,18 +728,22 @@
 				3DF90573186142A3008A2D35 /* Metro.m in Sources */,
 				04077E85185E268B0076E6F8 /* FMDatabasePool.m in Sources */,
 				04C8C120188B62CF00905637 /* PDFMapZoomViewController.m in Sources */,
+				044819F418A13DCB008EACFD /* NSMutableArray+SWUtilityButtons.m in Sources */,
 				04753174189E567200E34BDF /* UIViewController+ECSlidingViewController.m in Sources */,
 				04D6DB33186538E00043DC27 /* Timer.m in Sources */,
 				04C8C10C188B13D600905637 /* RootViewController.m in Sources */,
 				044E774D189352A2007D46ED /* DatePickerViewController.m in Sources */,
+				044819F818A13DCB008EACFD /* SWLongPressGestureRecognizer.m in Sources */,
 				3D95BB0A1887A64700F334C1 /* MenuViewController.m in Sources */,
 				04077E87185E268B0076E6F8 /* FMResultSet.m in Sources */,
 				04832538188D7C7800FE2C30 /* StopSequenceCell.m in Sources */,
+				044819FC18A13DCB008EACFD /* SWUtilityButtonTapGestureRecognizer.m in Sources */,
 				04077E83185E268B0076E6F8 /* FMDatabaseAdditions.m in Sources */,
 				0427900918622BD8000717FA /* AgencyViewController.m in Sources */,
 				04077E6F185D8B520076E6F8 /* MetroModel.xcdatamodeld in Sources */,
 				047730F118662696003FEBDC /* StopTimes.m in Sources */,
 				3D2D2F1E18A0C61F00C1D44E /* Favorites.m in Sources */,
+				044819FA18A13DCB008EACFD /* SWTableViewCell.m in Sources */,
 				04753170189E567200E34BDF /* ECSlidingSegue.m in Sources */,
 				0475316C189E567200E34BDF /* ECSlidingAnimationController.m in Sources */,
 				3DFAD062185E63B2000F3854 /* Stop.m in Sources */,

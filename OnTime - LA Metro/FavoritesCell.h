@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SWTableViewCell.h"
 
-@interface FavoritesCell : UITableViewCell
+@interface FavoritesCell : SWTableViewCell
 @property (weak, nonatomic) IBOutlet UILabel *directionBoundLabel;
 
 @end

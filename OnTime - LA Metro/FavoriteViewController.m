@@ -14,6 +14,7 @@
 #import "METransitions.h"
 #import "FavoritesCell.h"
 #import "AllStopTimeViewController.h"
+#import "SWTableViewCell.h"
 
 @interface FavoriteViewController ()
 {
@@ -29,7 +30,7 @@
 @property (nonatomic, strong) METransitions *transitions;
 @property (nonatomic, strong) NSArray *segmentItems;
 @property (nonatomic, strong) NSString *selectedSegment;
-
+@property (nonatomic, strong) NSString *slideState;
 @end
 
 @implementation FavoriteViewController
@@ -37,6 +38,7 @@
 @synthesize revealButtonItem = _revealButtonItem;
 @synthesize segmentItems = _segmentItems;
 @synthesize selectedSegment = _selectedSegment;
+@synthesize slideState = _slideState;
 
 - (UIPanGestureRecognizer *)dynamicTransitionPanGesture {
     if (_dynamicTransitionPanGesture) return _dynamicTransitionPanGesture;
@@ -52,7 +54,7 @@
 
     self.segmentItems = @[@"Current",@"All"];
     self.selectedSegment = self.segmentItems[0];
-
+    self.slideState = [[NSString alloc] init];
 }
 
 
@@ -102,6 +104,19 @@
 - (IBAction)revealMenu:(id)sender
 {
     [self.slidingViewController anchorTopViewToRightAnimated:YES];
+}
+
+- (NSArray *)rightButtons
+{
+    NSMutableArray *rightUtilityButtons = [NSMutableArray new];
+    [rightUtilityButtons sw_addUtilityButtonWithColor:
+     [UIColor colorWithRed:0.78f green:0.78f blue:0.8f alpha:1.0]
+                                                title:@"Edit"];
+    [rightUtilityButtons sw_addUtilityButtonWithColor:
+     [UIColor colorWithRed:1.0f green:0.231f blue:0.188 alpha:1.0f]
+                                                title:@"Delete"];
+    
+    return rightUtilityButtons;
 }
 
 - (void)didReceiveMemoryWarning
@@ -188,6 +203,15 @@
             newCell = [[FavoritesCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
         }
         
+        FavoritesCell __weak *weakCell = newCell;
+        
+        [newCell setAppearanceWithBlock:^{
+            weakCell.rightUtilityButtons = [self rightButtons];
+            weakCell.delegate = self;
+            weakCell.containingTableView = tableView;
+        } force:NO];
+        
+        [newCell setCellHeight:newCell.frame.size.height];
         Favorites *favorite = tableData[indexPath.section];
         
         newCell.directionBoundLabel.text = [NSString stringWithFormat:@"%@ Bound",favorite.trip_headsign];
@@ -353,6 +377,46 @@
         
         [self getTableData];
     }
+}
+
+- (void)swipeableTableViewCell:(SWTableViewCell *)cell didTriggerRightUtilityButtonWithIndex:(NSInteger)index {
+    
+    
+    switch (index) {
+        case 0:
+        {
+            NSLog(@"More button was pressed");
+            UIAlertView *alertTest = [[UIAlertView alloc] initWithTitle:@"Hello" message:@"More more more" delegate:nil cancelButtonTitle:@"cancel" otherButtonTitles: nil];
+            [alertTest show];
+            
+            [cell hideUtilityButtonsAnimated:YES];
+            break;
+        }
+        case 1:
+        {
+            // Delete button was pressed
+            NSIndexPath *cellIndexPath = [self.tableView indexPathForCell:cell];
+            
+            [tableData removeObjectAtIndex:cellIndexPath.section];
+            [self.tableView deleteRowsAtIndexPaths:@[cellIndexPath] withRowAnimation:UITableViewRowAnimationLeft];
+            break;
+        }
+        default:
+            break;
+    }
+}
+
+- (BOOL)swipeableTableViewCellShouldHideUtilityButtonsOnSwipe:(SWTableViewCell *)cell {
+
+    return YES;
+}
+
+- (void)swipeableTableViewCell:(SWTableViewCell *)cell scrollingToState:(SWCellState)state {
+    
+    self.slideState = [self.slideState stringByAppendingString:[NSString stringWithFormat:@"%u",state]];
+    
+    NSLog(@"This is %@",self.slideState);
+    [cell hid]
 }
 
 @end
