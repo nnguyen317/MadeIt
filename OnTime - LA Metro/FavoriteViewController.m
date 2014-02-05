@@ -92,11 +92,12 @@
     NSArray *cells = [self.tableView visibleCells];
     
     if (![self.selectedSegment isEqualToString:@"All"]) {
-        for(id cell in cells){
-            if ([cell isKindOfClass:[StopArrivalTimeCell class]]) {
+        if ([[cells firstObject] isKindOfClass:[StopArrivalTimeCell class]]){
+            for(StopArrivalTimeCell *cell in cells){
                 [cell endTimer];
             }
         }
+        
     }
 }
 
@@ -108,9 +109,6 @@
 - (NSArray *)rightButtons
 {
     NSMutableArray *rightUtilityButtons = [NSMutableArray new];
-    [rightUtilityButtons sw_addUtilityButtonWithColor:
-     [UIColor colorWithRed:0.78f green:0.78f blue:0.8f alpha:1.0]
-                                                title:@"Edit"];
     [rightUtilityButtons sw_addUtilityButtonWithColor:
      [UIColor colorWithRed:1.0f green:0.231f blue:0.188 alpha:1.0f]
                                                 title:@"Delete"];
@@ -255,6 +253,9 @@
             NSMutableArray *stopTimeArray = [metro getArrivalTimeFromStopSingle:favorites.route_id withStopId:favorites.stop_id andDirectionId:favorites.direction_id forAgency:favorites.agency_id forDatabase:favorites.agency_id];
             if(stopTimeArray.count > 0){
                 StopTimes *stopTimes = [stopTimeArray firstObject];
+                stopTimes.routeId = favorites.route_id;
+                stopTimes.agencyId = favorites.agency_id;
+                stopTimes.stopId = favorites.stop_id;
                 [tableData addObject:stopTimes];
             }
         } else {
@@ -268,6 +269,8 @@
     
     if ([self.selectedSegment isEqualToString:@"Current"]) {
         [self startTimer];
+    } else {
+        [timer invalidate];
     }
     
     
@@ -303,7 +306,7 @@
                             cell.arrivalTimerLabel.textColor = [UIColor grayColor];
                             cell.arrivalTimeLabel.textColor = [UIColor grayColor];
                             cell.directionBoundLabel.textColor = [UIColor grayColor];
-                            [self performSelector:@selector(deleteRow) withObject:nil afterDelay:10];
+                            [self performSelector:@selector(deleteRow) withObject:nil afterDelay:0];
                             break;
                         } else {
                         }
@@ -312,24 +315,35 @@
 
 -(void)deleteRow{
     NSArray *cells = [self.tableView visibleCells];
-    
-    for (StopArrivalTimeCell *cell in cells)
-    {
-        //UILabel *textField = cell.arrivalTimeLabel;
-        //StopTimes *stopTimes = tableData[index];
-        int totalCellSeconds = cell.totalSeconds;
-        
-        if(totalCellSeconds <= 0){
-            [self getTableData];
-            NSMutableArray *indexes = [[NSMutableArray alloc] init];
-            NSIndexPath *cellIndexPath = [self.tableView indexPathForCell:cell];
-            [indexes addObject:cellIndexPath];
+    NSMutableArray *indexes = [[NSMutableArray alloc] init];
+    if ([[cells firstObject] isKindOfClass:[StopArrivalTimeCell class]]) {
+        for (StopArrivalTimeCell *cell in cells)
+        {
+            int totalCellSeconds = cell.totalSeconds;
+            
+            if(totalCellSeconds <= -10){
+                [cell endTimer];
+                [self getTableData];
+                NSIndexPath *cellIndexPath = [self.tableView indexPathForCell:cell];
+                [indexes addObject:cellIndexPath];
+            }
+        }
+        if (indexes.count > 0){
             [self.tableView beginUpdates];
             [self.tableView insertRowsAtIndexPaths:indexes withRowAnimation:UITableViewRowAnimationFade];
             [self.tableView deleteRowsAtIndexPaths:indexes withRowAnimation:UITableViewRowAnimationFade];
             [self.tableView endUpdates];
-            break;
         }
+    }
+    
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if ([self.selectedSegment isEqualToString:@"All"]) {
+        [self.tableView selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionNone];
+        [self performSegueWithIdentifier:@"listTimes" sender:self];
+        [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
     }
 }
 
@@ -337,12 +351,12 @@
     if([segue.identifier isEqualToString:@"showStopTimes"]) {
         NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
         StopTimes *stopTimes = tableData[indexPath.section];
-        Favorites *favorites = _stationList[indexPath.section];
         
         StopSequenceViewController *stopSequenceController = [segue destinationViewController];
         stopSequenceController.stopTimes = stopTimes;
-        stopSequenceController.stopTimes.routeId = favorites.route_id;
-        stopSequenceController.stopTimes.stopId = favorites.stop_id;
+        stopSequenceController.stopTimes.routeId = stopTimes.routeId;
+        stopSequenceController.stopTimes.stopId = stopTimes.stopId;
+        stopSequenceController.stopTimes.agencyId = stopTimes.agencyId;
     } else if([segue.identifier isEqualToString:@"listTimes"]) {
         NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
         Favorites *favorites = tableData[indexPath.section];
@@ -383,20 +397,17 @@
     switch (index) {
         case 0:
         {
-            NSLog(@"More button was pressed");
-            UIAlertView *alertTest = [[UIAlertView alloc] initWithTitle:@"Hello" message:@"More more more" delegate:nil cancelButtonTitle:@"cancel" otherButtonTitles: nil];
-            [alertTest show];
-            
-            [cell hideUtilityButtonsAnimated:YES];
-            break;
-        }
-        case 1:
-        {
             // Delete button was pressed
             NSIndexPath *cellIndexPath = [self.tableView indexPathForCell:cell];
+            Favorites *favorites = tableData[cellIndexPath.section];
             
             [tableData removeObjectAtIndex:cellIndexPath.section];
-            [self.tableView deleteRowsAtIndexPaths:@[cellIndexPath] withRowAnimation:UITableViewRowAnimationLeft];
+            
+            [self.managedObjectContext deleteObject:favorites];
+            
+            [self.tableView beginUpdates];
+            [self.tableView deleteSections:[NSIndexSet indexSetWithIndex:cellIndexPath.section] withRowAnimation:UITableViewRowAnimationAutomatic];
+            [self.tableView endUpdates];
             break;
         }
         default:
