@@ -300,17 +300,34 @@
 
 - (void)timerFired
 {
-                NSArray *cells = [self.tableView visibleCells];
-                for (StopArrivalTimeCell *cell in cells) {
-                        if(cell.totalSeconds <= 0){
-                            cell.arrivalTimerLabel.textColor = [UIColor grayColor];
-                            cell.arrivalTimeLabel.textColor = [UIColor grayColor];
-                            cell.directionBoundLabel.textColor = [UIColor grayColor];
-                            [self performSelector:@selector(deleteRow) withObject:nil afterDelay:0];
-                            break;
-                        } else {
-                        }
-                }
+    NSArray *cells = [self.tableView visibleCells];
+    NSMutableArray *indexes = [[NSMutableArray alloc] init];
+    for (StopArrivalTimeCell *cell in cells) {
+        if(cell.totalSeconds <= 0){
+            cell.arrivalTimerLabel.textColor = [UIColor grayColor];
+            cell.arrivalTimeLabel.textColor = [UIColor grayColor];
+            cell.directionBoundLabel.textColor = [UIColor grayColor];
+            cell.deleteFlag = YES;
+            //[self deleteRow];
+        } else if (cell.totalSeconds <= -10) {
+            [cell endTimer];
+            NSIndexPath *cellIndexPath = [self.tableView indexPathForCell:cell];
+            [indexes addObject:cellIndexPath];
+            [self.tableView beginUpdates];
+            [self.tableView deleteRowsAtIndexPaths:indexes withRowAnimation:UITableViewRowAnimationFade];
+            [self.tableView endUpdates];
+            
+            [self getTableData];
+            [self.tableView beginUpdates];
+            [self.tableView insertRowsAtIndexPaths:indexes withRowAnimation:UITableViewRowAnimationFade];
+            [self.tableView endUpdates];
+
+            
+        } else {
+            NSLog(@"Cell:%@ at %d Seconds",cell.arrivalTimeLabel.text,cell.totalSeconds);
+        }
+    }
+
 }
 
 -(void)deleteRow{
