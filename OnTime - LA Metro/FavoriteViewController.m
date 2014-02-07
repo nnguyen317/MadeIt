@@ -416,7 +416,6 @@
     self.slideState = [self.slideState stringByAppendingString:[NSString stringWithFormat:@"%u",state]];
     
     NSLog(@"This is %@",self.slideState);
-    [cell hid]
 }
 
 @end
