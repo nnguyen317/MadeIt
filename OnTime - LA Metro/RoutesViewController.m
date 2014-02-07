@@ -32,6 +32,7 @@
     
     self.route = [[Route alloc] init];
     Metro *routes = [[Metro alloc] init];
+    
     self.route.agencyId = appDelegate.choice;
     self.routeList = [routes getRoutes:appDelegate.choice forDatabase:appDelegate.choice];
     self.navBarItem.title = appDelegate.choice;
