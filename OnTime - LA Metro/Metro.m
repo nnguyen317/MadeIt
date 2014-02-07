@@ -88,7 +88,7 @@
     
     int currentTime = [self getTimeInSeconds];
     
-    if ([appDelegate.choice isEqualToString:@"MetroRail"]) {
+    if ([appDelegate.choice isEqualToString:@"MetroRail"] || [appDelegate.choice isEqualToString:@"Amtrak"]) {
         if (currentTime >= 0 && currentTime <= 14400) {
             
             int newcurrentTime = [self getTimeForAfterMidnight];
