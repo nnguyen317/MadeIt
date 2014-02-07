@@ -45,9 +45,11 @@
     NSDictionary *object1 = @{@"name":@"Favorites",@"title":@"Favorites"};
     NSDictionary *object2 = @{@"name":@"Metrolink",@"title":@"Metrolink"};
     NSDictionary *object3 = @{@"name":@"Metro Rail",@"title":@"MetroRail"};
-    NSDictionary *object4 = @{@"name":@"Metrolink Metro Map",@"title":@"MetroMap"};
+    NSDictionary *object4 = @{@"name":@"Rail 2 Rail",@"title":@"Amtrak"};
+    NSDictionary *object5 = @{@"name":@"Metrolink Metro Map",@"title":@"MetroMap"};
     
-    self.menu = @[object1,object2,object3,object4];
+    
+    self.menu = @[object1,object2,object3,object4,object5];
     
     
     //[self.slidingViewController setAnchorRightRevealAmount:200.0f];
@@ -109,7 +111,7 @@
     
     self.slidingViewController.topViewController.view.layer.transform = CATransform3DMakeScale(1, 1, 1);
     
-    if ([identifier isEqualToString:@"Metrolink"] || [identifier isEqualToString:@"MetroRail"]) {
+    if ([identifier isEqualToString:@"Metrolink"] || [identifier isEqualToString:@"MetroRail"] || [identifier isEqualToString:@"Amtrak"]) {
         
         identifier = [NSString stringWithFormat:@"Metro"];
         
