@@ -54,6 +54,8 @@
 		044819FC18A13DCB008EACFD /* SWUtilityButtonTapGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 044819F018A13DCB008EACFD /* SWUtilityButtonTapGestureRecognizer.m */; };
 		044819FD18A13DCB008EACFD /* SWUtilityButtonView.m in Sources */ = {isa = PBXBuildFile; fileRef = 044819F218A13DCB008EACFD /* SWUtilityButtonView.m */; };
 		044819FE18A13DCB008EACFD /* SWUtilityButtonView.m in Sources */ = {isa = PBXBuildFile; fileRef = 044819F218A13DCB008EACFD /* SWUtilityButtonView.m */; };
+		04481A0C18A484CB008EACFD /* lametro.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 04481A0B18A484CB008EACFD /* lametro.sqlite */; };
+		04481A0D18A484CB008EACFD /* lametro.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 04481A0B18A484CB008EACFD /* lametro.sqlite */; };
 		044E774C189352A2007D46ED /* DatePickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 044E774B189352A2007D46ED /* DatePickerViewController.m */; };
 		044E774D189352A2007D46ED /* DatePickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 044E774B189352A2007D46ED /* DatePickerViewController.m */; };
 		0467B4D5187D246100495813 /* AddFavoritesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0467B4D4187D246100495813 /* AddFavoritesViewController.m */; };
@@ -84,8 +86,6 @@
 		04832538188D7C7800FE2C30 /* StopSequenceCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04832536188D7C7800FE2C30 /* StopSequenceCell.m */; };
 		0483253B188D7D4900FE2C30 /* StopSequenceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0483253A188D7D4900FE2C30 /* StopSequenceViewController.m */; };
 		0483253C188D7D4900FE2C30 /* StopSequenceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0483253A188D7D4900FE2C30 /* StopSequenceViewController.m */; };
-		0483B1EC18916FC300842A43 /* lametro.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 0483B1EB18916FC300842A43 /* lametro.sqlite */; };
-		0483B1ED18916FC300842A43 /* lametro.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 0483B1EB18916FC300842A43 /* lametro.sqlite */; };
 		04A3E707188283FF0056603F /* FavoriteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04A3E706188283FF0056603F /* FavoriteViewController.m */; };
 		04A3E708188283FF0056603F /* FavoriteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04A3E706188283FF0056603F /* FavoriteViewController.m */; };
 		04C8C10B188B13D600905637 /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C8C10A188B13D600905637 /* RootViewController.m */; };
@@ -196,6 +196,7 @@
 		044819F018A13DCB008EACFD /* SWUtilityButtonTapGestureRecognizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWUtilityButtonTapGestureRecognizer.m; sourceTree = "<group>"; };
 		044819F118A13DCB008EACFD /* SWUtilityButtonView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWUtilityButtonView.h; sourceTree = "<group>"; };
 		044819F218A13DCB008EACFD /* SWUtilityButtonView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWUtilityButtonView.m; sourceTree = "<group>"; };
+		04481A0B18A484CB008EACFD /* lametro.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = lametro.sqlite; sourceTree = "<group>"; };
 		044E774A189352A2007D46ED /* DatePickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DatePickerViewController.h; sourceTree = "<group>"; };
 		044E774B189352A2007D46ED /* DatePickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DatePickerViewController.m; sourceTree = "<group>"; };
 		0467B4D3187D246100495813 /* AddFavoritesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddFavoritesViewController.h; sourceTree = "<group>"; };
@@ -227,7 +228,6 @@
 		04832536188D7C7800FE2C30 /* StopSequenceCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StopSequenceCell.m; sourceTree = "<group>"; };
 		04832539188D7D4900FE2C30 /* StopSequenceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StopSequenceViewController.h; sourceTree = "<group>"; };
 		0483253A188D7D4900FE2C30 /* StopSequenceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StopSequenceViewController.m; sourceTree = "<group>"; };
-		0483B1EB18916FC300842A43 /* lametro.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = lametro.sqlite; sourceTree = "<group>"; };
 		04A3E705188283FF0056603F /* FavoriteViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FavoriteViewController.h; sourceTree = "<group>"; };
 		04A3E706188283FF0056603F /* FavoriteViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FavoriteViewController.m; sourceTree = "<group>"; };
 		04C8C109188B13D600905637 /* RootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootViewController.h; sourceTree = "<group>"; };
@@ -369,7 +369,7 @@
 		04077E39185BB98F0076E6F8 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				0483B1EB18916FC300842A43 /* lametro.sqlite */,
+				04481A0B18A484CB008EACFD /* lametro.sqlite */,
 				04077E3A185BB98F0076E6F8 /* OnTime - LA Metro-Info.plist */,
 				04D7BE381886EC4800D32902 /* reveal-icon.png */,
 				04D7BE391886EC4800D32902 /* reveal-icon@2x.png */,
@@ -614,7 +614,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0483B1EC18916FC300842A43 /* lametro.sqlite in Resources */,
+				04481A0C18A484CB008EACFD /* lametro.sqlite in Resources */,
 				04077E66185BB9C60076E6F8 /* MainStoryboard.storyboard in Resources */,
 				04077E3D185BB98F0076E6F8 /* InfoPlist.strings in Resources */,
 				04D7BE3C1886EC4800D32902 /* reveal-icon@2x.png in Resources */,
@@ -630,7 +630,7 @@
 				04D7BE3D1886EC4800D32902 /* reveal-icon@2x.png in Resources */,
 				04077E67185BB9C60076E6F8 /* MainStoryboard.storyboard in Resources */,
 				04077E5A185BB98F0076E6F8 /* InfoPlist.strings in Resources */,
-				0483B1ED18916FC300842A43 /* lametro.sqlite in Resources */,
+				04481A0D18A484CB008EACFD /* lametro.sqlite in Resources */,
 				04D7BE3B1886EC4800D32902 /* reveal-icon.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
