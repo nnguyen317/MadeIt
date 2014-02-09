@@ -56,6 +56,9 @@
     if([_choice isEqualToString:@"Metrolink"]) {
         _metroLinkUsers = @[@"MetrolinkANT",@"MetrolinkIEOC",@"MetrolinkOC",@"MetrolinkRIV",@"MetrolinkSB",@"MetrolinkVC",@"Metrolink91"];
         self.navBarItem.title = _choice;
+    } else if([_choice isEqualToString:@"Amtrak"]) {
+        _metroLinkUsers = @[@"PACSurfliners"];
+        self.navBarItem.title = _choice;
     } else {
         _metroLinkUsers = @[@"metrolaalerts"];
         self.navBarItem.title = _choice;

@@ -98,11 +98,13 @@
             serviceId = calendarDate[@"service_id"];
         }
     } else {
-        NSString *sql2 = [NSString stringWithFormat:@"SELECT t.service_id FROM trips t,calendar c WHERE (c.service_id = t.service_id) and t.route_id = '%@' AND c.%@ LIMIT 1",routeId,day];
+        /*NSString *sql2 = [NSString stringWithFormat:@"SELECT t.service_id FROM trips t,calendar c WHERE (c.service_id = t.service_id) and t.route_id = '%@' AND c.%@ LIMIT 1",routeId,day];
         FMResultSet *results2 = [database executeQuery:sql2];
         while ([results2 next]) {
             serviceId = [results2 stringForColumn:@"service_id"];
-        }
+        }*/
+        
+        serviceId = @"";
 
     }
     
