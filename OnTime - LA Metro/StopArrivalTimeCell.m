@@ -45,6 +45,14 @@
     // Configure the view for the selected state
 }
 
+-(void)awakeFromNib {
+    
+    
+    NSString* boldFontName = @"Roboto-Bold";
+    
+    self.arrivalTimerLabel.font = [UIFont fontWithName:boldFontName size:20.0f];
+}
+
 -(void)startTimer {
     timer =[NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(timerFired) userInfo:nil repeats:YES];
 }

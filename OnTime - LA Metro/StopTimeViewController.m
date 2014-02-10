@@ -141,6 +141,7 @@
         
         timerText = [NSString stringWithFormat:@"%02d%@%02d%@%02d",currHours,@":",currMinute,@":",currSeconds];
         
+        
         newcell.arrivalTimerLabel.textColor = [UIColor blackColor];
         newcell.arrivalTimeLabel.textColor = [UIColor blackColor];
         newcell.directionBoundLabel.textColor = [UIColor blackColor];
@@ -186,6 +187,8 @@
     
     //Grab a list for stop times
     if (!self.selectedSegment || [self.selectedSegment isEqualToString:@"Current"]) {
+        self.tableView.rowHeight = 100.0f;
+        
         self.stopTimeList = [metro getArrivalTimeFromStop:self.stopTimes.routeId withStopId:self.stopTimes.stopId andDirectionId:@"0" forAgency:self.stopTimes.agencyId forDatabase:self.stopTimes.agencyId forAll:NO];
         
         //Add list to containers
