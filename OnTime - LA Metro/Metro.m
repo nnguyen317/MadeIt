@@ -27,7 +27,7 @@
     NSString *sql = [NSString stringWithFormat:@"SELECT route_id,route_long_name FROM routes WHERE agency_id = '%@'",agencyId];
     
     routes = [self databaseSearch:sql withClassName:@"Route" andClass:[Route class] forDatabase:databaseName];
-
+    
     return routes;
 }
 
@@ -159,7 +159,7 @@
             stopTimes2 = [self databaseSearch:stopSql withClassName:@"StopTimes" andClass:[StopTimes class] forDatabase:databaseName];
             [stopTimes addObjectsFromArray:stopTimes2];
         }
-
+        
     }
     
     if (all == YES) {
@@ -289,7 +289,7 @@
             NSString *newDate = [dateFormatter3 stringFromDate:newToday];
             
             NSString *serviceId2 = [search calendarDateQuery:routeID withDate:newDate andDay:newDayQuery];
-            
+            /*
             stopSql = [NSString stringWithFormat:@"SELECT T3.stop_name,T2.arrival_time,T1.direction_id, T1.trip_headsign,T1.trip_id,T2.stop_sequence \
                        FROM trips as T1 \
                        JOIN \
@@ -299,11 +299,27 @@
                        on T2.stop_id=T3.stop_id AND T3.stop_id = '%@' \
                        JOIN calendar as T4 \
                        on T1.service_id=T4.service_id AND T4.%@ ORDER BY T2.arrival_time LIMIT 1",routeID,directionId,newcurrentTime,serviceId2,stopId,newDayQuery];
-            
+            */
+            if ([serviceId2 isEqualToString:@""]) {
+                stopSql = [NSString stringWithFormat:@" \
+                           SELECT T3.stop_name,T2.arrival_time,T1.direction_id, T1.trip_headsign,T1.trip_id,T2.stop_sequence  \
+                           FROM trips as T1                 \
+                           JOIN stop_times as T2 on T1.trip_id=T2.trip_id AND route_id = '%@' AND direction_id = '%@' AND arrival_time > %d              \
+                           JOIN stops as T3 on T2.stop_id=T3.stop_id AND T3.stop_id = '%@'                 \
+                           JOIN calendar as T4 on T1.service_id=T4.service_id AND T4.%@ AND strftime('%@') between strftime(T4.start_date) and strftime(T4.end_date) LIMIT 1",routeID,directionId,currentTime,stopId,newDayQuery,newDate];
+            } else {
+                stopSql = [NSString stringWithFormat:@" \
+                           SELECT T3.stop_name,T2.arrival_time,T1.direction_id, T1.trip_headsign,T1.trip_id,T2.stop_sequence  \
+                           FROM trips as T1                 \
+                           JOIN stop_times as T2 on T1.trip_id=T2.trip_id AND route_id = '%@' AND direction_id = '%@' AND arrival_time > %d AND T1.service_id = '%@'                \
+                           JOIN stops as T3 on T2.stop_id=T3.stop_id AND T3.stop_id = '%@'                 \
+                           JOIN calendar as T4 on T1.service_id=T4.service_id AND T4.%@ LIMIT 1",routeID,directionId,currentTime,serviceId2,stopId,newDayQuery];
+            }
             NSMutableArray *stopTimes2 = [[NSMutableArray alloc]init];
             stopTimes2 = [self databaseSearch:stopSql withClassName:@"StopTimes" andClass:[StopTimes class] forDatabase:databaseName];
             [stopTimes addObjectsFromArray:stopTimes2];
         } else {
+            /*
             stopSql = [NSString stringWithFormat:@"SELECT T3.stop_name,T2.arrival_time,T1.direction_id, T1.trip_headsign,T1.trip_id,T2.stop_sequence \
                        FROM trips as T1 \
                        JOIN \
@@ -313,20 +329,42 @@
                        on T2.stop_id=T3.stop_id AND T3.stop_id = '%@' \
                        JOIN calendar as T4 \
                        on T1.service_id=T4.service_id AND T4.%@ ORDER BY T2.arrival_time LIMIT 1",routeID,directionId,currentTime,serviceId,stopId,dayQuery];
+             */
+            if ([serviceId isEqualToString:@""]) {
+                stopSql = [NSString stringWithFormat:@" \
+                           SELECT T3.stop_name,T2.arrival_time,T1.direction_id, T1.trip_headsign,T1.trip_id,T2.stop_sequence  \
+                           FROM trips as T1                 \
+                           JOIN stop_times as T2 on T1.trip_id=T2.trip_id AND route_id = '%@' AND direction_id = '%@' AND arrival_time > %d              \
+                           JOIN stops as T3 on T2.stop_id=T3.stop_id AND T3.stop_id = '%@'                 \
+                           JOIN calendar as T4 on T1.service_id=T4.service_id AND T4.%@ AND strftime('%@') between strftime(T4.start_date) and strftime(T4.end_date) LIMIT 1",routeID,directionId,currentTime,stopId,dayQuery,date];
+            } else {
+                stopSql = [NSString stringWithFormat:@" \
+                           SELECT T3.stop_name,T2.arrival_time,T1.direction_id, T1.trip_headsign,T1.trip_id,T2.stop_sequence  \
+                           FROM trips as T1                 \
+                           JOIN stop_times as T2 on T1.trip_id=T2.trip_id AND route_id = '%@' AND direction_id = '%@' AND arrival_time > %d AND T1.service_id = '%@'                \
+                           JOIN stops as T3 on T2.stop_id=T3.stop_id AND T3.stop_id = '%@'                 \
+                           JOIN calendar as T4 on T1.service_id=T4.service_id AND T4.%@ LIMIT 1",routeID,directionId,currentTime,serviceId,stopId,dayQuery];
+            }
             
             [stopTimes addObjectsFromArray:[self databaseSearch:stopSql withClassName:@"StopTimes" andClass:[StopTimes class] forDatabase:databaseName]];
         }
         
     } else {
-        stopSql = [NSString stringWithFormat:@"SELECT T3.stop_name,T2.arrival_time,T1.direction_id, T1.trip_headsign,T1.trip_id,T2.stop_sequence \
-                   FROM trips as T1 \
-                   JOIN \
-                   stop_times as T2 \
-                   on T1.trip_id=T2.trip_id AND route_id = '%@' AND direction_id = '%@' AND arrival_time > %d AND T1.service_id = '%@' \
-                   JOIN stops as T3 \
-                   on T2.stop_id=T3.stop_id AND T3.stop_id = '%@' \
-                   JOIN calendar as T4 \
-                   on T1.service_id=T4.service_id AND T4.%@ ORDER BY T2.arrival_time LIMIT 1",routeID,directionId,currentTime,serviceId,stopId,dayQuery];
+        if ([serviceId isEqualToString:@""]) {
+            stopSql = [NSString stringWithFormat:@" \
+                       SELECT T3.stop_name,T2.arrival_time,T1.direction_id, T1.trip_headsign,T1.trip_id,T2.stop_sequence  \
+                       FROM trips as T1                 \
+                       JOIN stop_times as T2 on T1.trip_id=T2.trip_id AND route_id = '%@' AND direction_id = '%@' AND arrival_time > %d              \
+                       JOIN stops as T3 on T2.stop_id=T3.stop_id AND T3.stop_id = '%@'                 \
+                       JOIN calendar as T4 on T1.service_id=T4.service_id AND T4.%@ AND strftime('%@') between strftime(T4.start_date) and strftime(T4.end_date) LIMIT 1",routeID,directionId,currentTime,stopId,dayQuery,date];
+        } else {
+            stopSql = [NSString stringWithFormat:@" \
+                       SELECT T3.stop_name,T2.arrival_time,T1.direction_id, T1.trip_headsign,T1.trip_id,T2.stop_sequence  \
+                       FROM trips as T1                 \
+                       JOIN stop_times as T2 on T1.trip_id=T2.trip_id AND route_id = '%@' AND direction_id = '%@' AND arrival_time > %d AND T1.service_id = '%@'                \
+                       JOIN stops as T3 on T2.stop_id=T3.stop_id AND T3.stop_id = '%@'                 \
+                       JOIN calendar as T4 on T1.service_id=T4.service_id AND T4.%@ LIMIT 1",routeID,directionId,currentTime,serviceId,stopId,dayQuery];
+        }
         
         [stopTimes addObjectsFromArray:[self databaseSearch:stopSql withClassName:@"StopTimes" andClass:[StopTimes class] forDatabase:databaseName]];
     }
@@ -355,24 +393,24 @@
     NSString *sql = [[NSString alloc]init];
     SearchDatabase *searchDB = [[SearchDatabase alloc] init];
     sql = [NSString stringWithFormat:@" \
-               select trip_headsign,direction_id,count(trip_id) as C \
-               FROM trips t \
-               WHERE \
-               route_id = '%@' AND \
-               direction_id = 0 \
-               UNION \
-               select trip_headsign,direction_id,count(trip_id) as C \
-               FROM trips t \
-               WHERE \
-               route_id = '%@' AND \
-               direction_id = 1 \
-               GROUP BY trip_headsign \
-               ORDER BY C DESC \
-               LIMIT 2 \
-               ",routeID,routeID];
+           select trip_headsign,direction_id,count(trip_id) as C \
+           FROM trips t \
+           WHERE \
+           route_id = '%@' AND \
+           direction_id = 0 \
+           UNION \
+           select trip_headsign,direction_id,count(trip_id) as C \
+           FROM trips t \
+           WHERE \
+           route_id = '%@' AND \
+           direction_id = 1 \
+           GROUP BY trip_headsign \
+           ORDER BY C DESC \
+           LIMIT 2 \
+           ",routeID,routeID];
     
     directionBound = [searchDB regularQuery:sql];
-
+    
     return directionBound;
 }
 
@@ -389,7 +427,7 @@
 -(int)getTotalSecondsFromDate:(NSString *)arrivalTimeString{
     
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-
+    
     NSDateFormatter *timeFormatter = [[NSDateFormatter alloc] init];
     [timeFormatter setDateFormat:@"HH:mm:ss"];
     NSDate *today = [NSDate date];
