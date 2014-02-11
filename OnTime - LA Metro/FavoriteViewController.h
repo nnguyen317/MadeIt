@@ -15,6 +15,10 @@
 #import "MEDynamicTransition.h"
 #import "SWTableViewCell.h"
 
+@interface FavoriteNavigationController : UINavigationController
+
+@end
+
 @interface FavoriteViewController : UIViewController <UITableViewDataSource, UITableViewDelegate,ECSlidingViewControllerDelegate, SWTableViewCellDelegate>
 @property (nonatomic,strong) NSManagedObjectContext* managedObjectContext;
 @property (nonatomic) IBOutlet UIBarButtonItem* revealButtonItem;

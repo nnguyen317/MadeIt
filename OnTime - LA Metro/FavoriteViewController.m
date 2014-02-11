@@ -16,6 +16,57 @@
 #import "AllStopTimeViewController.h"
 #import "SWTableViewCell.h"
 
+@interface FavoriteNavigationController ()
+@property (nonatomic, strong) UIPanGestureRecognizer *dynamicTransitionPanGesture;
+@property (nonatomic, strong) METransitions *transitions;
+
+@end
+
+@implementation FavoriteNavigationController
+@synthesize dynamicTransitionPanGesture = _dynamicTransitionPanGesture;
+
+- (UIPanGestureRecognizer *)dynamicTransitionPanGesture {
+    if (_dynamicTransitionPanGesture) return _dynamicTransitionPanGesture;
+    
+    _dynamicTransitionPanGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self.transitions.dynamicTransition action:@selector(handlePanGesture:)];
+    
+    return _dynamicTransitionPanGesture;
+}
+
+- (IBAction)revealMenu:(id)sender
+{
+    [self.slidingViewController anchorTopViewToRightAnimated:YES];
+}
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    self.view.layer.shadowOpacity = 0.75f;
+    self.view.layer.shadowRadius = 10.0f;
+    self.view.layer.shadowColor = [UIColor blackColor].CGColor;
+    // Change the tab bar background
+    //UIImage *tabBarBackground = [UIImage imageNamed:@"CustomUITabbar.png"];
+    [[UITabBar appearance] setTintColor:[UIColor grayColor]];
+	// Do any additional setup after loading the view.
+    // Add the pan gesture to allow sliding
+    //[self.view addGestureRecognizer:self.slidingViewController.panGesture];
+    
+    if ([(NSObject *)self.slidingViewController.delegate isKindOfClass:[MEDynamicTransition class]]) {
+        MEDynamicTransition *dynamicTransition = (MEDynamicTransition *)self.slidingViewController.delegate;
+        if (!self.dynamicTransitionPanGesture) {
+            self.dynamicTransitionPanGesture = [[UIPanGestureRecognizer alloc] initWithTarget:dynamicTransition action:@selector(handlePanGesture:)];
+        }
+        
+        [self.navigationController.view removeGestureRecognizer:self.slidingViewController.panGesture];
+        [self.navigationController.view addGestureRecognizer:self.dynamicTransitionPanGesture];
+    } else {
+        [self.navigationController.view removeGestureRecognizer:self.dynamicTransitionPanGesture];
+        [self.navigationController.view addGestureRecognizer:self.slidingViewController.panGesture];
+    }
+}
+
+@end
+
 @interface FavoriteViewController ()
 {
     NSTimer *timer;
@@ -324,7 +375,6 @@
             
             
         } else {
-            NSLog(@"Cell:%@ at %d Seconds",cell.arrivalTimeLabel.text,cell.totalSeconds);
         }
     }
     
