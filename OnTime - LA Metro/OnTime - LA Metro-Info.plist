@@ -34,7 +34,9 @@
 	</array>
 	<key>UIAppFonts</key>
 	<array>
+		<string>FlexDisplay-Thin.otf</string>
 		<string>Roboto-Bold.ttf</string>
+		<string>Roboto-Medium.ttf</string>
 		<string>Harabara.ttf</string>
 		<string>Dosis-ExtraBold.ttf</string>
 		<string>Dosis-SemiBold.ttf</string>

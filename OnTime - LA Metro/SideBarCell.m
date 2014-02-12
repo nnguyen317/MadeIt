@@ -33,7 +33,7 @@
     self.topSeparator.backgroundColor = [UIColor colorWithWhite:0.1f alpha:1.0f];
     self.bottomSeparator.backgroundColor = [UIColor colorWithWhite:0.3f alpha:1.0f];
     
-    NSString* boldFontName = @"Harabara";
+    NSString* boldFontName = @"Roboto-Medium";
     
     self.titleLabel.textColor = [UIColor colorWithWhite:0.9f alpha:1.0f];
     self.titleLabel.font = [UIFont fontWithName:boldFontName size:16.0f];
