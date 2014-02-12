@@ -57,8 +57,11 @@
     self.slidingViewController.customAnchoredGestures = @[self.dynamicTransitionPanGesture];
 
     
-    self.topViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"Favorites"];
+    self.slidingViewController.topViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"Favorites"];
     
+    [self.slidingViewController.topViewController.view addGestureRecognizer:self.slidingViewController.panGesture];
+    self.slidingViewController.topViewAnchoredGesture = ECSlidingViewControllerAnchoredGestureTapping | ECSlidingViewControllerAnchoredGesturePanning;
+    [self.slidingViewController resetTopViewAnimated:YES];
 
 }
 

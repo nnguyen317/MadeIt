@@ -21,7 +21,7 @@
     
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     [[UINavigationBar appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor], NSForegroundColorAttributeName, [UIFont fontWithName:@"Harabara" size:18.0f], NSFontAttributeName, nil]];
-    [[UINavigationBar appearance] setBarTintColor:[self colorWithHexString:@"336699"]];
+    [[UINavigationBar appearance] setBarTintColor:[self colorWithHexString:@"252525"]];
     [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
     [[UITabBar appearance] setBarTintColor:[self colorWithHexString:@"C0C0C0"]];
     

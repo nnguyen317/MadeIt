@@ -125,6 +125,8 @@
     
     self.slidingViewController.topViewController= newTopViewController;
     
+    [self.slidingViewController.topViewController.view addGestureRecognizer:self.slidingViewController.panGesture];
+    self.slidingViewController.topViewAnchoredGesture = ECSlidingViewControllerAnchoredGestureTapping | ECSlidingViewControllerAnchoredGesturePanning;
     [self.slidingViewController resetTopViewAnimated:YES];
     
     //self.slidingViewController.underLeftViewController  = newTopViewController;

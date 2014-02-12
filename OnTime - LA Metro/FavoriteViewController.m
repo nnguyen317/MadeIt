@@ -23,6 +23,7 @@
 @end
 
 @implementation FavoriteNavigationController
+
 @synthesize dynamicTransitionPanGesture = _dynamicTransitionPanGesture;
 
 - (UIPanGestureRecognizer *)dynamicTransitionPanGesture {
@@ -41,6 +42,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
     self.view.layer.shadowOpacity = 0.75f;
     self.view.layer.shadowRadius = 10.0f;
     self.view.layer.shadowColor = [UIColor blackColor].CGColor;
@@ -63,11 +65,12 @@
         [self.navigationController.view removeGestureRecognizer:self.dynamicTransitionPanGesture];
         [self.navigationController.view addGestureRecognizer:self.slidingViewController.panGesture];
     }
+    
 }
 
 @end
 
-@interface FavoriteViewController ()
+@interface FavoriteViewController () <UIGestureRecognizerDelegate>
 {
     NSTimer *timer;
     NSMutableArray *timerContainer;
@@ -131,7 +134,10 @@
     } else {
         [self.view removeGestureRecognizer:self.dynamicTransitionPanGesture];
         [self.view addGestureRecognizer:self.slidingViewController.panGesture];
+        
     }
+    
+    self.slidingViewController.topViewAnchoredGesture = ECSlidingViewControllerAnchoredGestureTapping | ECSlidingViewControllerAnchoredGesturePanning;
     
     [self getTableData];
     
@@ -152,6 +158,11 @@
     }
 }
 
+-(BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer
+{
+    return NO;
+}
+
 - (IBAction)revealMenu:(id)sender
 {
     [self.slidingViewController anchorTopViewToRightAnimated:YES];
@@ -166,6 +177,7 @@
     
     return rightUtilityButtons;
 }
+
 
 - (void)didReceiveMemoryWarning
 {
@@ -487,6 +499,7 @@
     return YES;
 }
 
+
 - (void)swipeableTableViewCell:(SWTableViewCell *)cell scrollingToState:(SWCellState)state {
     
     NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
@@ -526,5 +539,6 @@
     }
     
 }
+
 
 @end
