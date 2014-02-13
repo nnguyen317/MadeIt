@@ -26,4 +26,11 @@
     // Configure the view for the selected state
 }
 
+-(void)awakeFromNib {
+    
+    
+    NSString *boldFontName = @"Bariol-Bold";
+    NSString *FontName = @"Bariol-Regular";
+    self.directionBoundLabel.font = [UIFont fontWithName:FontName size:16.0f];
+}
 @end

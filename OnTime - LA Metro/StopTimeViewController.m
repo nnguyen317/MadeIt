@@ -212,6 +212,7 @@
         }
         [self startTimerForInbound];
     } else if ([self.selectedSegment isEqualToString:@"All"]) {
+        self.tableView.rowHeight = 50.0f;
         [timer invalidate];
         self.stopArray = [metro getStopBounds:self.stopTimes.routeId];
     }

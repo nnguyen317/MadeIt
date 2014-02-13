@@ -313,6 +313,7 @@
     for (Favorites *favorites in _stationList) {
         
         if ([self.selectedSegment isEqualToString:@"Current"]) {
+            self.tableView.rowHeight = 80.0f;
             NSMutableArray *stopTimeArray = [metro getArrivalTimeFromStopSingle:favorites.route_id withStopId:favorites.stop_id andDirectionId:favorites.direction_id forAgency:favorites.agency_id forDatabase:favorites.agency_id];
             if(stopTimeArray.count > 0){
                 StopTimes *stopTimes = [stopTimeArray firstObject];
@@ -322,6 +323,7 @@
                 [tableData addObject:stopTimes];
             }
         } else {
+            self.tableView.rowHeight = 50.0f;
             [tableData addObject:favorites];
         }
     }

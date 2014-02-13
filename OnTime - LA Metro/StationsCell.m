@@ -27,4 +27,10 @@
     // Configure the view for the selected state
 }
 
+-(void)awakeFromNib {
+        
+    NSString *FontName = @"Bariol-Regular";
+    self.stationLabel.font = [UIFont fontWithName:FontName size:16.0f];
+}
+
 @end

@@ -13,6 +13,7 @@
 #import "AppDelegate.h"
 #import "UIViewController+ECSlidingViewController.h"
 #import "MEDynamicTransition.h"
+#import "StationsCell.h"
 
 @interface RoutesViewController ()
 @property (nonatomic, strong) NSMutableArray *routeList;
@@ -99,10 +100,10 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"RouteCell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+    StationsCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     
     if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+        cell = [[StationsCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
     
     // Configure the cell...
@@ -111,7 +112,7 @@
     
     route = self.routeList[indexPath.row];
     
-    cell.textLabel.text = route.routeName;
+    cell.stationLabel.text = route.routeName;
     
     return cell;
 }

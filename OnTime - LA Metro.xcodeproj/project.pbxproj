@@ -40,6 +40,10 @@
 		040E7CC418AB3F5500C4791F /* FlexDisplay-Thin.otf in Resources */ = {isa = PBXBuildFile; fileRef = 040E7CC218AB3F5500C4791F /* FlexDisplay-Thin.otf */; };
 		040E7CC618AB409600C4791F /* Roboto-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 040E7CC518AB409600C4791F /* Roboto-Medium.ttf */; };
 		040E7CC718AB409600C4791F /* Roboto-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 040E7CC518AB409600C4791F /* Roboto-Medium.ttf */; };
+		040E7CCA18ABC93D00C4791F /* Bariol_Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 040E7CC818ABC93D00C4791F /* Bariol_Bold.otf */; };
+		040E7CCB18ABC93D00C4791F /* Bariol_Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 040E7CC818ABC93D00C4791F /* Bariol_Bold.otf */; };
+		040E7CCC18ABC93D00C4791F /* Bariol_Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 040E7CC918ABC93D00C4791F /* Bariol_Regular.otf */; };
+		040E7CCD18ABC93D00C4791F /* Bariol_Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 040E7CC918ABC93D00C4791F /* Bariol_Regular.otf */; };
 		0427900018620D5D000717FA /* SearchDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 04278FFF18620D5D000717FA /* SearchDatabase.m */; };
 		0427900118620D5D000717FA /* SearchDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 04278FFF18620D5D000717FA /* SearchDatabase.m */; };
 		042790041862200C000717FA /* Agency.m in Sources */ = {isa = PBXBuildFile; fileRef = 042790031862200C000717FA /* Agency.m */; };
@@ -193,6 +197,8 @@
 		04077E7F185E268B0076E6F8 /* FMResultSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMResultSet.m; sourceTree = "<group>"; };
 		040E7CC218AB3F5500C4791F /* FlexDisplay-Thin.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "FlexDisplay-Thin.otf"; sourceTree = "<group>"; };
 		040E7CC518AB409600C4791F /* Roboto-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Medium.ttf"; sourceTree = "<group>"; };
+		040E7CC818ABC93D00C4791F /* Bariol_Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Bariol_Bold.otf; sourceTree = "<group>"; };
+		040E7CC918ABC93D00C4791F /* Bariol_Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Bariol_Regular.otf; sourceTree = "<group>"; };
 		04278FFE18620D5D000717FA /* SearchDatabase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchDatabase.h; sourceTree = "<group>"; };
 		04278FFF18620D5D000717FA /* SearchDatabase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchDatabase.m; sourceTree = "<group>"; };
 		042790021862200C000717FA /* Agency.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Agency.h; sourceTree = "<group>"; };
@@ -390,6 +396,8 @@
 		04077E39185BB98F0076E6F8 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				040E7CC818ABC93D00C4791F /* Bariol_Bold.otf */,
+				040E7CC918ABC93D00C4791F /* Bariol_Regular.otf */,
 				040E7CC518AB409600C4791F /* Roboto-Medium.ttf */,
 				040E7CC218AB3F5500C4791F /* FlexDisplay-Thin.otf */,
 				3DBEE0DF18A8BBD1002F1DDF /* Roboto-Bold.ttf */,
@@ -647,9 +655,11 @@
 				04BF936B18A75A0B00CED17B /* lametro.sqlite in Resources */,
 				3DBEE0DA18A8B001002F1DDF /* Dosis-ExtraBold.ttf in Resources */,
 				04077E66185BB9C60076E6F8 /* MainStoryboard.storyboard in Resources */,
+				040E7CCA18ABC93D00C4791F /* Bariol_Bold.otf in Resources */,
 				3DBEE0E018A8BBD1002F1DDF /* Roboto-Bold.ttf in Resources */,
 				04077E3D185BB98F0076E6F8 /* InfoPlist.strings in Resources */,
 				04D7BE3C1886EC4800D32902 /* reveal-icon@2x.png in Resources */,
+				040E7CCC18ABC93D00C4791F /* Bariol_Regular.otf in Resources */,
 				04077E48185BB98F0076E6F8 /* Images.xcassets in Resources */,
 				040E7CC318AB3F5500C4791F /* FlexDisplay-Thin.otf in Resources */,
 				3DBEE0D418A815D1002F1DDF /* Dosis-SemiBold.ttf in Resources */,
@@ -669,8 +679,10 @@
 				04077E67185BB9C60076E6F8 /* MainStoryboard.storyboard in Resources */,
 				3DBEE0DB18A8B001002F1DDF /* Dosis-ExtraBold.ttf in Resources */,
 				3DBEE0D518A815D1002F1DDF /* Dosis-SemiBold.ttf in Resources */,
+				040E7CCD18ABC93D00C4791F /* Bariol_Regular.otf in Resources */,
 				04077E5A185BB98F0076E6F8 /* InfoPlist.strings in Resources */,
 				040E7CC718AB409600C4791F /* Roboto-Medium.ttf in Resources */,
+				040E7CCB18ABC93D00C4791F /* Bariol_Bold.otf in Resources */,
 				04BF936C18A75A0B00CED17B /* lametro.sqlite in Resources */,
 				040E7CC418AB3F5500C4791F /* FlexDisplay-Thin.otf in Resources */,
 				04D7BE3B1886EC4800D32902 /* reveal-icon.png in Resources */,

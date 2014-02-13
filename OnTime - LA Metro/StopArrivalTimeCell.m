@@ -48,9 +48,12 @@
 -(void)awakeFromNib {
     
     
-    NSString* boldFontName = @"Roboto-Bold";
-    
-    self.arrivalTimerLabel.font = [UIFont fontWithName:boldFontName size:20.0f];
+    //NSString *boldFontName = @"Bariol-Bold";
+    NSString *fontName = @"Bariol-Regular";
+    NSString *timerFont = @"HelveticaNeue-Bold";
+    self.arrivalTimerLabel.font = [UIFont fontWithName:timerFont size:20.0f];
+    self.arrivalTimeLabel.font = [UIFont fontWithName:fontName size:12.0f];
+    self.directionBoundLabel.font = [UIFont fontWithName:fontName size:14.0f];
 }
 
 -(void)startTimer {
