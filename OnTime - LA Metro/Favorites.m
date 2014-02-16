@@ -17,5 +17,6 @@
 @dynamic stop_id;
 @dynamic stop_name;
 @dynamic trip_headsign;
+@dynamic route_color;
 
 @end

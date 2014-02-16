@@ -12,5 +12,5 @@
 @interface Route : Agency
 @property (nonatomic, strong) NSString *routeName;
 @property (nonatomic, strong) NSString *routeId;
-
+@property (nonatomic, strong) NSString *routeColor;
 @end

@@ -89,6 +89,7 @@
         stopTimeController.stopTimes = stopTimes;
         stopTimeController.stopTimes.routeId   = self.stop.routeId;
         stopTimeController.stopTimes.agencyId = self.stop.agencyId;
+        stopTimeController.stopTimes.routeColor = self.stop.routeColor;
         stopTimeController.navBarItem.title = stopTimes.stopName;
     }
 }

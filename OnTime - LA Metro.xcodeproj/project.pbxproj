@@ -44,6 +44,8 @@
 		040E7CCB18ABC93D00C4791F /* Bariol_Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 040E7CC818ABC93D00C4791F /* Bariol_Bold.otf */; };
 		040E7CCC18ABC93D00C4791F /* Bariol_Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 040E7CC918ABC93D00C4791F /* Bariol_Regular.otf */; };
 		040E7CCD18ABC93D00C4791F /* Bariol_Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 040E7CC918ABC93D00C4791F /* Bariol_Regular.otf */; };
+		040E7CCF18ADBE6A00C4791F /* Arial Rounded Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 040E7CCE18ADBE6A00C4791F /* Arial Rounded Bold.ttf */; };
+		040E7CD018ADBE6A00C4791F /* Arial Rounded Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 040E7CCE18ADBE6A00C4791F /* Arial Rounded Bold.ttf */; };
 		0427900018620D5D000717FA /* SearchDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 04278FFF18620D5D000717FA /* SearchDatabase.m */; };
 		0427900118620D5D000717FA /* SearchDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 04278FFF18620D5D000717FA /* SearchDatabase.m */; };
 		042790041862200C000717FA /* Agency.m in Sources */ = {isa = PBXBuildFile; fileRef = 042790031862200C000717FA /* Agency.m */; };
@@ -199,6 +201,7 @@
 		040E7CC518AB409600C4791F /* Roboto-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Medium.ttf"; sourceTree = "<group>"; };
 		040E7CC818ABC93D00C4791F /* Bariol_Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Bariol_Bold.otf; sourceTree = "<group>"; };
 		040E7CC918ABC93D00C4791F /* Bariol_Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Bariol_Regular.otf; sourceTree = "<group>"; };
+		040E7CCE18ADBE6A00C4791F /* Arial Rounded Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Arial Rounded Bold.ttf"; sourceTree = "<group>"; };
 		04278FFE18620D5D000717FA /* SearchDatabase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchDatabase.h; sourceTree = "<group>"; };
 		04278FFF18620D5D000717FA /* SearchDatabase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchDatabase.m; sourceTree = "<group>"; };
 		042790021862200C000717FA /* Agency.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Agency.h; sourceTree = "<group>"; };
@@ -396,6 +399,7 @@
 		04077E39185BB98F0076E6F8 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				040E7CCE18ADBE6A00C4791F /* Arial Rounded Bold.ttf */,
 				040E7CC818ABC93D00C4791F /* Bariol_Bold.otf */,
 				040E7CC918ABC93D00C4791F /* Bariol_Regular.otf */,
 				040E7CC518AB409600C4791F /* Roboto-Medium.ttf */,
@@ -532,9 +536,9 @@
 			isa = PBXGroup;
 			children = (
 				3DFAD056185E4097000F3854 /* Route.h */,
+				3DFAD057185E4097000F3854 /* Route.m */,
 				3D2D2F1B18A0C61F00C1D44E /* Favorites.h */,
 				3D2D2F1C18A0C61F00C1D44E /* Favorites.m */,
-				3DFAD057185E4097000F3854 /* Route.m */,
 				3DFAD05F185E63B2000F3854 /* Stop.h */,
 				3DFAD060185E63B2000F3854 /* Stop.m */,
 				3DF90570186142A3008A2D35 /* Metro.h */,
@@ -663,6 +667,7 @@
 				04077E48185BB98F0076E6F8 /* Images.xcassets in Resources */,
 				040E7CC318AB3F5500C4791F /* FlexDisplay-Thin.otf in Resources */,
 				3DBEE0D418A815D1002F1DDF /* Dosis-SemiBold.ttf in Resources */,
+				040E7CCF18ADBE6A00C4791F /* Arial Rounded Bold.ttf in Resources */,
 				3DBEE0D718A815DF002F1DDF /* Dosis-Regular.ttf in Resources */,
 				04D7BE3A1886EC4800D32902 /* reveal-icon.png in Resources */,
 			);
@@ -680,6 +685,7 @@
 				3DBEE0DB18A8B001002F1DDF /* Dosis-ExtraBold.ttf in Resources */,
 				3DBEE0D518A815D1002F1DDF /* Dosis-SemiBold.ttf in Resources */,
 				040E7CCD18ABC93D00C4791F /* Bariol_Regular.otf in Resources */,
+				040E7CD018ADBE6A00C4791F /* Arial Rounded Bold.ttf in Resources */,
 				04077E5A185BB98F0076E6F8 /* InfoPlist.strings in Resources */,
 				040E7CC718AB409600C4791F /* Roboto-Medium.ttf in Resources */,
 				040E7CCB18ABC93D00C4791F /* Bariol_Bold.otf in Resources */,

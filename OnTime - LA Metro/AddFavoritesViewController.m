@@ -15,6 +15,7 @@
     NSString *stopId;
     NSString *directionId;
     NSString *stopName;
+    NSString *routeColor;
 }
 
 @property (nonatomic, strong) UITextField *pickerViewTextField;
@@ -180,6 +181,7 @@
         newEntry.route_id = routeId;
         newEntry.stop_id = stopId;
         newEntry.stop_name = stopName;
+        newEntry.route_color = routeColor;
         newEntry.direction_id = [NSString stringWithFormat:@"%@",directionId];
         newEntry.trip_headsign = self.trip_headsign;
     }
@@ -229,6 +231,7 @@
             _directionButton.enabled = NO;
             _routes = _routeList[row];
             routeId = _routes.routeId;
+            routeColor = _routes.routeColor;
             break;
         case 102:
             [_directionButton setTitle:@"Select....." forState:UIControlStateNormal];

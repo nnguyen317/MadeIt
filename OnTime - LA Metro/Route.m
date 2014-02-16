@@ -9,6 +9,8 @@
 #import "Route.h"
 
 @implementation Route
-@synthesize routeId,routeName;
+@synthesize routeId = _routeId;
+@synthesize routeName   = _routeName;
+@synthesize routeColor = _routeColor;
 
 @end

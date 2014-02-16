@@ -17,5 +17,5 @@
 @property (nonatomic, retain) NSString * stop_id;
 @property (nonatomic, retain) NSString * stop_name;
 @property (nonatomic, retain) NSString * trip_headsign;
-
+@property (nonatomic, retain) NSString * route_color;
 @end

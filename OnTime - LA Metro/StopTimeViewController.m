@@ -49,6 +49,8 @@
     self.segmentItems = @[@"Current",@"All"];
     self.selectedSegment = self.segmentItems[0];
     
+    [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
+    
     [self getTableData];
     
     
@@ -221,6 +223,8 @@
     
 }
 
+
+
 -(void)startTimerForInbound {
     timer =[NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(timerFiredForInbound) userInfo:nil repeats:YES];
 }
@@ -233,16 +237,21 @@
 {
 
     NSArray *cells = [self.tableView visibleCells];
+    BOOL insert = NO;
     for (StopArrivalTimeCell *cell in cells) {
-        if(cell.totalSeconds <= 0){
+        if(cell.totalSeconds <= 1){
             if (cell.deleteFlag == YES) {
                 break;
             } else {
                 cell.deleteFlag = YES;
-                [self insertRow];
+                insert = YES;
             }
         } else {
         }
+    }
+    
+    if(insert) {
+        [self insertRow];
     }
 }
 
@@ -251,12 +260,15 @@
     
     NSMutableArray *indexes = [[NSMutableArray alloc] init];
     NSMutableArray *stopTimesToDelete = [[NSMutableArray alloc]init];
+    int currentRows = [self.tableView numberOfRowsInSection:0];
     for (StopArrivalTimeCell *cell in cells) {
         if (cell.deleteFlag == YES) {
             for (StopTimes *stopTimes in self.stopTimeContainer) {
                 if ([stopTimes.directionId isEqualToString:cell.directionId]) {
                     [self.stopArray addObject:stopTimes];
                     [stopTimesToDelete addObject:stopTimes];
+                    [indexes addObject:[NSIndexPath indexPathForRow:currentRows inSection:0]];
+                    currentRows+=1;
                     break;
                 }
             }
@@ -270,9 +282,9 @@
     }
     
     
-    [indexes addObject:[NSIndexPath indexPathForRow:[self.tableView numberOfRowsInSection:0] inSection:0]];
+    //[indexes addObject:[NSIndexPath indexPathForRow:[self.tableView numberOfRowsInSection:0] inSection:0]];
     [self.tableView beginUpdates];
-    [self.tableView insertRowsAtIndexPaths:indexes withRowAnimation:UITableViewRowAnimationAutomatic];
+    [self.tableView insertRowsAtIndexPaths:indexes withRowAnimation:UITableViewRowAnimationTop];
     [self.tableView endUpdates];
     
     
@@ -285,7 +297,7 @@
 -(void)deleteRow {
     NSArray *cells = [self.tableView visibleCells];
     NSMutableArray *indexes = [[NSMutableArray alloc] init];
-    
+    BOOL delete = NO;
     for (StopArrivalTimeCell *cell in cells)
     {
         int totalCellSeconds = cell.totalSeconds;
@@ -298,6 +310,8 @@
                     [cell endTimer];
                     stopTimeToDelete = stopTimes;
                     [indexes addObject:cellIndexPath];
+                    delete = YES;
+                    break;
                 }
             }
             
@@ -306,9 +320,13 @@
         }
     }
     
-    [self.tableView beginUpdates];
-    [self.tableView deleteRowsAtIndexPaths:indexes withRowAnimation:UITableViewRowAnimationFade];
-    [self.tableView endUpdates];
+    if (delete) {
+        [self.tableView beginUpdates];
+        [self.tableView deleteRowsAtIndexPaths:indexes withRowAnimation:UITableViewRowAnimationFade];
+        [self.tableView endUpdates];
+        delete = NO;
+    }
+    
 }
 
 

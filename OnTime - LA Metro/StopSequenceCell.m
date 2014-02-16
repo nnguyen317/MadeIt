@@ -33,7 +33,7 @@
 -(void)awakeFromNib {
     
     
-    NSString *boldFontName = @"Bariol-Bold";
+    NSString *boldFontName = @"ArialRoundedMTBold";
     NSString *FontName = @"Bariol-Regular";
     self.arrivalTime.font = [UIFont fontWithName:boldFontName size:14.0f];
     self.stopName.font = [UIFont fontWithName:FontName size:14.0f];

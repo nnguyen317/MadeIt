@@ -34,6 +34,7 @@
 	</array>
 	<key>UIAppFonts</key>
 	<array>
+		<string>ArialRoundedMTBold</string>
 		<string>Bariol_Bold.otf</string>
 		<string>Bariol_Regular.otf</string>
 		<string>FlexDisplay-Thin.otf</string>
