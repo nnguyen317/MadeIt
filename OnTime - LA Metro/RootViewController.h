@@ -10,4 +10,6 @@
 
 @interface RootViewController : UITabBarController
 
+@property (weak, nonatomic) IBOutlet UITabBar *tabBar;
+
 @end

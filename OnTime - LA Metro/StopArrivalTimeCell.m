@@ -7,6 +7,7 @@
 //
 
 #import "StopArrivalTimeCell.h"
+#import "AppDelegate.h"
 
 @interface StopArrivalTimeCell()
 {
@@ -25,6 +26,7 @@
 @synthesize totalSeconds        = _totalSeconds;
 @synthesize deleteFlag = _deleteFlag;
 @synthesize arrivalSeconds = _arrivalSeconds;
+@synthesize imageView = _imageView;
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
@@ -54,6 +56,12 @@
     self.arrivalTimerLabel.font = [UIFont fontWithName:timerFont size:20.0f];
     self.arrivalTimeLabel.font = [UIFont fontWithName:fontName size:12.0f];
     self.directionBoundLabel.font = [UIFont fontWithName:fontName size:14.0f];
+    
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    
+    UIView *bgColorView = [[UIView alloc] init];
+    bgColorView.backgroundColor = appDelegate.selectionColor;
+    self.selectedBackgroundView = bgColorView;
 }
 
 -(UIColor*)colorWithHexString:(NSString*)hex

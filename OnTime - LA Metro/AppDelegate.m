@@ -13,17 +13,31 @@
 @synthesize managedObjectContext = _managedObjectContext;
 @synthesize managedObjectModel = _managedObjectModel;
 @synthesize persistentStoreCoordinator = _persistentStoreCoordinator;
-@synthesize databaseNameMetroLink,databaseNameMetroRail, dbPathMetroLink, dbPathMetroRail, choice, setTime;
+@synthesize databaseNameMetroLink,databaseNameMetroRail, dbPathMetroLink, dbPathMetroRail, choice, setTime, navigationColor, selectionColor, addFavoritesBackgroundColor;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     
-    
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     [[UINavigationBar appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor], NSForegroundColorAttributeName, [UIFont fontWithName:@"Bariol-Bold" size:18.0f], NSFontAttributeName, nil]];
-    [[UINavigationBar appearance] setBarTintColor:[self colorWithHexString:@"2980b9"]];
+    
+    self.navigationColor = [self colorWithHexString:@"2980b9"];
+    self.selectionColor = [self colorWithHexString:@"2D8DCC"];
+    self.addFavoritesBackgroundColor = [self colorWithHexString:@"0E2C40"];
+    
+    [[UINavigationBar appearance] setBarTintColor:self.navigationColor];
     [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
-    [[UITabBar appearance] setBarTintColor:[self colorWithHexString:@"C0C0C0"]];
+    [[UITabBar appearance] setBarTintColor:[self colorWithHexString:@"4F6C7F"]];
+    //[[UITabBarItem appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor], NSForegroundColorAttributeName, nil]
+                                            // forState:UIControlStateNormal];
+    [[UITabBar appearance] setSelectedImageTintColor:[UIColor whiteColor]];
+    [[UITabBar appearance] setTintColor:[UIColor whiteColor]];
+    
+    //[[UITabBar appearance] setBarTintColor:[self colorWithHexString:@"26343D"]];
+
+    
+    
+    [[UINavigationBar appearance] setShadowImage:[[UIImage alloc] init]];
     
     self.databaseNameMetroLink = @"lametro.sqlite";
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);

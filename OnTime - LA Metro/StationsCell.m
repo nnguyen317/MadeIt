@@ -7,9 +7,12 @@
 //
 
 #import "StationsCell.h"
+#import "AppDelegate.h"
 
 @implementation StationsCell
 @synthesize stationLabel = _stationLabel;
+@synthesize imageView = _imageView;
+@synthesize lineColor = _lineColor;
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
@@ -28,9 +31,15 @@
 }
 
 -(void)awakeFromNib {
-        
-    NSString *FontName = @"Bariol-Regular";
+    
+    NSString *FontName = @"Bariol-Bold";
     self.stationLabel.font = [UIFont fontWithName:FontName size:16.0f];
+    
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+
+    UIView *bgColorView = [[UIView alloc] init];
+    bgColorView.backgroundColor = appDelegate.selectionColor;
+    self.selectedBackgroundView = bgColorView;
 }
 
 @end

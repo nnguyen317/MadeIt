@@ -7,8 +7,9 @@
 //
 
 #import "AddFavoritesViewController.h"
+#import "AppDelegate.h"
 
-@interface AddFavoritesViewController ()
+@interface AddFavoritesViewController () <UIPickerViewDelegate, UIPickerViewDataSource>
 {
     NSString *agencyId;
     NSString *routeId;
@@ -16,6 +17,7 @@
     NSString *directionId;
     NSString *stopName;
     NSString *routeColor;
+    NSString *routeImg;
 }
 
 @property (nonatomic, strong) UITextField *pickerViewTextField;
@@ -64,6 +66,15 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    
+    //self.view.backgroundColor = appDelegate.addFavoritesBackgroundColor;
+    NSString *boldFontName = @"Bariol-Bold";
+    
+    self.agencyLabel.font = [UIFont fontWithName:boldFontName size:18.0f ];
+    self.lineLabel.font = [UIFont fontWithName:boldFontName size:18.0f ];
+    self.stationLabel.font = [UIFont fontWithName:boldFontName size:18.0f ];
+    self.directionLabel.font = [UIFont fontWithName:boldFontName size:18.0f ];
     
     self.pickerViewTextField = [[UITextField alloc] initWithFrame:CGRectZero];
     [self.view addSubview:self.pickerViewTextField];
@@ -79,15 +90,18 @@
     
     // add a toolbar with Cancel & Done button
     UIToolbar *toolBar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, 0, 320, 44)];
-    toolBar.barStyle = UIBarStyleBlackOpaque;
+    toolBar.barTintColor = [appDelegate navigationColor];
     
     UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(doneTouched:)];
     UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancelTouched:)];
     
+    doneButton.tintColor = [UIColor whiteColor];
+    cancelButton.tintColor = [UIColor whiteColor];
     
     // the middle button is to make the Done button align to right
     [toolBar setItems:[NSArray arrayWithObjects:cancelButton, [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil], doneButton, nil]];
     self.pickerViewTextField.inputAccessoryView = toolBar;
+    
     
 }
 
@@ -149,6 +163,31 @@
 
 }
 
+-(UIView *)pickerView:(UIPickerView *)pickerView viewForRow:(NSInteger)row forComponent:(NSInteger)component reusingView:(UIView *)view{
+    // Get the text of the row.
+    NSString *rowItem = [_pickerContainer objectAtIndex: row];
+    
+    // Create and init a new UILabel.
+    // We must set our label's width equal to our picker's width.
+    // We'll give the default height in each row.
+    UILabel *lblRow = [[UILabel alloc] initWithFrame:CGRectMake(0.0f, 0.0f, [pickerView bounds].size.width, 44.0f)];
+    NSString *fontName = @"Bariol-Regular";
+    
+    // Center the text.
+    //[lblRow setTextAlignment:UITextAlignmentCenter];
+    [lblRow setTextAlignment:NSTextAlignmentCenter];
+    
+    lblRow.font = [UIFont fontWithName:fontName size:26.0f];
+    
+    // Add the text.
+    [lblRow setText:rowItem];
+    
+    
+    // Return the label.
+    return lblRow;
+}
+
+
 - (IBAction)cancelAddFavorites:(id)sender {
     [self dismissViewControllerAnimated:YES completion:NULL];
 }
@@ -172,7 +211,11 @@
             update = NO;
         }
     }
-
+    
+    if(!routeId || !stopId || !directionId || !agencyId) {
+        update = NO;
+    }
+    
     if(update){
         Favorites *newEntry = [NSEntityDescription insertNewObjectForEntityForName:@"Favorites"
                                                       inManagedObjectContext:self.managedObjectContext];
@@ -182,6 +225,7 @@
         newEntry.stop_id = stopId;
         newEntry.stop_name = stopName;
         newEntry.route_color = routeColor;
+        newEntry.route_img = routeImg;
         newEntry.direction_id = [NSString stringWithFormat:@"%@",directionId];
         newEntry.trip_headsign = self.trip_headsign;
     }
@@ -232,6 +276,7 @@
             _routes = _routeList[row];
             routeId = _routes.routeId;
             routeColor = _routes.routeColor;
+            routeImg = _routes.routeImg;
             break;
         case 102:
             [_directionButton setTitle:@"Select....." forState:UIControlStateNormal];

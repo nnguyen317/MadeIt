@@ -7,8 +7,10 @@
 //
 
 #import "FavoritesCell.h"
+#import "AppDelegate.h"
 
 @implementation FavoritesCell
+@synthesize imageView = _imageView;
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
@@ -32,5 +34,11 @@
     NSString *boldFontName = @"Bariol-Bold";
     NSString *FontName = @"Bariol-Regular";
     self.directionBoundLabel.font = [UIFont fontWithName:FontName size:16.0f];
+    
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    
+    UIView *bgColorView = [[UIView alloc] init];
+    bgColorView.backgroundColor = appDelegate.selectionColor;
+    self.selectedBackgroundView = bgColorView;
 }
 @end

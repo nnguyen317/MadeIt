@@ -12,5 +12,6 @@
 @synthesize routeId = _routeId;
 @synthesize routeName   = _routeName;
 @synthesize routeColor = _routeColor;
+@synthesize routeImg = _routeImg;
 
 @end

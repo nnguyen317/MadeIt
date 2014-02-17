@@ -18,6 +18,7 @@
 @property (weak, nonatomic) IBOutlet UINavigationItem *navBarItem;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *segmentedControl;
+@property (weak, nonatomic) IBOutlet UIView *segmentBackgroundView;
 - (IBAction)control:(id)sender;
 
 @end

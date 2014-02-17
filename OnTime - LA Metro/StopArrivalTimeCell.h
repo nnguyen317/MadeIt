@@ -23,6 +23,7 @@
 @property int totalSeconds;
 @property (nonatomic, strong) NSString *arrivalSeconds;
 @property BOOL deleteFlag;
+@property (weak, nonatomic) IBOutlet UIImageView *imageView;
 
 - (void)startTimer;
 - (void)endTimer;

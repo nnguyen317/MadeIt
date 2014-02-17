@@ -7,6 +7,7 @@
 //
 
 #import "StopsViewController.h"
+#import "AppDelegate.h"
 
 @interface StopsViewController ()
 
@@ -62,6 +63,8 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+
     static NSString *CellIdentifier = @"StopCell";
     StationsCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     
@@ -77,6 +80,7 @@
     // Configure the cell...
     
     cell.stationLabel.text = stop.stopName;
+    cell.lineColor.backgroundColor = [appDelegate colorWithHexString:self.stop.routeColor];
     
     return cell;
 }
@@ -90,6 +94,7 @@
         stopTimeController.stopTimes.routeId   = self.stop.routeId;
         stopTimeController.stopTimes.agencyId = self.stop.agencyId;
         stopTimeController.stopTimes.routeColor = self.stop.routeColor;
+        stopTimeController.stopTimes.routeImg = self.stop.routeImg;
         stopTimeController.navBarItem.title = stopTimes.stopName;
     }
 }

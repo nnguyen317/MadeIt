@@ -7,6 +7,7 @@
 //
 
 #import "StopSequenceCell.h"
+#import "AppDelegate.h"
 
 @implementation StopSequenceCell
 
@@ -37,6 +38,12 @@
     NSString *FontName = @"Bariol-Regular";
     self.arrivalTime.font = [UIFont fontWithName:boldFontName size:14.0f];
     self.stopName.font = [UIFont fontWithName:FontName size:14.0f];
+    
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    
+    UIView *bgColorView = [[UIView alloc] init];
+    bgColorView.backgroundColor = appDelegate.selectionColor;
+    self.selectedBackgroundView = bgColorView;
 }
 
 @end

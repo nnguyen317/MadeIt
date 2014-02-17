@@ -15,7 +15,7 @@
 
 @interface PDFMapZoomViewController ()
 
-@property (strong, nonatomic) IBOutlet UIImageView *imageView;
+@property (strong, nonatomic) UIImageView *imageView;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *revealButtonItem;
 @property (nonatomic, strong) UIPanGestureRecognizer *dynamicTransitionPanGesture;
 
@@ -106,21 +106,37 @@
     
 
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    NSString *imageName = [[NSString alloc]init];
     if([appDelegate.choice isEqualToString:@"MetroRail"]) {
         image = [UIImage imageNamed:@"rail_map.png"];
+        imageName = @"rail_map.png";
         self.navBarItem.title = appDelegate.choice;
         
     } else if ([appDelegate.choice isEqualToString:@"Metrolink"]) {
         image = [UIImage imageNamed:@"metrolink_map.png"];
+        imageName = @"metrolink_map.png";
         self.navBarItem.title = appDelegate.choice;
     } else if ([appDelegate.choice isEqualToString:@"MetroMap"]) {
         image = [UIImage imageNamed:@"metro_metrolink_map.png"];
+        imageName = @"metro_metrolink_map.png";
+        self.navBarItem.title = appDelegate.choice;
+    } else if ([appDelegate.choice isEqualToString:@"Amtrak"]) {
+        image = [UIImage imageNamed:@"amtraksocal.png"];
+        imageName = @"amtraksocal.png";
         self.navBarItem.title = appDelegate.choice;
     }
     
     
+
+    NSString *file = [[NSBundle mainBundle] pathForResource:imageName ofType:nil];
     
-    self.imageView = [[UIImageView alloc] initWithImage:image];
+
+
+    
+    UIImage *currentImage = [UIImage imageWithContentsOfFile:file];
+    
+    self.imageView = [[UIImageView alloc] initWithImage:currentImage];
+    
     self.imageView.frame = (CGRect){.origin=CGPointMake(0.0f, 0.0f), .size=image.size};
     [self.scrollView addSubview:self.imageView];
     
@@ -142,7 +158,8 @@
     CGFloat scaleWidth = scrollViewFrame.size.width / self.scrollView.contentSize.width;
     CGFloat scaleHeight = scrollViewFrame.size.height / self.scrollView.contentSize.height;
     CGFloat minScale = MIN(scaleWidth, scaleHeight);
-    self.scrollView.minimumZoomScale = minScale;
+    
+    self.scrollView.minimumZoomScale = minScale + 0.13;
     
     // 5
     self.scrollView.maximumZoomScale = 1.0f;
@@ -155,6 +172,10 @@
 
 }
 
+-(void)viewDidDisappear:(BOOL)animated {
+    self.scrollView = nil;
+    self.imageView = nil;
+}
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
@@ -162,14 +183,7 @@
     self.view.layer.shadowOpacity = 0.75f;
     self.view.layer.shadowRadius = 10.0f;
     self.view.layer.shadowColor = [UIColor blackColor].CGColor;
-    
-    /*
-    if (![self.slidingViewController.underLeftViewController isKindOfClass:[MenuViewController class]]) {
-        self.slidingViewController.underLeftViewController  = [self.storyboard instantiateViewControllerWithIdentifier:@"menu"];
-    }
-    // Add the pan gesture to allow sliding
-    [self.view addGestureRecognizer:self.slidingViewController.panGesture];
-     */
+
     
     if ([(NSObject *)self.slidingViewController.delegate isKindOfClass:[MEDynamicTransition class]]) {
         MEDynamicTransition *dynamicTransition = (MEDynamicTransition *)self.slidingViewController.delegate;

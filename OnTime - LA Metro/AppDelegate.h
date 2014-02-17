@@ -23,8 +23,12 @@
 @property (strong, nonatomic) NSString *dbPathMetroRail;
 @property (strong, nonatomic) NSString *choice;
 @property (strong, nonatomic) NSDate *setTime;
+@property (strong, nonatomic) UIColor *navigationColor;
+@property (strong, nonatomic) UIColor *selectionColor;
+@property (strong, nonatomic) UIColor *addFavoritesBackgroundColor;
 
 - (void)saveContext;
 - (NSURL *)applicationDocumentsDirectory;
+-(UIColor*)colorWithHexString:(NSString*)hex;
 
 @end

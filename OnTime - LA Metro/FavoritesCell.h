@@ -11,5 +11,6 @@
 
 @interface FavoritesCell : SWTableViewCell
 @property (weak, nonatomic) IBOutlet UILabel *directionBoundLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *imageView;
 
 @end

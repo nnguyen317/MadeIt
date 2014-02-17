@@ -7,6 +7,7 @@
 //
 
 #import "SideBarCell.h"
+#import "AppDelegate.h"
 
 @implementation SideBarCell
 
@@ -37,6 +38,12 @@
     
     self.titleLabel.textColor = [UIColor colorWithWhite:0.9f alpha:1.0f];
     self.titleLabel.font = [UIFont fontWithName:boldFontName size:16.0f];
+    
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    
+    UIView *bgColorView = [[UIView alloc] init];
+    bgColorView.backgroundColor = appDelegate.selectionColor;
+    self.selectedBackgroundView = bgColorView;
     
 }
 

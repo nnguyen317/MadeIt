@@ -43,6 +43,11 @@
 {
     [super viewDidLoad];
     
+    self.navigationBar.translucent = NO;
+    [self.navigationBar setShadowImage:[[UIImage alloc] init]];
+    [self.navigationBar setBackgroundImage:[[UIImage alloc]init] forBarMetrics:UIBarMetricsDefault];
+    
+    
     self.view.layer.shadowOpacity = 0.75f;
     self.view.layer.shadowRadius = 10.0f;
     self.view.layer.shadowColor = [UIColor blackColor].CGColor;
@@ -108,6 +113,8 @@
     
     self.segmentItems = @[@"Current",@"All"];
     self.selectedSegment = self.segmentItems[0];
+    self.segmentBackgroundView.backgroundColor = [self colorWithHexString:@"2980b9"];
+    self.segmentedControl.tintColor = [UIColor whiteColor];
 }
 
 
@@ -136,7 +143,7 @@
         [self.view addGestureRecognizer:self.slidingViewController.panGesture];
         
     }
-    
+ 
     self.slidingViewController.topViewAnchoredGesture = ECSlidingViewControllerAnchoredGestureTapping | ECSlidingViewControllerAnchoredGesturePanning;
     
     [self getTableData];
@@ -240,6 +247,7 @@
                 newCell.arrivalTimeLabel.text = [NSString stringWithFormat:@"Arrival time: %@",[metro convertToTime:[stopTimes.arrivalTime integerValue]]];
                 newCell.directionBoundLabel.text = [NSString stringWithFormat:@"%@ Bound",stopTimes.tripHeadsign];
                 newCell.directionId = stopTimes.directionId;
+                newCell.imageView.image = [UIImage imageNamed:stopTimes.routeImg];
                 newCell.currHours = currHours;
                 newCell.currMinutes = currMinute;
                 newCell.currSeconds = currSeconds;
@@ -275,7 +283,7 @@
         Favorites *favorite = tableData[indexPath.section];
         
         newCell.directionBoundLabel.text = [NSString stringWithFormat:@"%@ Bound",favorite.trip_headsign];
-        
+        newCell.imageView.image = [UIImage imageNamed:favorite.route_img];
         cell = newCell;
     }
     
@@ -301,17 +309,8 @@
     // Set the text color of our header/footer text.
     UITableViewHeaderFooterView *header = (UITableViewHeaderFooterView *)view;
     [header.textLabel setTextColor:[UIColor whiteColor]];
-    NSString *routeColor = [[NSString alloc]init];
-    // Set the background color of our header/footer.
-    if ([self.selectedSegment isEqualToString:@"Current"]) {
-        StopTimes *stopTime = tableData[section];
-        routeColor = stopTime.routeColor;
-    } else {
-        Favorites *favorite = tableData[section];
-        routeColor = favorite.route_color;
-    }
     
-    header.contentView.backgroundColor = [self colorWithHexString:routeColor];
+    header.contentView.backgroundColor = [self colorWithHexString:@"43677F"];
     
     // You can also do this to set the background color of our header/footer,
     //    but the gradients/other effects will be retained.
@@ -380,10 +379,11 @@
                 stopTimes.routeId = favorites.route_id;
                 stopTimes.agencyId = favorites.agency_id;
                 stopTimes.stopId = favorites.stop_id;
+                stopTimes.routeImg = favorites.route_img;
                 [tableData addObject:stopTimes];
             }
         } else {
-            self.tableView.rowHeight = 50.0f;
+            self.tableView.rowHeight = 60.0f;
             [tableData addObject:favorites];
         }
     }
@@ -544,11 +544,26 @@
             
             [tableData removeObjectAtIndex:cellIndexPath.section];
             
-            [self.managedObjectContext deleteObject:favorites];
+            [[self managedObjectContext] deleteObject:favorites];
+            [[self managedObjectContext] save:nil];
             
             [self.tableView beginUpdates];
             [self.tableView deleteSections:[NSIndexSet indexSetWithIndex:cellIndexPath.section] withRowAnimation:UITableViewRowAnimationAutomatic];
             [self.tableView endUpdates];
+            
+            if ([(NSObject *)self.slidingViewController.delegate isKindOfClass:[MEDynamicTransition class]]) {
+                MEDynamicTransition *dynamicTransition = (MEDynamicTransition *)self.slidingViewController.delegate;
+                if (!self.dynamicTransitionPanGesture) {
+                    self.dynamicTransitionPanGesture = [[UIPanGestureRecognizer alloc] initWithTarget:dynamicTransition action:@selector(handlePanGesture:)];
+                }
+                
+                [self.view removeGestureRecognizer:self.slidingViewController.panGesture];
+                [self.view addGestureRecognizer:self.dynamicTransitionPanGesture];
+            } else {
+                [self.view removeGestureRecognizer:self.dynamicTransitionPanGesture];
+                [self.view addGestureRecognizer:self.slidingViewController.panGesture];
+            }
+
             break;
         }
         default:
@@ -568,6 +583,10 @@
     
     if (state == 2) {
         self.doorOpen = indexPath.section;
+        UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
+        
+        cell.accessoryType = UITableViewCellAccessoryNone;
+        
         // Remove the pan gesture to disallow sliding
         if ([(NSObject *)self.slidingViewController.delegate isKindOfClass:[MEDynamicTransition class]]) {
             MEDynamicTransition *dynamicTransition = (MEDynamicTransition *)self.slidingViewController.delegate;
@@ -577,7 +596,6 @@
             
             [self.view removeGestureRecognizer:self.dynamicTransitionPanGesture];
         } else {
-            
             [self.view removeGestureRecognizer:self.slidingViewController.panGesture];
             
         }
@@ -585,6 +603,9 @@
     
     if (self.doorOpen == indexPath.section && state != 2) {
         self.doorOpen = 99;
+        UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
+        
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         // Add the pan gesture to allow sliding
         if ([(NSObject *)self.slidingViewController.delegate isKindOfClass:[MEDynamicTransition class]]) {
             MEDynamicTransition *dynamicTransition = (MEDynamicTransition *)self.slidingViewController.delegate;

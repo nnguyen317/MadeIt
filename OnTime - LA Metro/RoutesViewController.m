@@ -113,6 +113,7 @@
     route = self.routeList[indexPath.row];
     
     cell.stationLabel.text = route.routeName;
+    cell.imageView.image = [UIImage imageNamed:route.routeImg];
     
     return cell;
 }

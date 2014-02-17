@@ -13,4 +13,6 @@
 @property (nonatomic, strong) NSString *routeName;
 @property (nonatomic, strong) NSString *routeId;
 @property (nonatomic, strong) NSString *routeColor;
+@property (nonatomic, strong) NSString *routeImg;
+
 @end

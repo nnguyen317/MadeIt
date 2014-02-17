@@ -24,7 +24,7 @@
     
     NSMutableArray *routes = [[NSMutableArray alloc] init];
     
-    NSString *sql = [NSString stringWithFormat:@"SELECT route_id,route_long_name,route_color FROM routes WHERE agency_id = '%@'",agencyId];
+    NSString *sql = [NSString stringWithFormat:@"SELECT route_id,route_long_name,route_color,route_img FROM routes WHERE agency_id = '%@'",agencyId];
     
     routes = [self databaseSearch:sql withClassName:@"Route" andClass:[Route class] forDatabase:databaseName];
     

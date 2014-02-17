@@ -36,10 +36,6 @@
 		04077E85185E268B0076E6F8 /* FMDatabasePool.m in Sources */ = {isa = PBXBuildFile; fileRef = 04077E7D185E268B0076E6F8 /* FMDatabasePool.m */; };
 		04077E86185E268B0076E6F8 /* FMResultSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 04077E7F185E268B0076E6F8 /* FMResultSet.m */; };
 		04077E87185E268B0076E6F8 /* FMResultSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 04077E7F185E268B0076E6F8 /* FMResultSet.m */; };
-		040E7CC318AB3F5500C4791F /* FlexDisplay-Thin.otf in Resources */ = {isa = PBXBuildFile; fileRef = 040E7CC218AB3F5500C4791F /* FlexDisplay-Thin.otf */; };
-		040E7CC418AB3F5500C4791F /* FlexDisplay-Thin.otf in Resources */ = {isa = PBXBuildFile; fileRef = 040E7CC218AB3F5500C4791F /* FlexDisplay-Thin.otf */; };
-		040E7CC618AB409600C4791F /* Roboto-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 040E7CC518AB409600C4791F /* Roboto-Medium.ttf */; };
-		040E7CC718AB409600C4791F /* Roboto-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 040E7CC518AB409600C4791F /* Roboto-Medium.ttf */; };
 		040E7CCA18ABC93D00C4791F /* Bariol_Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 040E7CC818ABC93D00C4791F /* Bariol_Bold.otf */; };
 		040E7CCB18ABC93D00C4791F /* Bariol_Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 040E7CC818ABC93D00C4791F /* Bariol_Bold.otf */; };
 		040E7CCC18ABC93D00C4791F /* Bariol_Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 040E7CC918ABC93D00C4791F /* Bariol_Regular.otf */; };
@@ -96,8 +92,6 @@
 		0483253C188D7D4900FE2C30 /* StopSequenceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0483253A188D7D4900FE2C30 /* StopSequenceViewController.m */; };
 		04A3E707188283FF0056603F /* FavoriteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04A3E706188283FF0056603F /* FavoriteViewController.m */; };
 		04A3E708188283FF0056603F /* FavoriteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04A3E706188283FF0056603F /* FavoriteViewController.m */; };
-		04BF936B18A75A0B00CED17B /* lametro.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 04BF936A18A75A0B00CED17B /* lametro.sqlite */; };
-		04BF936C18A75A0B00CED17B /* lametro.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 04BF936A18A75A0B00CED17B /* lametro.sqlite */; };
 		04C8C10B188B13D600905637 /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C8C10A188B13D600905637 /* RootViewController.m */; };
 		04C8C10C188B13D600905637 /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C8C10A188B13D600905637 /* RootViewController.m */; };
 		04C8C10F188B1C2100905637 /* InitViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C8C10E188B1C2100905637 /* InitViewController.m */; };
@@ -133,16 +127,16 @@
 		3D8D9C9A1894397900096E46 /* NewsFeedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D8D9C981894397900096E46 /* NewsFeedViewController.m */; };
 		3D95BB091887A64700F334C1 /* MenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D95BB081887A64700F334C1 /* MenuViewController.m */; };
 		3D95BB0A1887A64700F334C1 /* MenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D95BB081887A64700F334C1 /* MenuViewController.m */; };
-		3DBEE0D418A815D1002F1DDF /* Dosis-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3DBEE0D318A815D1002F1DDF /* Dosis-SemiBold.ttf */; };
-		3DBEE0D518A815D1002F1DDF /* Dosis-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3DBEE0D318A815D1002F1DDF /* Dosis-SemiBold.ttf */; };
-		3DBEE0D718A815DF002F1DDF /* Dosis-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3DBEE0D618A815DF002F1DDF /* Dosis-Regular.ttf */; };
-		3DBEE0D818A815DF002F1DDF /* Dosis-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3DBEE0D618A815DF002F1DDF /* Dosis-Regular.ttf */; };
-		3DBEE0DA18A8B001002F1DDF /* Dosis-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3DBEE0D918A8B001002F1DDF /* Dosis-ExtraBold.ttf */; };
-		3DBEE0DB18A8B001002F1DDF /* Dosis-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3DBEE0D918A8B001002F1DDF /* Dosis-ExtraBold.ttf */; };
-		3DBEE0DD18A8B542002F1DDF /* Harabara.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3DBEE0DC18A8B542002F1DDF /* Harabara.ttf */; };
-		3DBEE0DE18A8B542002F1DDF /* Harabara.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3DBEE0DC18A8B542002F1DDF /* Harabara.ttf */; };
-		3DBEE0E018A8BBD1002F1DDF /* Roboto-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3DBEE0DF18A8BBD1002F1DDF /* Roboto-Bold.ttf */; };
-		3DBEE0E118A8BBD1002F1DDF /* Roboto-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3DBEE0DF18A8BBD1002F1DDF /* Roboto-Bold.ttf */; };
+		3DBB307018B1982200E25372 /* lametro.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 3DBB306F18B1982200E25372 /* lametro.sqlite */; };
+		3DBB307118B1982200E25372 /* lametro.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 3DBB306F18B1982200E25372 /* lametro.sqlite */; };
+		3DBB307318B19FFF00E25372 /* metro_metrolink_map.png in Resources */ = {isa = PBXBuildFile; fileRef = 3DBB307218B19FFF00E25372 /* metro_metrolink_map.png */; };
+		3DBB307418B19FFF00E25372 /* metro_metrolink_map.png in Resources */ = {isa = PBXBuildFile; fileRef = 3DBB307218B19FFF00E25372 /* metro_metrolink_map.png */; };
+		3DBB307618B1A00B00E25372 /* amtraksocal.png in Resources */ = {isa = PBXBuildFile; fileRef = 3DBB307518B1A00B00E25372 /* amtraksocal.png */; };
+		3DBB307718B1A00B00E25372 /* amtraksocal.png in Resources */ = {isa = PBXBuildFile; fileRef = 3DBB307518B1A00B00E25372 /* amtraksocal.png */; };
+		3DBB307918B1A02400E25372 /* metrolink_map.png in Resources */ = {isa = PBXBuildFile; fileRef = 3DBB307818B1A02400E25372 /* metrolink_map.png */; };
+		3DBB307A18B1A02400E25372 /* metrolink_map.png in Resources */ = {isa = PBXBuildFile; fileRef = 3DBB307818B1A02400E25372 /* metrolink_map.png */; };
+		3DBB308518B1A5A200E25372 /* rail_map.png in Resources */ = {isa = PBXBuildFile; fileRef = 3DBB308418B1A5A200E25372 /* rail_map.png */; };
+		3DBB308618B1A5A200E25372 /* rail_map.png in Resources */ = {isa = PBXBuildFile; fileRef = 3DBB308418B1A5A200E25372 /* rail_map.png */; };
 		3DD02AFE188E379D00E4CD30 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DD02AFD188E379D00E4CD30 /* SystemConfiguration.framework */; };
 		3DF90572186142A3008A2D35 /* Metro.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DF90571186142A3008A2D35 /* Metro.m */; };
 		3DF90573186142A3008A2D35 /* Metro.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DF90571186142A3008A2D35 /* Metro.m */; };
@@ -197,8 +191,6 @@
 		04077E7D185E268B0076E6F8 /* FMDatabasePool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabasePool.m; sourceTree = "<group>"; };
 		04077E7E185E268B0076E6F8 /* FMResultSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMResultSet.h; sourceTree = "<group>"; };
 		04077E7F185E268B0076E6F8 /* FMResultSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMResultSet.m; sourceTree = "<group>"; };
-		040E7CC218AB3F5500C4791F /* FlexDisplay-Thin.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "FlexDisplay-Thin.otf"; sourceTree = "<group>"; };
-		040E7CC518AB409600C4791F /* Roboto-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Medium.ttf"; sourceTree = "<group>"; };
 		040E7CC818ABC93D00C4791F /* Bariol_Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Bariol_Bold.otf; sourceTree = "<group>"; };
 		040E7CC918ABC93D00C4791F /* Bariol_Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Bariol_Regular.otf; sourceTree = "<group>"; };
 		040E7CCE18ADBE6A00C4791F /* Arial Rounded Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Arial Rounded Bold.ttf"; sourceTree = "<group>"; };
@@ -254,7 +246,6 @@
 		0483253A188D7D4900FE2C30 /* StopSequenceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StopSequenceViewController.m; sourceTree = "<group>"; };
 		04A3E705188283FF0056603F /* FavoriteViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FavoriteViewController.h; sourceTree = "<group>"; };
 		04A3E706188283FF0056603F /* FavoriteViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FavoriteViewController.m; sourceTree = "<group>"; };
-		04BF936A18A75A0B00CED17B /* lametro.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = lametro.sqlite; sourceTree = "<group>"; };
 		04C8C109188B13D600905637 /* RootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootViewController.h; sourceTree = "<group>"; };
 		04C8C10A188B13D600905637 /* RootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
 		04C8C10D188B1C2100905637 /* InitViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InitViewController.h; sourceTree = "<group>"; };
@@ -287,11 +278,11 @@
 		3D8D9C981894397900096E46 /* NewsFeedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewsFeedViewController.m; sourceTree = "<group>"; };
 		3D95BB071887A64700F334C1 /* MenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuViewController.h; sourceTree = "<group>"; };
 		3D95BB081887A64700F334C1 /* MenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuViewController.m; sourceTree = "<group>"; };
-		3DBEE0D318A815D1002F1DDF /* Dosis-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Dosis-SemiBold.ttf"; sourceTree = "<group>"; };
-		3DBEE0D618A815DF002F1DDF /* Dosis-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Dosis-Regular.ttf"; sourceTree = "<group>"; };
-		3DBEE0D918A8B001002F1DDF /* Dosis-ExtraBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Dosis-ExtraBold.ttf"; sourceTree = "<group>"; };
-		3DBEE0DC18A8B542002F1DDF /* Harabara.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Harabara.ttf; sourceTree = "<group>"; };
-		3DBEE0DF18A8BBD1002F1DDF /* Roboto-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Bold.ttf"; sourceTree = "<group>"; };
+		3DBB306F18B1982200E25372 /* lametro.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = lametro.sqlite; sourceTree = "<group>"; };
+		3DBB307218B19FFF00E25372 /* metro_metrolink_map.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = metro_metrolink_map.png; path = Images.xcassets/metro_metrolink_map.imageset/metro_metrolink_map.png; sourceTree = "<group>"; };
+		3DBB307518B1A00B00E25372 /* amtraksocal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = amtraksocal.png; path = Images.xcassets/amtraksocal.imageset/amtraksocal.png; sourceTree = "<group>"; };
+		3DBB307818B1A02400E25372 /* metrolink_map.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = metrolink_map.png; path = Images.xcassets/metrolink_map.imageset/metrolink_map.png; sourceTree = "<group>"; };
+		3DBB308418B1A5A200E25372 /* rail_map.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rail_map.png; sourceTree = "<group>"; };
 		3DD02AFD188E379D00E4CD30 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		3DF90570186142A3008A2D35 /* Metro.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Metro.h; sourceTree = "<group>"; };
 		3DF90571186142A3008A2D35 /* Metro.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Metro.m; sourceTree = "<group>"; };
@@ -399,17 +390,14 @@
 		04077E39185BB98F0076E6F8 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				3DBB307218B19FFF00E25372 /* metro_metrolink_map.png */,
+				3DBB307518B1A00B00E25372 /* amtraksocal.png */,
+				3DBB307818B1A02400E25372 /* metrolink_map.png */,
+				3DBB308418B1A5A200E25372 /* rail_map.png */,
+				3DBB306F18B1982200E25372 /* lametro.sqlite */,
 				040E7CCE18ADBE6A00C4791F /* Arial Rounded Bold.ttf */,
 				040E7CC818ABC93D00C4791F /* Bariol_Bold.otf */,
 				040E7CC918ABC93D00C4791F /* Bariol_Regular.otf */,
-				040E7CC518AB409600C4791F /* Roboto-Medium.ttf */,
-				040E7CC218AB3F5500C4791F /* FlexDisplay-Thin.otf */,
-				3DBEE0DF18A8BBD1002F1DDF /* Roboto-Bold.ttf */,
-				3DBEE0DC18A8B542002F1DDF /* Harabara.ttf */,
-				3DBEE0D918A8B001002F1DDF /* Dosis-ExtraBold.ttf */,
-				3DBEE0D318A815D1002F1DDF /* Dosis-SemiBold.ttf */,
-				3DBEE0D618A815DF002F1DDF /* Dosis-Regular.ttf */,
-				04BF936A18A75A0B00CED17B /* lametro.sqlite */,
 				04077E3A185BB98F0076E6F8 /* OnTime - LA Metro-Info.plist */,
 				04D7BE381886EC4800D32902 /* reveal-icon.png */,
 				04D7BE391886EC4800D32902 /* reveal-icon@2x.png */,
@@ -654,21 +642,18 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				040E7CC618AB409600C4791F /* Roboto-Medium.ttf in Resources */,
-				3DBEE0DD18A8B542002F1DDF /* Harabara.ttf in Resources */,
-				04BF936B18A75A0B00CED17B /* lametro.sqlite in Resources */,
-				3DBEE0DA18A8B001002F1DDF /* Dosis-ExtraBold.ttf in Resources */,
+				3DBB307018B1982200E25372 /* lametro.sqlite in Resources */,
 				04077E66185BB9C60076E6F8 /* MainStoryboard.storyboard in Resources */,
+				3DBB307918B1A02400E25372 /* metrolink_map.png in Resources */,
+				3DBB307618B1A00B00E25372 /* amtraksocal.png in Resources */,
+				3DBB308518B1A5A200E25372 /* rail_map.png in Resources */,
 				040E7CCA18ABC93D00C4791F /* Bariol_Bold.otf in Resources */,
-				3DBEE0E018A8BBD1002F1DDF /* Roboto-Bold.ttf in Resources */,
 				04077E3D185BB98F0076E6F8 /* InfoPlist.strings in Resources */,
 				04D7BE3C1886EC4800D32902 /* reveal-icon@2x.png in Resources */,
 				040E7CCC18ABC93D00C4791F /* Bariol_Regular.otf in Resources */,
 				04077E48185BB98F0076E6F8 /* Images.xcassets in Resources */,
-				040E7CC318AB3F5500C4791F /* FlexDisplay-Thin.otf in Resources */,
-				3DBEE0D418A815D1002F1DDF /* Dosis-SemiBold.ttf in Resources */,
 				040E7CCF18ADBE6A00C4791F /* Arial Rounded Bold.ttf in Resources */,
-				3DBEE0D718A815DF002F1DDF /* Dosis-Regular.ttf in Resources */,
+				3DBB307318B19FFF00E25372 /* metro_metrolink_map.png in Resources */,
 				04D7BE3A1886EC4800D32902 /* reveal-icon.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -677,20 +662,17 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3DBEE0DE18A8B542002F1DDF /* Harabara.ttf in Resources */,
-				3DBEE0D818A815DF002F1DDF /* Dosis-Regular.ttf in Resources */,
-				3DBEE0E118A8BBD1002F1DDF /* Roboto-Bold.ttf in Resources */,
+				3DBB307718B1A00B00E25372 /* amtraksocal.png in Resources */,
 				04D7BE3D1886EC4800D32902 /* reveal-icon@2x.png in Resources */,
+				3DBB307418B19FFF00E25372 /* metro_metrolink_map.png in Resources */,
 				04077E67185BB9C60076E6F8 /* MainStoryboard.storyboard in Resources */,
-				3DBEE0DB18A8B001002F1DDF /* Dosis-ExtraBold.ttf in Resources */,
-				3DBEE0D518A815D1002F1DDF /* Dosis-SemiBold.ttf in Resources */,
+				3DBB307118B1982200E25372 /* lametro.sqlite in Resources */,
 				040E7CCD18ABC93D00C4791F /* Bariol_Regular.otf in Resources */,
 				040E7CD018ADBE6A00C4791F /* Arial Rounded Bold.ttf in Resources */,
 				04077E5A185BB98F0076E6F8 /* InfoPlist.strings in Resources */,
-				040E7CC718AB409600C4791F /* Roboto-Medium.ttf in Resources */,
+				3DBB308618B1A5A200E25372 /* rail_map.png in Resources */,
+				3DBB307A18B1A02400E25372 /* metrolink_map.png in Resources */,
 				040E7CCB18ABC93D00C4791F /* Bariol_Bold.otf in Resources */,
-				04BF936C18A75A0B00CED17B /* lametro.sqlite in Resources */,
-				040E7CC418AB3F5500C4791F /* FlexDisplay-Thin.otf in Resources */,
 				04D7BE3B1886EC4800D32902 /* reveal-icon.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -878,6 +860,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				ONLY_ACTIVE_ARCH = YES;
+				PROVISIONING_PROFILE = "678EB72B-5AA1-46E1-A210-F019001D5B08";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -910,6 +893,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				PROVISIONING_PROFILE = "678EB72B-5AA1-46E1-A210-F019001D5B08";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};

@@ -98,6 +98,19 @@
     [self.slidingViewController anchorTopViewToRightAnimated:YES];
 }
 
+- (void)tableView:(UITableView *)tableView willDisplayHeaderView:(UIView *)view forSection:(NSInteger)section
+{
+    // Set the text color of our header/footer text.
+    UITableViewHeaderFooterView *header = (UITableViewHeaderFooterView *)view;
+    [header.textLabel setTextColor:[UIColor whiteColor]];
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    header.contentView.backgroundColor = [appDelegate colorWithHexString:@"43677F"];
+    
+    // You can also do this to set the background color of our header/footer,
+    //    but the gradients/other effects will be retained.
+    // view.tintColor = [UIColor blackColor];
+}
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];

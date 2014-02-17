@@ -10,5 +10,7 @@
 
 @interface StationsCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UILabel *stationLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *imageView;
+@property (weak, nonatomic) IBOutlet UIView *lineColor;
 
 @end
