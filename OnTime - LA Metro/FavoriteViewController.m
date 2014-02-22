@@ -621,11 +621,7 @@
                             [indexes addObject:[NSIndexPath indexPathForRow:rowCount inSection:indexPath.section]];
                             cell.doneDelete = YES;
                             insert = YES;
-                        } else {
-                            NSLog(@"Did not insert %@ Lets try again",stopTime.stopName);
-                            
                         }
-                        
                     }
                 }
             }
