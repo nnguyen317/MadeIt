@@ -43,6 +43,7 @@
 {
     [super viewDidLoad];
     
+
     self.navigationBar.translucent = NO;
     [self.navigationBar setShadowImage:[[UIImage alloc] init]];
     [self.navigationBar setBackgroundImage:[[UIImage alloc]init] forBarMetrics:UIBarMetricsDefault];
@@ -78,8 +79,8 @@
 @interface FavoriteViewController () <UIGestureRecognizerDelegate>
 {
     NSTimer *timer;
+    NSTimer *timerDelete;
     NSMutableArray *timerContainer;
-    NSMutableArray *tableData;
     int grandTotalSeconds;
     int timerSeconds;
 }
@@ -90,6 +91,9 @@
 @property (nonatomic, strong) NSArray *segmentItems;
 @property (nonatomic, strong) NSString *selectedSegment;
 @property (nonatomic) NSInteger doorOpen;
+@property (nonatomic, strong) NSMutableArray *tableData;
+@property (nonatomic, strong) NSMutableDictionary *stopTimeDictionary;
+@property (nonatomic, strong) NSMutableArray *stopTimeObject;
 @end
 
 @implementation FavoriteViewController
@@ -98,6 +102,7 @@
 @synthesize segmentItems = _segmentItems;
 @synthesize selectedSegment = _selectedSegment;
 @synthesize doorOpen = _doorOpen;
+@synthesize tableData = _tableData;
 
 - (UIPanGestureRecognizer *)dynamicTransitionPanGesture {
     if (_dynamicTransitionPanGesture) return _dynamicTransitionPanGesture;
@@ -110,7 +115,10 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+    self.tableData = [[NSMutableArray alloc] init];
+    self.stopTimeDictionary = [[NSMutableDictionary alloc] init];
+    self.stopTimeObject = [[NSMutableArray alloc] init];
+
     self.segmentItems = @[@"Current",@"All"];
     self.selectedSegment = self.segmentItems[0];
     self.segmentBackgroundView.backgroundColor = [self colorWithHexString:@"2980b9"];
@@ -146,7 +154,9 @@
  
     self.slidingViewController.topViewAnchoredGesture = ECSlidingViewControllerAnchoredGestureTapping | ECSlidingViewControllerAnchoredGesturePanning;
     
+    self.tableData = [[NSMutableArray alloc]init];
     [self getTableData];
+    [self.tableView reloadData];
     
 }
 
@@ -195,13 +205,19 @@
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     // Return the number of sections.
-    return tableData.count;
+    return self.tableData.count;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    return 1;
+    NSDictionary *stopDictionary = self.tableData[section];
+    NSArray *allKeys = [stopDictionary allKeys];
+    NSString *key = [allKeys firstObject];
+    
+    NSMutableArray *stopArray = [stopDictionary objectForKey:key];
+    
+    return stopArray.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -220,7 +236,13 @@
         
         // Configure the cell...
         [cell endTimer];
-        StopTimes *stopTimes = tableData[indexPath.section];
+        //StopTimes *stopTimes = self.tableData[indexPath.section];
+        NSDictionary *stopDictionary = self.tableData[indexPath.section];
+        NSArray *allKeys = [stopDictionary allKeys];
+        NSString *key = [allKeys firstObject];
+        NSMutableArray *stopArray = [stopDictionary objectForKey:key];
+        StopTimes *stopTimes = stopArray[indexPath.row];
+        
         Metro *metro = [[Metro alloc] init];
         
         if (stopTimes) {
@@ -251,11 +273,14 @@
                 newCell.currHours = currHours;
                 newCell.currMinutes = currMinute;
                 newCell.currSeconds = currSeconds;
+                newCell.cellKey = key;
+                newCell.arrivalSeconds = stopTimes.arrivalTime;
                 
                 NSDictionary *favoritesSection = @{@"totalSeconds":[NSNumber numberWithInt:arrivalTotalSeconds],
                                                    @"startTimer":[NSNumber numberWithInt:0],
                                                    };
                 [timerContainer addObject:favoritesSection];
+                [newCell endTimer];
                 [newCell startTimer];
             }
             
@@ -280,7 +305,12 @@
         } force:NO];
         
         [newCell setCellHeight:newCell.frame.size.height];
-        Favorites *favorite = tableData[indexPath.section];
+        //Favorites *favorite = self.tableData[indexPath.section];
+        NSDictionary *stopDictionary = self.tableData[indexPath.section];
+        NSArray *allKeys = [stopDictionary allKeys];
+        NSString *key = [allKeys firstObject];
+        NSMutableArray *stopArray = [stopDictionary objectForKey:key];
+        Favorites *favorite = stopArray[indexPath.row];
         
         newCell.directionBoundLabel.text = [NSString stringWithFormat:@"%@ Bound",favorite.trip_headsign];
         newCell.imageView.image = [UIImage imageNamed:favorite.route_img];
@@ -291,19 +321,42 @@
 }
 
 
-- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+//- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+-(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
-    NSString *stop_name = [[NSString alloc]init];
+    //NSString *stop_name = [[NSString alloc]init];
+    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.frame.size.width, 16)];
+    view.backgroundColor = [self colorWithHexString:@"43677F"];
+    
+    /* Create custom view to display section header... */
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(10, 5, tableView.frame.size.width, 16)];
+    NSString *FontName = @"Bariol-Bold";
+    [label setFont:[UIFont fontWithName:FontName size:16]];
+    label.textColor = [UIColor whiteColor];
+    
     if ([self.selectedSegment isEqualToString:@"Current"]) {
-        StopTimes *stopTime = tableData[section];
-        stop_name = stopTime.stopName;
+        NSDictionary *stopDictionary = self.tableData[section];
+        NSArray *allKeys = [stopDictionary allKeys];
+        NSString *key = [allKeys firstObject];
+        NSMutableArray *stopArray = [stopDictionary objectForKey:key];
+        StopTimes *stopTimes = [stopArray firstObject];
+        label.text = stopTimes.stopName;
     } else {
-        Favorites *favorite = tableData[section];
-        stop_name = favorite.stop_name;
+        NSDictionary *stopDictionary = self.tableData[section];
+        NSArray *allKeys = [stopDictionary allKeys];
+        NSString *key = [allKeys firstObject];
+        NSMutableArray *stopArray = [stopDictionary objectForKey:key];
+        Favorites *favorite = [stopArray firstObject];
+
+        label.text = favorite.stop_name;
     }
-    return stop_name;
+    
+    [view addSubview:label];
+    
+    return view;
 }
 
+/*
 - (void)tableView:(UITableView *)tableView willDisplayHeaderView:(UIView *)view forSection:(NSInteger)section
 {
     // Set the text color of our header/footer text.
@@ -316,6 +369,8 @@
     //    but the gradients/other effects will be retained.
     // view.tintColor = [UIColor blackColor];
 }
+
+ */
 
 -(UIColor*)colorWithHexString:(NSString*)hex
 {
@@ -366,7 +421,6 @@
     _stationList = [_managedObjectContext executeFetchRequest:fetchRequest error:&error];
     
     Metro *metro = [[Metro alloc] init];
-    tableData = [[NSMutableArray alloc] init];
     grandTotalSeconds = 0;
     for (Favorites *favorites in _stationList) {
         
@@ -380,22 +434,90 @@
                 stopTimes.agencyId = favorites.agency_id;
                 stopTimes.stopId = favorites.stop_id;
                 stopTimes.routeImg = favorites.route_img;
-                [tableData addObject:stopTimes];
+                
+                
+                NSString *dictionaryKey = [NSString stringWithFormat:@"%@-%@-%@",favorites.route_id,favorites.stop_id,favorites.direction_id];
+                NSMutableArray *stopsArray = [[NSMutableArray alloc]init];
+                
+                [stopsArray addObject:stopTimes];
+                
+                NSMutableDictionary *stopDictionary = [[NSMutableDictionary alloc] init];
+                [stopDictionary setObject:stopsArray forKey:dictionaryKey];
+               // [stopDictionary setObject:favorites.route_img forKey:@"img"];
+                
+                NSInteger index = 0;
+                BOOL objectExists = NO;
+                
+                for(NSDictionary *thisDictionary in self.tableData) {
+                    NSArray *keys = [thisDictionary allKeys];
+                    NSString *key = [keys firstObject];
+                    
+                    if([key isEqualToString:dictionaryKey]){
+                        BOOL recordExists = NO;
+                        NSMutableArray *tableArray = self.tableData[index][key];
+                        for (int i = 0; i < tableArray.count; i++) {
+                            StopTimes *stopTimes2 = tableArray[i];
+                            if([stopTimes2.arrivalTime isEqualToString:stopTimes.arrivalTime]){
+                                recordExists = YES;
+                            }
+                        }
+                        
+                        if(!recordExists){
+                            [self.tableData[index][key] addObject:stopTimes];
+                        }
+                        // [self.tableData replaceObjectAtIndex:index withObject:stopDictionary];
+                        objectExists = YES;
+                    }
+                    index++;
+                }
+                
+                if (!objectExists) {
+                    [self.tableData addObject:stopDictionary];
+                }
             }
+                 
         } else {
             self.tableView.rowHeight = 60.0f;
-            [tableData addObject:favorites];
+            //[self.stopTimeObject addObject:favorites];
+            //[self.tableData setObject:self.stopTimeObject forKey:[NSString stringWithFormat:@"%@-%@-%@",favorites.route_id,favorites.stop_id,favorites.direction_id]];
+            
+            NSString *dictionaryKey = [NSString stringWithFormat:@"%@-%@-%@",favorites.route_id,favorites.stop_id,favorites.direction_id];
+            NSMutableArray *stopsArray = [[NSMutableArray alloc]init];
+            NSDictionary *stopDictionary = [[NSMutableDictionary alloc]init];
+            [stopsArray addObject:favorites];
+            stopDictionary = @{dictionaryKey:stopsArray};
+            
+            NSInteger index = 0;
+            BOOL objectExists = NO;
+            NSMutableArray *newTableData = [self.tableData mutableCopy];
+            for(NSDictionary *thisDictionary in newTableData) {
+                NSArray *keys = [thisDictionary allKeys];
+                NSString *key = [keys firstObject];
+                
+                if([key isEqualToString:dictionaryKey]){
+                    [self.tableData replaceObjectAtIndex:index withObject:stopDictionary];
+                }
+                index++;
+            }
+            if (!objectExists) {
+                [self.tableData addObject:stopDictionary];
+            }
         }
     }
     
     [timer invalidate];
+    [timerDelete invalidate];
+    
     timerContainer = [[NSMutableArray alloc] init];
-    [self.tableView reloadData];
+    
     
     if ([self.selectedSegment isEqualToString:@"Current"]) {
         [self startTimer];
+        [self startTimerForDelete];
+
     } else {
         [timer invalidate];
+        [timerDelete invalidate];
     }
     
     
@@ -418,60 +540,166 @@
     return totalCellSeconds;
 }
 
+
 -(void)startTimer {
-    timer =[NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(timerFired) userInfo:nil repeats:YES];
+    timer =[NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(insertRow) userInfo:nil repeats:YES];
 }
 
+-(void)startTimerForDelete {
+    timerDelete =[NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(deleteRow) userInfo:nil repeats:YES];
+}
 
 - (void)timerFired
 {
     NSArray *cells = [self.tableView visibleCells];
-    NSMutableArray *indexes = [[NSMutableArray alloc] init];
+    BOOL insert = NO;
     for (StopArrivalTimeCell *cell in cells) {
         if(cell.totalSeconds <= 0){
-            cell.arrivalTimerLabel.textColor = [UIColor grayColor];
-            cell.arrivalTimeLabel.textColor = [UIColor grayColor];
-            cell.directionBoundLabel.textColor = [UIColor grayColor];
-            cell.deleteFlag = YES;
+            
+            if (cell.deleteFlag) {
+                continue;
+            } else {
+                cell.arrivalTimerLabel.textColor = [UIColor grayColor];
+                cell.arrivalTimeLabel.textColor = [UIColor grayColor];
+                cell.directionBoundLabel.textColor = [UIColor grayColor];
+                
+                cell.deleteFlag = YES;
+                insert = YES;
+            }
             //[self deleteRow];
-        } else if (cell.totalSeconds <= -10) {
-            [cell endTimer];
-            NSIndexPath *cellIndexPath = [self.tableView indexPathForCell:cell];
-            [indexes addObject:cellIndexPath];
-            [self.tableView beginUpdates];
-            [self.tableView deleteRowsAtIndexPaths:indexes withRowAnimation:UITableViewRowAnimationFade];
-            [self.tableView endUpdates];
-            
-            [self getTableData];
-            [self.tableView beginUpdates];
-            [self.tableView insertRowsAtIndexPaths:indexes withRowAnimation:UITableViewRowAnimationFade];
-            [self.tableView endUpdates];
-            
-            
         } else {
+        
         }
     }
+    
+    if (insert) {
+        [self insertRow];
+    }
+    
+}
+
+-(void)insertRow {
+    NSArray *cells = [self.tableView visibleCells];
+    
+    NSMutableArray *indexes = [[NSMutableArray alloc] init];
+    //NSMutableArray *stopTimesToDelete = [[NSMutableArray alloc]init];
+   // int currentRows = [self.tableView numberOfRowsInSection:section];
+    BOOL insert = NO;
+    for (StopArrivalTimeCell *cell in cells) {
+        if (cell.totalSeconds <= 0) {
+            if (!cell.doneDelete) {
+                cell.arrivalTimerLabel.textColor = [UIColor grayColor];
+                cell.arrivalTimeLabel.textColor = [UIColor grayColor];
+                cell.directionBoundLabel.textColor = [UIColor grayColor];
+                //[self getTableData];
+                for (int i = 0; i<self.tableData.count; i++) {
+                    NSDictionary *stopDictionary = self.tableData[i];
+                    NSArray *keys = [stopDictionary allKeys];
+                    NSString *key = [keys firstObject];
+                    //NSString *image = stopDictionary[@"img"];
+                    
+                    if([cell.cellKey isEqualToString:key]){
+                        StopTimes *stopTime = [self.tableData[i][key] firstObject];
+                        Metro *metro = [[Metro alloc] init];
+                        
+                        NSMutableArray *stopTimeArray = [metro getArrivalTimeFromStopSingle:stopTime.routeId withStopId:stopTime.stopId andDirectionId:stopTime.directionId forAgency:stopTime.agencyId forDatabase:stopTime.agencyId];
+                        
+                        if (stopTimeArray.count > 0) {
+                            StopTimes *stopTime2 = [stopTimeArray firstObject];
+                            stopTime2.stopId = stopTime.stopId;
+                            stopTime2.agencyId = stopTime.agencyId;
+                            stopTime2.routeId = stopTime.routeId;
+                            stopTime2.routeImg = stopTime.routeImg;
+                            [self.tableData[i][key] addObject:stopTime2];
+                        }
+                        
+                        NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
+                        int rowCount = [self.tableView numberOfRowsInSection:indexPath.section];
+                        int tableRowCount = [self.tableData[i][key] count];
+                        
+                        if (rowCount < 2 && tableRowCount == 2) {
+                            [indexes addObject:[NSIndexPath indexPathForRow:rowCount inSection:indexPath.section]];
+                            cell.doneDelete = YES;
+                            insert = YES;
+                        } else {
+                            NSLog(@"Did not insert %@ Lets try again",stopTime.stopName);
+                            
+                        }
+                        
+                    }
+                }
+            }
+        }
+    }
+    
+    if (insert) {
+        //[self.tableView reloadData];
+        [self.tableView beginUpdates];
+        [self.tableView insertRowsAtIndexPaths:indexes withRowAnimation:UITableViewRowAnimationTop];
+        [self.tableView endUpdates];
+    }
+    
     
 }
 
 -(void)deleteRow{
     NSArray *cells = [self.tableView visibleCells];
     NSMutableArray *indexes = [[NSMutableArray alloc] init];
+    NSMutableArray *itemsToDelete = [[NSMutableArray alloc] init];
+    BOOL deleteItems = NO;
     if ([[cells firstObject] isKindOfClass:[StopArrivalTimeCell class]]) {
         for (StopArrivalTimeCell *cell in cells)
         {
             int totalCellSeconds = cell.totalSeconds;
             
-            if(totalCellSeconds <= -10){
+            if(totalCellSeconds <= -60){
                 [cell endTimer];
-                [self getTableData];
-                NSIndexPath *cellIndexPath = [self.tableView indexPathForCell:cell];
-                [indexes addObject:cellIndexPath];
+                //[self getTableData];
+                for (int i = 0; i<self.tableData.count; i++) {
+                    NSDictionary *stopDictionary = self.tableData[i];
+                    NSArray *keys = [stopDictionary allKeys];
+                    NSString *key = [keys firstObject];
+                    
+                    if([cell.cellKey isEqualToString:key]){
+                        NSArray *stopArray = self.tableData[i][key];
+                        for (int j = 0; j < stopArray.count; j++) {
+                            StopTimes *stopTime = stopArray[j];
+                            NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
+                            NSInteger rowCount = [self.tableView numberOfRowsInSection:indexPath.section];
+                            NSInteger tableRowCount = [self.tableData[i][key] count];
+                            if (rowCount > 1 && tableRowCount > 1) {
+                                if ([cell.arrivalSeconds isEqualToString:stopTime.arrivalTime]) {
+                                    NSDictionary *items = @{@"section":[NSString stringWithFormat:@"%d",i],@"row":key,@"deleteIndex":[NSNumber numberWithInt: indexPath.row],@"object":stopTime};
+                                    [itemsToDelete addObject:items];
+                                    deleteItems = YES;
+                                    [indexes addObject:indexPath];
+                                    cell.deleteFlag = NO;
+                                    cell.doneDelete = NO;
+                                    //[self.tableData[i][key] removeObjectIdenticalTo:stopTime];
+                                }
+                            }
+                        }
+                    }
+                }
+
+                //NSIndexPath *cellIndexPath = [self.tableView indexPathForCell:cell];
+                
             }
         }
+        
+        if (deleteItems) {
+            for (int i=0; i < itemsToDelete.count; i++) {
+                NSDictionary *deleteItems = itemsToDelete[i];
+                NSInteger section = [deleteItems[@"section"] integerValue];
+                NSString *row = deleteItems[@"row"];
+                //int index = [deleteItems[@"delete"] integerValue];
+                //[self.tableData[section][row] removeObjectAtIndex:index];
+                [self.tableData[section][row] removeObjectIdenticalTo:deleteItems[@"object"]];
+            }
+        }
+                                 
         if (indexes.count > 0){
             [self.tableView beginUpdates];
-            [self.tableView insertRowsAtIndexPaths:indexes withRowAnimation:UITableViewRowAnimationFade];
             [self.tableView deleteRowsAtIndexPaths:indexes withRowAnimation:UITableViewRowAnimationFade];
             [self.tableView endUpdates];
         }
@@ -489,9 +717,13 @@
 }
 
 -(void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
+    NSDictionary *stopDictionary = self.tableData[indexPath.section];
+    NSArray *keys = [stopDictionary allKeys];
+    NSString *key = [keys firstObject];
+    
     if([segue.identifier isEqualToString:@"showStopTimes"]) {
-        NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
-        StopTimes *stopTimes = tableData[indexPath.section];
+        StopTimes *stopTimes = self.tableData[indexPath.section][key][indexPath.row];
         
         StopSequenceViewController *stopSequenceController = [segue destinationViewController];
         stopSequenceController.stopTimes = stopTimes;
@@ -499,8 +731,7 @@
         stopSequenceController.stopTimes.stopId = stopTimes.stopId;
         stopSequenceController.stopTimes.agencyId = stopTimes.agencyId;
     } else if([segue.identifier isEqualToString:@"listTimes"]) {
-        NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
-        Favorites *favorites = tableData[indexPath.section];
+        Favorites *favorites = self.tableData[indexPath.section][key][indexPath.row];
         StopTimes *stopTimes = [[StopTimes alloc]init];
         AllStopTimeViewController *allStopTimeController = [segue destinationViewController];
         allStopTimeController.navItem.title = favorites.stop_name;
@@ -513,6 +744,8 @@
 
 - (IBAction)control:(id)sender {
     UISegmentedControl *segmentedControl = (UISegmentedControl *)sender;
+    self.tableData = [[NSMutableArray alloc]init];
+    
     if (![self.segmentItems[segmentedControl.selectedSegmentIndex] isEqualToString:self.selectedSegment]) {
         self.selectedSegment = self.segmentItems[segmentedControl.selectedSegmentIndex];
         
@@ -529,6 +762,7 @@
         }
         
         [self getTableData];
+        [self.tableView reloadData];
     }
 }
 
@@ -540,9 +774,13 @@
         {
             // Delete button was pressed
             NSIndexPath *cellIndexPath = [self.tableView indexPathForCell:cell];
-            Favorites *favorites = tableData[cellIndexPath.section];
+            NSDictionary *stopDictionary = self.tableData[cellIndexPath.section];
+            NSArray *keys = [stopDictionary allKeys];
+            NSString *key = [keys firstObject];
             
-            [tableData removeObjectAtIndex:cellIndexPath.section];
+            Favorites *favorites = self.tableData[cellIndexPath.section][key][cellIndexPath.row];
+            
+            [self.tableData removeObjectAtIndex:cellIndexPath.section];
             
             [[self managedObjectContext] deleteObject:favorites];
             [[self managedObjectContext] save:nil];

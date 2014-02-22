@@ -67,13 +67,6 @@
     self.view.layer.shadowRadius = 10.0f;
     self.view.layer.shadowColor = [UIColor blackColor].CGColor;
     
-    /*
-    if (![self.slidingViewController.underLeftViewController isKindOfClass:[MenuViewController class]]) {
-        self.slidingViewController.underLeftViewController  = [self.storyboard instantiateViewControllerWithIdentifier:@"menu"];
-    }
-    // Add the pan gesture to allow sliding
-    [self.view addGestureRecognizer:self.slidingViewController.panGesture];
-     */
     if ([(NSObject *)self.slidingViewController.delegate isKindOfClass:[MEDynamicTransition class]]) {
         MEDynamicTransition *dynamicTransition = (MEDynamicTransition *)self.slidingViewController.delegate;
         if (!self.dynamicTransitionPanGesture) {
@@ -170,62 +163,74 @@
     ACAccountType *accountType = [account
                                   accountTypeWithAccountTypeIdentifier:ACAccountTypeIdentifierTwitter];
     
-    
-    [account requestAccessToAccountsWithType:accountType
-                                     options:nil completion:^(BOOL granted, NSError *error)
-     {
-         if (granted == YES)
+    if([SLComposeViewController isAvailableForServiceType:SLServiceTypeTwitter]) {
+        
+        [account requestAccessToAccountsWithType:accountType
+                                         options:nil completion:^(BOOL granted, NSError *error)
          {
-             NSArray *arrayOfAccounts = [account
-                                         accountsWithAccountType:accountType];
-             
-             if ([arrayOfAccounts count] > 0)
+             if (granted == YES)
              {
-                 ACAccount *twitterAccount = [arrayOfAccounts lastObject];
+                 NSArray *arrayOfAccounts = [account
+                                             accountsWithAccountType:accountType];
                  
-                 NSURL *requestURL = [NSURL URLWithString:@"https://api.twitter.com/1.1/statuses/user_timeline.json"];
-                 for (NSString *user in _metroLinkUsers){
-                 NSMutableDictionary *parameters =
-                 [[NSMutableDictionary alloc] init];
-                 [parameters setObject:@"10" forKey:@"count"];
-                 [parameters setObject:[NSString stringWithFormat:@"%@",user] forKey:@"screen_name"];
-                 
-                 SLRequest *postRequest = [SLRequest
-                                           requestForServiceType:SLServiceTypeTwitter
-                                           requestMethod:SLRequestMethodGET
-                                           URL:requestURL parameters:parameters];
-                 
-                 postRequest.account = twitterAccount;
-                 
-                 [postRequest performRequestWithHandler:
-                  ^(NSData *responseData, NSHTTPURLResponse
-                    *urlResponse, NSError *error)
-                  {
-                      
-                      _tweets = [NSJSONSerialization
+                 if ([arrayOfAccounts count] > 0)
+                 {
+                     ACAccount *twitterAccount = [arrayOfAccounts lastObject];
+                     
+                     NSURL *requestURL = [NSURL URLWithString:@"https://api.twitter.com/1.1/statuses/user_timeline.json"];
+                     for (NSString *user in _metroLinkUsers){
+                         NSMutableDictionary *parameters =
+                         [[NSMutableDictionary alloc] init];
+                         [parameters setObject:@"10" forKey:@"count"];
+                         [parameters setObject:[NSString stringWithFormat:@"%@",user] forKey:@"screen_name"];
+                         
+                         SLRequest *postRequest = [SLRequest
+                                                   requestForServiceType:SLServiceTypeTwitter
+                                                   requestMethod:SLRequestMethodGET
+                                                   URL:requestURL parameters:parameters];
+                         
+                         postRequest.account = twitterAccount;
+                         
+                         [postRequest performRequestWithHandler:
+                          ^(NSData *responseData, NSHTTPURLResponse
+                            *urlResponse, NSError *error)
+                          {
+                              
+                              _tweets = [NSJSONSerialization
                                          JSONObjectWithData:responseData
                                          options:NSJSONReadingMutableLeaves
                                          error:&error];
-                      
-                      if (_tweets.count != 0) {
-                          [self.dataSource addObject:_tweets];
-                          if (_dataSource.count != 0) {
-                              dispatch_async(dispatch_get_main_queue(), ^{
-                                  [self.tweetTableView reloadData];
-                                  
-                              });
-                          }
-                      }
-                  }];
+                              
+                              if (_tweets.count != 0) {
+                                  [self.dataSource addObject:_tweets];
+                                  if (_dataSource.count != 0) {
+                                      dispatch_async(dispatch_get_main_queue(), ^{
+                                          [self.tweetTableView reloadData];
+                                          
+                                      });
+                                  }
+                              }
+                          }];
+                     }
+                     
                  }
-                 
+             } else {
+                 UIAlertView *alertView = [[UIAlertView alloc]
+                                           initWithTitle:@"Sorry"
+                                           message:@"Unable to acces your account"
+                                           delegate:self
+                                           cancelButtonTitle:@"OK"
+                                           otherButtonTitles:nil];
+                 [alertView show];
              }
-         } else {
-             // Handle failure to get account access
-         }
-         
-     }];
-    
+             
+         }];
+    } else {
+        SLComposeViewController *fbCompose=[SLComposeViewController composeViewControllerForServiceType:SLServiceTypeTwitter];
+        [fbCompose setInitialText:@""];
+        [self presentViewController:fbCompose animated:YES completion:nil];
+    }
+
 }
 
 @end

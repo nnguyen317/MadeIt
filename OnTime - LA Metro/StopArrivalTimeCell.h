@@ -22,8 +22,10 @@
 @property int currHours;
 @property int totalSeconds;
 @property (nonatomic, strong) NSString *arrivalSeconds;
-@property BOOL deleteFlag;
+@property (nonatomic) BOOL deleteFlag;
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
+@property (nonatomic, strong) NSString *cellKey;
+@property (nonatomic) BOOL doneDelete;
 
 - (void)startTimer;
 - (void)endTimer;

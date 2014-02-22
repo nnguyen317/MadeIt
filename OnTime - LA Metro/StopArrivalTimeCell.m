@@ -27,6 +27,8 @@
 @synthesize deleteFlag = _deleteFlag;
 @synthesize arrivalSeconds = _arrivalSeconds;
 @synthesize imageView = _imageView;
+@synthesize cellKey = _cellKey;
+@synthesize doneDelete = _doneDelete;
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {

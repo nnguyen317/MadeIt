@@ -127,16 +127,8 @@
 		3D8D9C9A1894397900096E46 /* NewsFeedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D8D9C981894397900096E46 /* NewsFeedViewController.m */; };
 		3D95BB091887A64700F334C1 /* MenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D95BB081887A64700F334C1 /* MenuViewController.m */; };
 		3D95BB0A1887A64700F334C1 /* MenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D95BB081887A64700F334C1 /* MenuViewController.m */; };
-		3DBB307018B1982200E25372 /* lametro.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 3DBB306F18B1982200E25372 /* lametro.sqlite */; };
-		3DBB307118B1982200E25372 /* lametro.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 3DBB306F18B1982200E25372 /* lametro.sqlite */; };
-		3DBB307318B19FFF00E25372 /* metro_metrolink_map.png in Resources */ = {isa = PBXBuildFile; fileRef = 3DBB307218B19FFF00E25372 /* metro_metrolink_map.png */; };
-		3DBB307418B19FFF00E25372 /* metro_metrolink_map.png in Resources */ = {isa = PBXBuildFile; fileRef = 3DBB307218B19FFF00E25372 /* metro_metrolink_map.png */; };
-		3DBB307618B1A00B00E25372 /* amtraksocal.png in Resources */ = {isa = PBXBuildFile; fileRef = 3DBB307518B1A00B00E25372 /* amtraksocal.png */; };
-		3DBB307718B1A00B00E25372 /* amtraksocal.png in Resources */ = {isa = PBXBuildFile; fileRef = 3DBB307518B1A00B00E25372 /* amtraksocal.png */; };
-		3DBB307918B1A02400E25372 /* metrolink_map.png in Resources */ = {isa = PBXBuildFile; fileRef = 3DBB307818B1A02400E25372 /* metrolink_map.png */; };
-		3DBB307A18B1A02400E25372 /* metrolink_map.png in Resources */ = {isa = PBXBuildFile; fileRef = 3DBB307818B1A02400E25372 /* metrolink_map.png */; };
-		3DBB308518B1A5A200E25372 /* rail_map.png in Resources */ = {isa = PBXBuildFile; fileRef = 3DBB308418B1A5A200E25372 /* rail_map.png */; };
-		3DBB308618B1A5A200E25372 /* rail_map.png in Resources */ = {isa = PBXBuildFile; fileRef = 3DBB308418B1A5A200E25372 /* rail_map.png */; };
+		3DBB306D18B1376500E25372 /* lametro.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 3DBB306C18B1376500E25372 /* lametro.sqlite */; };
+		3DBB306E18B1376500E25372 /* lametro.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 3DBB306C18B1376500E25372 /* lametro.sqlite */; };
 		3DD02AFE188E379D00E4CD30 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DD02AFD188E379D00E4CD30 /* SystemConfiguration.framework */; };
 		3DF90572186142A3008A2D35 /* Metro.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DF90571186142A3008A2D35 /* Metro.m */; };
 		3DF90573186142A3008A2D35 /* Metro.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DF90571186142A3008A2D35 /* Metro.m */; };
@@ -278,11 +270,7 @@
 		3D8D9C981894397900096E46 /* NewsFeedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewsFeedViewController.m; sourceTree = "<group>"; };
 		3D95BB071887A64700F334C1 /* MenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuViewController.h; sourceTree = "<group>"; };
 		3D95BB081887A64700F334C1 /* MenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuViewController.m; sourceTree = "<group>"; };
-		3DBB306F18B1982200E25372 /* lametro.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = lametro.sqlite; sourceTree = "<group>"; };
-		3DBB307218B19FFF00E25372 /* metro_metrolink_map.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = metro_metrolink_map.png; path = Images.xcassets/metro_metrolink_map.imageset/metro_metrolink_map.png; sourceTree = "<group>"; };
-		3DBB307518B1A00B00E25372 /* amtraksocal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = amtraksocal.png; path = Images.xcassets/amtraksocal.imageset/amtraksocal.png; sourceTree = "<group>"; };
-		3DBB307818B1A02400E25372 /* metrolink_map.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = metrolink_map.png; path = Images.xcassets/metrolink_map.imageset/metrolink_map.png; sourceTree = "<group>"; };
-		3DBB308418B1A5A200E25372 /* rail_map.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rail_map.png; sourceTree = "<group>"; };
+		3DBB306C18B1376500E25372 /* lametro.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = lametro.sqlite; sourceTree = "<group>"; };
 		3DD02AFD188E379D00E4CD30 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		3DF90570186142A3008A2D35 /* Metro.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Metro.h; sourceTree = "<group>"; };
 		3DF90571186142A3008A2D35 /* Metro.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Metro.m; sourceTree = "<group>"; };
@@ -390,11 +378,7 @@
 		04077E39185BB98F0076E6F8 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				3DBB307218B19FFF00E25372 /* metro_metrolink_map.png */,
-				3DBB307518B1A00B00E25372 /* amtraksocal.png */,
-				3DBB307818B1A02400E25372 /* metrolink_map.png */,
-				3DBB308418B1A5A200E25372 /* rail_map.png */,
-				3DBB306F18B1982200E25372 /* lametro.sqlite */,
+				3DBB306C18B1376500E25372 /* lametro.sqlite */,
 				040E7CCE18ADBE6A00C4791F /* Arial Rounded Bold.ttf */,
 				040E7CC818ABC93D00C4791F /* Bariol_Bold.otf */,
 				040E7CC918ABC93D00C4791F /* Bariol_Regular.otf */,
@@ -642,18 +626,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3DBB307018B1982200E25372 /* lametro.sqlite in Resources */,
+				3DBB306D18B1376500E25372 /* lametro.sqlite in Resources */,
 				04077E66185BB9C60076E6F8 /* MainStoryboard.storyboard in Resources */,
-				3DBB307918B1A02400E25372 /* metrolink_map.png in Resources */,
-				3DBB307618B1A00B00E25372 /* amtraksocal.png in Resources */,
-				3DBB308518B1A5A200E25372 /* rail_map.png in Resources */,
 				040E7CCA18ABC93D00C4791F /* Bariol_Bold.otf in Resources */,
 				04077E3D185BB98F0076E6F8 /* InfoPlist.strings in Resources */,
 				04D7BE3C1886EC4800D32902 /* reveal-icon@2x.png in Resources */,
 				040E7CCC18ABC93D00C4791F /* Bariol_Regular.otf in Resources */,
 				04077E48185BB98F0076E6F8 /* Images.xcassets in Resources */,
 				040E7CCF18ADBE6A00C4791F /* Arial Rounded Bold.ttf in Resources */,
-				3DBB307318B19FFF00E25372 /* metro_metrolink_map.png in Resources */,
 				04D7BE3A1886EC4800D32902 /* reveal-icon.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -662,16 +642,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3DBB307718B1A00B00E25372 /* amtraksocal.png in Resources */,
 				04D7BE3D1886EC4800D32902 /* reveal-icon@2x.png in Resources */,
-				3DBB307418B19FFF00E25372 /* metro_metrolink_map.png in Resources */,
 				04077E67185BB9C60076E6F8 /* MainStoryboard.storyboard in Resources */,
-				3DBB307118B1982200E25372 /* lametro.sqlite in Resources */,
+				3DBB306E18B1376500E25372 /* lametro.sqlite in Resources */,
 				040E7CCD18ABC93D00C4791F /* Bariol_Regular.otf in Resources */,
 				040E7CD018ADBE6A00C4791F /* Arial Rounded Bold.ttf in Resources */,
 				04077E5A185BB98F0076E6F8 /* InfoPlist.strings in Resources */,
-				3DBB308618B1A5A200E25372 /* rail_map.png in Resources */,
-				3DBB307A18B1A02400E25372 /* metrolink_map.png in Resources */,
 				040E7CCB18ABC93D00C4791F /* Bariol_Bold.otf in Resources */,
 				04D7BE3B1886EC4800D32902 /* reveal-icon.png in Resources */,
 			);
