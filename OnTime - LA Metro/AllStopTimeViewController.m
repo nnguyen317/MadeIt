@@ -75,7 +75,11 @@
     // Configure the cell...
     stopTimes = self.stopTimeList[indexPath.row];
     
-    cell.stopName.text = [NSString stringWithFormat:@"%@ bound",stopTimes.tripHeadsign];
+    if (stopTimes.tripShortName) {
+        cell.stopName.text = [NSString stringWithFormat:@"%@ - %@ Bound",stopTimes.tripShortName, stopTimes.tripHeadsign];
+    } else {
+        cell.stopName.text = [NSString stringWithFormat:@"%@ Bound",stopTimes.tripHeadsign];
+    }
     cell.arrivalTime.text = [metro convertToTime:[stopTimes.arrivalTime integerValue]];
     
     return cell;

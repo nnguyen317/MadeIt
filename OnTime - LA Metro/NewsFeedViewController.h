@@ -17,6 +17,8 @@
 @property (strong, nonatomic) NSMutableArray *dataSource;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *revealButton;
 @property (weak, nonatomic) IBOutlet UINavigationItem *navBarItem;
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
+@property (weak, nonatomic) IBOutlet UIView *statusView;
 
 
 @end

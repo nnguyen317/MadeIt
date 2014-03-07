@@ -63,7 +63,6 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
 
     static NSString *CellIdentifier = @"StopCell";
     StationsCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
@@ -80,7 +79,10 @@
     // Configure the cell...
     
     cell.stationLabel.text = stop.stopName;
-    cell.lineColor.backgroundColor = [appDelegate colorWithHexString:self.stop.routeColor];
+    //cell.lineColor.backgroundColor = [appDelegate colorWithHexString:self.stop.routeColor];
+    NSString *image = [NSString stringWithFormat:@"%@_line",self.stop.routeImg];
+    
+    cell.imageView.image = [UIImage imageNamed:image];
     
     return cell;
 }

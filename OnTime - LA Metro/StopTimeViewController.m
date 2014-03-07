@@ -149,8 +149,17 @@
         newcell.arrivalTimeLabel.textColor = [UIColor blackColor];
         newcell.directionBoundLabel.textColor = [UIColor blackColor];
         newcell.arrivalTimerLabel.text = timerText;
-        newcell.arrivalTimeLabel.text = [NSString stringWithFormat:@"%@ Scheduled Arrival Time",[metro convertToTime:[stopTimes.arrivalTime integerValue]]];
-        newcell.directionBoundLabel.text = [NSString stringWithFormat:@"%@ Bound",stopTimes.tripHeadsign];
+        newcell.arrivalTimeLabel.text = [NSString stringWithFormat:@"%@ Scheduled Arrival",[metro convertToTime:[stopTimes.arrivalTime integerValue]]];
+        
+        NSString *stationBound = [[NSString alloc]init];
+        
+        if(stopTimes.tripShortName) {
+           stationBound = [NSString stringWithFormat:@"%@ - %@ Bound",stopTimes.tripShortName,stopTimes.tripHeadsign];
+        } else {
+            stationBound = [NSString stringWithFormat:@"%@ Bound",stopTimes.tripHeadsign];
+        }
+        
+        newcell.directionBoundLabel.text = stationBound;
         newcell.directionId = stopTimes.directionId;
         
         AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
@@ -159,7 +168,8 @@
         } else {
             [newcell startTimer];
         }
-        newcell.imageView.image = [UIImage imageNamed:self.stopTimes.routeImg];
+        NSString *image = [NSString stringWithFormat:@"%@_img",self.stopTimes.routeImg];
+        newcell.imageView.image = [UIImage imageNamed:image];
         
         cell = newcell;
     } else if ([self.selectedSegment isEqualToString:@"All"]) {
@@ -171,8 +181,11 @@
         
         NSDictionary *bounds = self.stopArray[indexPath.row];
         
+        
         newCell.stationLabel.text = [NSString stringWithFormat:@"%@ Bound",bounds[@"trip_headsign"]];
-        newCell.imageView.image = [UIImage imageNamed:self.stopTimes.routeImg];
+        NSString *image = [NSString stringWithFormat:@"%@_img",self.stopTimes.routeImg];
+        newCell.imageView.image = [UIImage imageNamed:image];
+        //newCell.imageView.image = [UIImage imageNamed:self.stopTimes.routeImg];
         
         cell = newCell;
     }

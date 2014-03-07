@@ -12,7 +12,6 @@
 @implementation StationsCell
 @synthesize stationLabel = _stationLabel;
 @synthesize imageView = _imageView;
-@synthesize lineColor = _lineColor;
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {

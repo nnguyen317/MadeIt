@@ -90,6 +90,8 @@
 		04832538188D7C7800FE2C30 /* StopSequenceCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04832536188D7C7800FE2C30 /* StopSequenceCell.m */; };
 		0483253B188D7D4900FE2C30 /* StopSequenceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0483253A188D7D4900FE2C30 /* StopSequenceViewController.m */; };
 		0483253C188D7D4900FE2C30 /* StopSequenceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0483253A188D7D4900FE2C30 /* StopSequenceViewController.m */; };
+		0490E73418C0682700903553 /* lametro.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 0490E73318C0682700903553 /* lametro.sqlite */; };
+		0490E73518C0682700903553 /* lametro.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 0490E73318C0682700903553 /* lametro.sqlite */; };
 		04A3E707188283FF0056603F /* FavoriteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04A3E706188283FF0056603F /* FavoriteViewController.m */; };
 		04A3E708188283FF0056603F /* FavoriteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04A3E706188283FF0056603F /* FavoriteViewController.m */; };
 		04C8C10B188B13D600905637 /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C8C10A188B13D600905637 /* RootViewController.m */; };
@@ -110,6 +112,12 @@
 		04D7BE3B1886EC4800D32902 /* reveal-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 04D7BE381886EC4800D32902 /* reveal-icon.png */; };
 		04D7BE3C1886EC4800D32902 /* reveal-icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04D7BE391886EC4800D32902 /* reveal-icon@2x.png */; };
 		04D7BE3D1886EC4800D32902 /* reveal-icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04D7BE391886EC4800D32902 /* reveal-icon@2x.png */; };
+		04EABB4D18BE462100762203 /* metro_metrolink_map.png in Resources */ = {isa = PBXBuildFile; fileRef = 04EABB4C18BE462100762203 /* metro_metrolink_map.png */; };
+		04EABB4E18BE462100762203 /* metro_metrolink_map.png in Resources */ = {isa = PBXBuildFile; fileRef = 04EABB4C18BE462100762203 /* metro_metrolink_map.png */; };
+		04EABB5018BE462D00762203 /* metrolink_map.png in Resources */ = {isa = PBXBuildFile; fileRef = 04EABB4F18BE462D00762203 /* metrolink_map.png */; };
+		04EABB5118BE462D00762203 /* metrolink_map.png in Resources */ = {isa = PBXBuildFile; fileRef = 04EABB4F18BE462D00762203 /* metrolink_map.png */; };
+		04EABB5318BE463C00762203 /* amtraksocal.png in Resources */ = {isa = PBXBuildFile; fileRef = 04EABB5218BE463C00762203 /* amtraksocal.png */; };
+		04EABB5418BE463C00762203 /* amtraksocal.png in Resources */ = {isa = PBXBuildFile; fileRef = 04EABB5218BE463C00762203 /* amtraksocal.png */; };
 		3D10F33D18959B7100D463D5 /* SideBarCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D10F33C18959B7100D463D5 /* SideBarCell.m */; };
 		3D10F33E18959B7100D463D5 /* SideBarCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D10F33C18959B7100D463D5 /* SideBarCell.m */; };
 		3D2D2F1818A0B04E00C1D44E /* FavoritesCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D2D2F1718A0B04E00C1D44E /* FavoritesCell.m */; };
@@ -127,9 +135,11 @@
 		3D8D9C9A1894397900096E46 /* NewsFeedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D8D9C981894397900096E46 /* NewsFeedViewController.m */; };
 		3D95BB091887A64700F334C1 /* MenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D95BB081887A64700F334C1 /* MenuViewController.m */; };
 		3D95BB0A1887A64700F334C1 /* MenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D95BB081887A64700F334C1 /* MenuViewController.m */; };
-		3DBB306D18B1376500E25372 /* lametro.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 3DBB306C18B1376500E25372 /* lametro.sqlite */; };
-		3DBB306E18B1376500E25372 /* lametro.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 3DBB306C18B1376500E25372 /* lametro.sqlite */; };
 		3DD02AFE188E379D00E4CD30 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DD02AFD188E379D00E4CD30 /* SystemConfiguration.framework */; };
+		3DD08E7918C8281100F49E41 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DD08E7818C8281100F49E41 /* Reachability.m */; };
+		3DD08E7A18C8281100F49E41 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DD08E7818C8281100F49E41 /* Reachability.m */; };
+		3DD08E7F18C838FB00F49E41 /* rail_map.png in Resources */ = {isa = PBXBuildFile; fileRef = 3DD08E7E18C838FB00F49E41 /* rail_map.png */; };
+		3DD08E8018C838FB00F49E41 /* rail_map.png in Resources */ = {isa = PBXBuildFile; fileRef = 3DD08E7E18C838FB00F49E41 /* rail_map.png */; };
 		3DF90572186142A3008A2D35 /* Metro.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DF90571186142A3008A2D35 /* Metro.m */; };
 		3DF90573186142A3008A2D35 /* Metro.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DF90571186142A3008A2D35 /* Metro.m */; };
 		3DFAD04C185C1D9F000F3854 /* StopsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DFAD04B185C1D9F000F3854 /* StopsViewController.m */; };
@@ -236,6 +246,7 @@
 		04832536188D7C7800FE2C30 /* StopSequenceCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StopSequenceCell.m; sourceTree = "<group>"; };
 		04832539188D7D4900FE2C30 /* StopSequenceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StopSequenceViewController.h; sourceTree = "<group>"; };
 		0483253A188D7D4900FE2C30 /* StopSequenceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StopSequenceViewController.m; sourceTree = "<group>"; };
+		0490E73318C0682700903553 /* lametro.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = lametro.sqlite; sourceTree = "<group>"; };
 		04A3E705188283FF0056603F /* FavoriteViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FavoriteViewController.h; sourceTree = "<group>"; };
 		04A3E706188283FF0056603F /* FavoriteViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FavoriteViewController.m; sourceTree = "<group>"; };
 		04C8C109188B13D600905637 /* RootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootViewController.h; sourceTree = "<group>"; };
@@ -254,6 +265,9 @@
 		04D6DB31186538E00043DC27 /* Timer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Timer.m; sourceTree = "<group>"; };
 		04D7BE381886EC4800D32902 /* reveal-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "reveal-icon.png"; sourceTree = "<group>"; };
 		04D7BE391886EC4800D32902 /* reveal-icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "reveal-icon@2x.png"; sourceTree = "<group>"; };
+		04EABB4C18BE462100762203 /* metro_metrolink_map.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = metro_metrolink_map.png; path = Images.xcassets/metro_metrolink_map.imageset/metro_metrolink_map.png; sourceTree = "<group>"; };
+		04EABB4F18BE462D00762203 /* metrolink_map.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = metrolink_map.png; path = Images.xcassets/metrolink_map.imageset/metrolink_map.png; sourceTree = "<group>"; };
+		04EABB5218BE463C00762203 /* amtraksocal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = amtraksocal.png; path = Images.xcassets/amtraksocal.imageset/amtraksocal.png; sourceTree = "<group>"; };
 		3D10F33B18959B7100D463D5 /* SideBarCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SideBarCell.h; sourceTree = "<group>"; };
 		3D10F33C18959B7100D463D5 /* SideBarCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SideBarCell.m; sourceTree = "<group>"; };
 		3D2D2F1618A0B04E00C1D44E /* FavoritesCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FavoritesCell.h; sourceTree = "<group>"; };
@@ -270,8 +284,10 @@
 		3D8D9C981894397900096E46 /* NewsFeedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewsFeedViewController.m; sourceTree = "<group>"; };
 		3D95BB071887A64700F334C1 /* MenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuViewController.h; sourceTree = "<group>"; };
 		3D95BB081887A64700F334C1 /* MenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuViewController.m; sourceTree = "<group>"; };
-		3DBB306C18B1376500E25372 /* lametro.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = lametro.sqlite; sourceTree = "<group>"; };
 		3DD02AFD188E379D00E4CD30 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		3DD08E7718C8281100F49E41 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
+		3DD08E7818C8281100F49E41 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
+		3DD08E7E18C838FB00F49E41 /* rail_map.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = rail_map.png; path = Images.xcassets/rail_map.imageset/rail_map.png; sourceTree = "<group>"; };
 		3DF90570186142A3008A2D35 /* Metro.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Metro.h; sourceTree = "<group>"; };
 		3DF90571186142A3008A2D35 /* Metro.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Metro.m; sourceTree = "<group>"; };
 		3DFAD04A185C1D9F000F3854 /* StopsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StopsViewController.h; sourceTree = "<group>"; };
@@ -358,6 +374,7 @@
 		04077E38185BB98F0076E6F8 /* OnTime - LA Metro */ = {
 			isa = PBXGroup;
 			children = (
+				3DD08E7618C8280100F49E41 /* Reachability */,
 				044819E518A13DCB008EACFD /* PodFiles */,
 				0475315B189E567200E34BDF /* ECSlidingViewController */,
 				3DFAD05E185E6399000F3854 /* Views */,
@@ -378,7 +395,11 @@
 		04077E39185BB98F0076E6F8 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				3DBB306C18B1376500E25372 /* lametro.sqlite */,
+				3DD08E7E18C838FB00F49E41 /* rail_map.png */,
+				0490E73318C0682700903553 /* lametro.sqlite */,
+				04EABB5218BE463C00762203 /* amtraksocal.png */,
+				04EABB4F18BE462D00762203 /* metrolink_map.png */,
+				04EABB4C18BE462100762203 /* metro_metrolink_map.png */,
 				040E7CCE18ADBE6A00C4791F /* Arial Rounded Bold.ttf */,
 				040E7CC818ABC93D00C4791F /* Bariol_Bold.otf */,
 				040E7CC918ABC93D00C4791F /* Bariol_Regular.otf */,
@@ -463,6 +484,15 @@
 				04753168189E567200E34BDF /* UIViewController+ECSlidingViewController.m */,
 			);
 			path = ECSlidingViewController;
+			sourceTree = "<group>";
+		};
+		3DD08E7618C8280100F49E41 /* Reachability */ = {
+			isa = PBXGroup;
+			children = (
+				3DD08E7718C8281100F49E41 /* Reachability.h */,
+				3DD08E7818C8281100F49E41 /* Reachability.m */,
+			);
+			name = Reachability;
 			sourceTree = "<group>";
 		};
 		3DFAD05B185E634C000F3854 /* Controllers */ = {
@@ -626,14 +656,18 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3DBB306D18B1376500E25372 /* lametro.sqlite in Resources */,
+				04EABB5318BE463C00762203 /* amtraksocal.png in Resources */,
 				04077E66185BB9C60076E6F8 /* MainStoryboard.storyboard in Resources */,
 				040E7CCA18ABC93D00C4791F /* Bariol_Bold.otf in Resources */,
 				04077E3D185BB98F0076E6F8 /* InfoPlist.strings in Resources */,
+				3DD08E7F18C838FB00F49E41 /* rail_map.png in Resources */,
 				04D7BE3C1886EC4800D32902 /* reveal-icon@2x.png in Resources */,
 				040E7CCC18ABC93D00C4791F /* Bariol_Regular.otf in Resources */,
+				0490E73418C0682700903553 /* lametro.sqlite in Resources */,
 				04077E48185BB98F0076E6F8 /* Images.xcassets in Resources */,
 				040E7CCF18ADBE6A00C4791F /* Arial Rounded Bold.ttf in Resources */,
+				04EABB5018BE462D00762203 /* metrolink_map.png in Resources */,
+				04EABB4D18BE462100762203 /* metro_metrolink_map.png in Resources */,
 				04D7BE3A1886EC4800D32902 /* reveal-icon.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -642,11 +676,15 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0490E73518C0682700903553 /* lametro.sqlite in Resources */,
+				04EABB5118BE462D00762203 /* metrolink_map.png in Resources */,
 				04D7BE3D1886EC4800D32902 /* reveal-icon@2x.png in Resources */,
+				04EABB5418BE463C00762203 /* amtraksocal.png in Resources */,
+				04EABB4E18BE462100762203 /* metro_metrolink_map.png in Resources */,
 				04077E67185BB9C60076E6F8 /* MainStoryboard.storyboard in Resources */,
-				3DBB306E18B1376500E25372 /* lametro.sqlite in Resources */,
 				040E7CCD18ABC93D00C4791F /* Bariol_Regular.otf in Resources */,
 				040E7CD018ADBE6A00C4791F /* Arial Rounded Bold.ttf in Resources */,
+				3DD08E8018C838FB00F49E41 /* rail_map.png in Resources */,
 				04077E5A185BB98F0076E6F8 /* InfoPlist.strings in Resources */,
 				040E7CCB18ABC93D00C4791F /* Bariol_Bold.otf in Resources */,
 				04D7BE3B1886EC4800D32902 /* reveal-icon.png in Resources */,
@@ -686,6 +724,7 @@
 				04077E82185E268B0076E6F8 /* FMDatabaseAdditions.m in Sources */,
 				044819F718A13DCB008EACFD /* SWLongPressGestureRecognizer.m in Sources */,
 				3DFAD058185E4097000F3854 /* Route.m in Sources */,
+				3DD08E7918C8281100F49E41 /* Reachability.m in Sources */,
 				047730F018662696003FEBDC /* StopTimes.m in Sources */,
 				0475317B189EB02600E34BDF /* MEDynamicTransition.m in Sources */,
 				04D6DB32186538E00043DC27 /* Timer.m in Sources */,
@@ -734,6 +773,7 @@
 				0483253C188D7D4900FE2C30 /* StopSequenceViewController.m in Sources */,
 				044819F618A13DCB008EACFD /* SWCellScrollView.m in Sources */,
 				04C8C110188B1C2100905637 /* InitViewController.m in Sources */,
+				3DD08E7A18C8281100F49E41 /* Reachability.m in Sources */,
 				0475317C189EB02600E34BDF /* MEDynamicTransition.m in Sources */,
 				04077E5C185BB98F0076E6F8 /* OnTime___LA_MetroTests.m in Sources */,
 				0427900118620D5D000717FA /* SearchDatabase.m in Sources */,
@@ -885,6 +925,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "OnTime - LA Metro/OnTime - LA Metro-Prefix.pch";
 				INFOPLIST_FILE = "OnTime - LA Metro/OnTime - LA Metro-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
@@ -901,6 +942,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "OnTime - LA Metro/OnTime - LA Metro-Prefix.pch";
 				INFOPLIST_FILE = "OnTime - LA Metro/OnTime - LA Metro-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;

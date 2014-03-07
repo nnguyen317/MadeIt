@@ -59,6 +59,7 @@
     // Add the pan gesture to allow sliding
     //[self.view addGestureRecognizer:self.slidingViewController.panGesture];
     
+    /*
     if ([(NSObject *)self.slidingViewController.delegate isKindOfClass:[MEDynamicTransition class]]) {
         MEDynamicTransition *dynamicTransition = (MEDynamicTransition *)self.slidingViewController.delegate;
         if (!self.dynamicTransitionPanGesture) {
@@ -71,6 +72,7 @@
         [self.navigationController.view removeGestureRecognizer:self.dynamicTransitionPanGesture];
         [self.navigationController.view addGestureRecognizer:self.slidingViewController.panGesture];
     }
+     */
     
 }
 
@@ -123,6 +125,8 @@
     self.selectedSegment = self.segmentItems[0];
     self.segmentBackgroundView.backgroundColor = [self colorWithHexString:@"2980b9"];
     self.segmentedControl.tintColor = [UIColor whiteColor];
+    
+    
 }
 
 
@@ -156,7 +160,8 @@
     
     self.tableData = [[NSMutableArray alloc]init];
     [self getTableData];
-    [self.tableView reloadData];
+    //[self.tableView reloadData];
+    [self.tableView performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:NO];
     
 }
 
@@ -175,10 +180,10 @@
     }
 }
 
--(BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer
-{
-    return NO;
-}
+//-(BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer
+//{
+//    return NO;
+//}
 
 - (IBAction)revealMenu:(id)sender
 {
@@ -216,7 +221,6 @@
     NSString *key = [allKeys firstObject];
     
     NSMutableArray *stopArray = [stopDictionary objectForKey:key];
-    
     return stopArray.count;
 }
 
@@ -225,13 +229,18 @@
     static NSString *CellIdentifier = @"StopTimeCell";
     id cell = nil;
     
+    
     if ([self.selectedSegment isEqualToString:@"Current"]) {
+        
         CellIdentifier = @"StopTimeCell";
-        StopArrivalTimeCell *newCell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+        
+        //StopArrivalTimeCell *newCell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+        StopArrivalTimeCell *newCell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
         timerSeconds = 0;
         
         if (newCell == nil) {
             newCell = [[StopArrivalTimeCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+            NSLog(@"Cell is nil");
         }
         
         // Configure the cell...
@@ -254,22 +263,47 @@
                 arrivalTotalSeconds -= 86400;
             }
             
+            int currHours = 0;
+            int currMinute = 0;
+            int currSeconds = 0;
+            
             newCell.totalSeconds = arrivalTotalSeconds;
-            int currHours   = arrivalTotalSeconds / 3600;
-            int currMinute = (arrivalTotalSeconds / 60) % 60;
-            int currSeconds = arrivalTotalSeconds % 60;
-            
-            
-            if(arrivalTotalSeconds > grandTotalSeconds ){
-                NSString *timerText = [NSString stringWithFormat:@"%02d%@%02d%@%02d",currHours,@":",currMinute,@":",currSeconds];
+            if (arrivalTotalSeconds > 0) {
+                currHours   = arrivalTotalSeconds / 3600;
+                currMinute = (arrivalTotalSeconds / 60) % 60;
+                currSeconds = arrivalTotalSeconds % 60;
                 newCell.arrivalTimerLabel.textColor = [UIColor blackColor];
                 newCell.arrivalTimeLabel.textColor = [UIColor blackColor];
                 newCell.directionBoundLabel.textColor = [UIColor blackColor];
+            } else {
+                newCell.arrivalTimerLabel.textColor = [UIColor grayColor];
+                newCell.arrivalTimeLabel.textColor = [UIColor grayColor];
+                newCell.directionBoundLabel.textColor = [UIColor grayColor];
+            }
+            
+            
+            
+            //if(arrivalTotalSeconds > grandTotalSeconds ){
+                NSString *timerText = [NSString stringWithFormat:@"%02d%@%02d%@%02d",currHours,@":",currMinute,@":",currSeconds];
+            
                 newCell.arrivalTimerLabel.text = timerText;
-                newCell.arrivalTimeLabel.text = [NSString stringWithFormat:@"Arrival time: %@",[metro convertToTime:[stopTimes.arrivalTime integerValue]]];
-                newCell.directionBoundLabel.text = [NSString stringWithFormat:@"%@ Bound",stopTimes.tripHeadsign];
+                newCell.arrivalTimeLabel.text = [NSString stringWithFormat:@"Scheduled Arrival: %@",[metro convertToTime:[stopTimes.arrivalTime integerValue]]];
+            
+                NSString *stationBound = [[NSString alloc]init];
+            
+                if(stopTimes.tripShortName) {
+                    stationBound = [NSString stringWithFormat:@"%@ - %@ Bound",stopTimes.tripShortName,stopTimes.tripHeadsign];
+                } else {
+                    stationBound = [NSString stringWithFormat:@"%@ Bound",stopTimes.tripHeadsign];
+                }
+            
+                newCell.directionBoundLabel.text = stationBound;
+            
+               // newCell.directionBoundLabel.text = [NSString stringWithFormat:@"%@ Bound",stopTimes.tripHeadsign];
                 newCell.directionId = stopTimes.directionId;
-                newCell.imageView.image = [UIImage imageNamed:stopTimes.routeImg];
+                NSString *image = [NSString stringWithFormat:@"%@_img",stopTimes.routeImg];
+                newCell.imageView.image = [UIImage imageNamed:image];
+                //newCell.imageView.image = [UIImage imageNamed:stopTimes.routeImg];
                 newCell.currHours = currHours;
                 newCell.currMinutes = currMinute;
                 newCell.currSeconds = currSeconds;
@@ -282,7 +316,7 @@
                 [timerContainer addObject:favoritesSection];
                 [newCell endTimer];
                 [newCell startTimer];
-            }
+            //}
             
             
         }
@@ -313,7 +347,9 @@
         Favorites *favorite = stopArray[indexPath.row];
         
         newCell.directionBoundLabel.text = [NSString stringWithFormat:@"%@ Bound",favorite.trip_headsign];
-        newCell.imageView.image = [UIImage imageNamed:favorite.route_img];
+        NSString *image = [NSString stringWithFormat:@"%@_img",favorite.route_img];
+        newCell.imageView.image = [UIImage imageNamed:image];
+        //newCell.imageView.image = [UIImage imageNamed:favorite.route_img];
         cell = newCell;
     }
     
@@ -356,21 +392,6 @@
     return view;
 }
 
-/*
-- (void)tableView:(UITableView *)tableView willDisplayHeaderView:(UIView *)view forSection:(NSInteger)section
-{
-    // Set the text color of our header/footer text.
-    UITableViewHeaderFooterView *header = (UITableViewHeaderFooterView *)view;
-    [header.textLabel setTextColor:[UIColor whiteColor]];
-    
-    header.contentView.backgroundColor = [self colorWithHexString:@"43677F"];
-    
-    // You can also do this to set the background color of our header/footer,
-    //    but the gradients/other effects will be retained.
-    // view.tintColor = [UIColor blackColor];
-}
-
- */
 
 -(UIColor*)colorWithHexString:(NSString*)hex
 {
@@ -542,11 +563,18 @@
 
 
 -(void)startTimer {
+    NSRunLoop *runLoop = [NSRunLoop currentRunLoop];
     timer =[NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(insertRow) userInfo:nil repeats:YES];
+    [runLoop addTimer:timer forMode:NSRunLoopCommonModes];
+    [runLoop addTimer:timer forMode:UITrackingRunLoopMode];
+    
 }
 
 -(void)startTimerForDelete {
+    NSRunLoop *runLoop = [NSRunLoop currentRunLoop];
     timerDelete =[NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(deleteRow) userInfo:nil repeats:YES];
+    [runLoop addTimer:timerDelete forMode:NSRunLoopCommonModes];
+    [runLoop addTimer:timerDelete forMode:UITrackingRunLoopMode];
 }
 
 - (void)timerFired
@@ -585,8 +613,13 @@
     //NSMutableArray *stopTimesToDelete = [[NSMutableArray alloc]init];
    // int currentRows = [self.tableView numberOfRowsInSection:section];
     BOOL insert = NO;
+    //NSMutableArray *tableDataCopy = [self.tableData mutableCopy];
+    
     for (StopArrivalTimeCell *cell in cells) {
-        if (cell.totalSeconds <= 0) {
+        NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
+        int rowCount = [self.tableView numberOfRowsInSection:indexPath.section];
+        
+        if (cell.totalSeconds <= 0 && rowCount == 1) {
             if (!cell.doneDelete) {
                 cell.arrivalTimerLabel.textColor = [UIColor grayColor];
                 cell.arrivalTimeLabel.textColor = [UIColor grayColor];
@@ -599,7 +632,7 @@
                     //NSString *image = stopDictionary[@"img"];
                     
                     if([cell.cellKey isEqualToString:key]){
-                        StopTimes *stopTime = [self.tableData[i][key] firstObject];
+                        StopTimes *stopTime = [stopDictionary[key] firstObject];
                         Metro *metro = [[Metro alloc] init];
                         
                         NSMutableArray *stopTimeArray = [metro getArrivalTimeFromStopSingle:stopTime.routeId withStopId:stopTime.stopId andDirectionId:stopTime.directionId forAgency:stopTime.agencyId forDatabase:stopTime.agencyId];
@@ -610,14 +643,12 @@
                             stopTime2.agencyId = stopTime.agencyId;
                             stopTime2.routeId = stopTime.routeId;
                             stopTime2.routeImg = stopTime.routeImg;
-                            [self.tableData[i][key] addObject:stopTime2];
+                            [stopDictionary[key] addObject:stopTime2];
                         }
                         
-                        NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
-                        int rowCount = [self.tableView numberOfRowsInSection:indexPath.section];
                         int tableRowCount = [self.tableData[i][key] count];
                         
-                        if (rowCount < 2 && tableRowCount == 2) {
+                        if (tableRowCount == 2) {
                             [indexes addObject:[NSIndexPath indexPathForRow:rowCount inSection:indexPath.section]];
                             cell.doneDelete = YES;
                             insert = YES;
@@ -630,6 +661,18 @@
     
     if (insert) {
         //[self.tableView reloadData];
+        NSMutableArray *indexsCopy = [indexes mutableCopy];
+        for(NSIndexPath *indexPath in indexsCopy) {
+            int rowCount = [self.tableView numberOfRowsInSection:indexPath.section];
+            NSDictionary *stopDictionary = self.tableData[indexPath.section];
+            NSArray *keys = [stopDictionary allKeys];
+            NSString *key = [keys firstObject];
+            int tableRowCount = [stopDictionary[key] count];
+            if(rowCount != 1 && tableRowCount != 2){
+                [indexes removeObjectIdenticalTo:indexPath];
+            }
+        }
+        
         [self.tableView beginUpdates];
         [self.tableView insertRowsAtIndexPaths:indexes withRowAnimation:UITableViewRowAnimationTop];
         [self.tableView endUpdates];
@@ -647,8 +690,10 @@
         for (StopArrivalTimeCell *cell in cells)
         {
             int totalCellSeconds = cell.totalSeconds;
+            NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
+            NSInteger rowCount = [self.tableView numberOfRowsInSection:indexPath.section];
             
-            if(totalCellSeconds <= -60){
+            if(totalCellSeconds <= -60 && rowCount == 2){
                 [cell endTimer];
                 //[self getTableData];
                 for (int i = 0; i<self.tableData.count; i++) {
@@ -660,15 +705,14 @@
                         NSArray *stopArray = self.tableData[i][key];
                         for (int j = 0; j < stopArray.count; j++) {
                             StopTimes *stopTime = stopArray[j];
-                            NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
-                            NSInteger rowCount = [self.tableView numberOfRowsInSection:indexPath.section];
                             NSInteger tableRowCount = [self.tableData[i][key] count];
-                            if (rowCount > 1 && tableRowCount > 1) {
+                            if (tableRowCount == 2) {
                                 if ([cell.arrivalSeconds isEqualToString:stopTime.arrivalTime]) {
                                     NSDictionary *items = @{@"section":[NSString stringWithFormat:@"%d",i],@"row":key,@"deleteIndex":[NSNumber numberWithInt: indexPath.row],@"object":stopTime};
+                                    NSIndexPath *indexPathDelete = [NSIndexPath indexPathForRow:0 inSection:indexPath.section];
                                     [itemsToDelete addObject:items];
                                     deleteItems = YES;
-                                    [indexes addObject:indexPath];
+                                    [indexes addObject:indexPathDelete];
                                     cell.deleteFlag = NO;
                                     cell.doneDelete = NO;
                                     //[self.tableData[i][key] removeObjectIdenticalTo:stopTime];
@@ -688,17 +732,19 @@
                 NSDictionary *deleteItems = itemsToDelete[i];
                 NSInteger section = [deleteItems[@"section"] integerValue];
                 NSString *row = deleteItems[@"row"];
-                //int index = [deleteItems[@"delete"] integerValue];
-                //[self.tableData[section][row] removeObjectAtIndex:index];
-                [self.tableData[section][row] removeObjectIdenticalTo:deleteItems[@"object"]];
+                int index = [deleteItems[@"delete"] integerValue];
+                [self.tableData[section][row] removeObjectAtIndex:index];
+                //[self.tableData[section][row] removeObjectIdenticalTo:deleteItems[@"object"]];
+            }
+            
+            if (indexes.count > 0){
+                [self.tableView beginUpdates];
+                [self.tableView deleteRowsAtIndexPaths:indexes withRowAnimation:UITableViewRowAnimationFade];
+                [self.tableView endUpdates];
             }
         }
                                  
-        if (indexes.count > 0){
-            [self.tableView beginUpdates];
-            [self.tableView deleteRowsAtIndexPaths:indexes withRowAnimation:UITableViewRowAnimationFade];
-            [self.tableView endUpdates];
-        }
+        
     }
     
 }
@@ -714,27 +760,29 @@
 
 -(void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
-    NSDictionary *stopDictionary = self.tableData[indexPath.section];
-    NSArray *keys = [stopDictionary allKeys];
-    NSString *key = [keys firstObject];
-    
-    if([segue.identifier isEqualToString:@"showStopTimes"]) {
-        StopTimes *stopTimes = self.tableData[indexPath.section][key][indexPath.row];
+    if(indexPath){
+        NSDictionary *stopDictionary = self.tableData[indexPath.section];
+        NSArray *keys = [stopDictionary allKeys];
+        NSString *key = [keys firstObject];
         
-        StopSequenceViewController *stopSequenceController = [segue destinationViewController];
-        stopSequenceController.stopTimes = stopTimes;
-        stopSequenceController.stopTimes.routeId = stopTimes.routeId;
-        stopSequenceController.stopTimes.stopId = stopTimes.stopId;
-        stopSequenceController.stopTimes.agencyId = stopTimes.agencyId;
-    } else if([segue.identifier isEqualToString:@"listTimes"]) {
-        Favorites *favorites = self.tableData[indexPath.section][key][indexPath.row];
-        StopTimes *stopTimes = [[StopTimes alloc]init];
-        AllStopTimeViewController *allStopTimeController = [segue destinationViewController];
-        allStopTimeController.navItem.title = favorites.stop_name;
-        allStopTimeController.bounds = @{@"trip_headsign":favorites.trip_headsign,@"direction_id":favorites.direction_id};
-        allStopTimeController.stopTimes = stopTimes;
-        allStopTimeController.stopTimes.routeId = favorites.route_id;
-        allStopTimeController.stopTimes.stopId = favorites.stop_id;
+        if([segue.identifier isEqualToString:@"showStopTimes"]) {
+            StopTimes *stopTimes = self.tableData[indexPath.section][key][indexPath.row];
+            
+            StopSequenceViewController *stopSequenceController = [segue destinationViewController];
+            stopSequenceController.stopTimes = stopTimes;
+            stopSequenceController.stopTimes.routeId = stopTimes.routeId;
+            stopSequenceController.stopTimes.stopId = stopTimes.stopId;
+            stopSequenceController.stopTimes.agencyId = stopTimes.agencyId;
+        } else if([segue.identifier isEqualToString:@"listTimes"]) {
+            Favorites *favorites = self.tableData[indexPath.section][key][indexPath.row];
+            StopTimes *stopTimes = [[StopTimes alloc]init];
+            AllStopTimeViewController *allStopTimeController = [segue destinationViewController];
+            allStopTimeController.navItem.title = favorites.stop_name;
+            allStopTimeController.bounds = @{@"trip_headsign":favorites.trip_headsign,@"direction_id":favorites.direction_id};
+            allStopTimeController.stopTimes = stopTimes;
+            allStopTimeController.stopTimes.routeId = favorites.route_id;
+            allStopTimeController.stopTimes.stopId = favorites.stop_id;
+        }
     }
 }
 
@@ -758,7 +806,8 @@
         }
         
         [self getTableData];
-        [self.tableView reloadData];
+        //[self.tableView reloadData];
+        [self.tableView performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:NO];
     }
 }
 
@@ -816,10 +865,7 @@
     NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
     
     if (state == 2) {
-        self.doorOpen = indexPath.section;
-        UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
-        
-        cell.accessoryType = UITableViewCellAccessoryNone;
+        self.doorOpen = indexPath.section;        
         
         // Remove the pan gesture to disallow sliding
         if ([(NSObject *)self.slidingViewController.delegate isKindOfClass:[MEDynamicTransition class]]) {
@@ -837,9 +883,7 @@
     
     if (self.doorOpen == indexPath.section && state != 2) {
         self.doorOpen = 99;
-        UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
         
-        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         // Add the pan gesture to allow sliding
         if ([(NSObject *)self.slidingViewController.delegate isKindOfClass:[MEDynamicTransition class]]) {
             MEDynamicTransition *dynamicTransition = (MEDynamicTransition *)self.slidingViewController.delegate;

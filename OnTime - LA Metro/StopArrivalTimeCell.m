@@ -55,8 +55,8 @@
     //NSString *boldFontName = @"Bariol-Bold";
     NSString *fontName = @"Bariol-Regular";
     NSString *timerFont = @"ArialRoundedMTBold";
-    self.arrivalTimerLabel.font = [UIFont fontWithName:timerFont size:20.0f];
-    self.arrivalTimeLabel.font = [UIFont fontWithName:fontName size:12.0f];
+    self.arrivalTimerLabel.font = [UIFont fontWithName:timerFont size:28.0f];
+    self.arrivalTimeLabel.font = [UIFont fontWithName:fontName size:14.0f];
     self.directionBoundLabel.font = [UIFont fontWithName:fontName size:14.0f];
     
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
@@ -104,6 +104,10 @@
 
 -(void)startTimer {
     timer =[NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(timerFired) userInfo:nil repeats:YES];
+    NSRunLoop *runLoop = [NSRunLoop currentRunLoop];
+    [runLoop addTimer:timer forMode:NSRunLoopCommonModes];
+    [runLoop addTimer:timer forMode:UITrackingRunLoopMode];
+    
 }
 
 

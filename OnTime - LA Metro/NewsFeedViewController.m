@@ -12,12 +12,15 @@
 #import "MenuViewController.h"
 #import "MEDynamicTransition.h"
 #import "UIViewController+ECSlidingViewController.h"
+#import <QuartzCore/QuartzCore.h>
+#import "Reachability.h"
 
 @interface NewsFeedViewController ()
 @property (nonatomic, strong) NSArray *tweets;
 @property (nonatomic, strong) NSString *choice;
 @property (nonatomic, strong) NSArray *metroLinkUsers;
 @property (nonatomic, strong) UIPanGestureRecognizer *dynamicTransitionPanGesture;
+@property BOOL isError;
 
 @end
 
@@ -26,6 +29,8 @@
 @synthesize tweets = _tweets;
 @synthesize choice = _choice;
 @synthesize metroLinkUsers = _metroLinkUsers;
+@synthesize activityIndicator = _activityIndicator;
+@synthesize statusView = _statusView;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -39,20 +44,22 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.statusView.layer.cornerRadius = 5;
+    self.statusView.layer.masksToBounds = YES;
+    
     _dataSource = [[NSMutableArray alloc]init];
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     _choice = appDelegate.choice;
-    //[self getTimeLine];
-    
-	// Do any additional setup after loading the view.
-}
-- (void)viewWillAppear:(BOOL)animated{
     _tweets = [[NSArray alloc]init];
-
-    if(_dataSource.count == 0 || !_dataSource) {
-        [self getTimeLine];
-    }
- 
+    self.isError = NO;
+    self.statusView.hidden = NO;
+    self.activityIndicator.hidden = NO;
+    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+    
+    
+    
+    
+    //self.activityIndicator.hidden = YES;
     if([_choice isEqualToString:@"Metrolink"]) {
         _metroLinkUsers = @[@"MetrolinkANT",@"MetrolinkIEOC",@"MetrolinkOC",@"MetrolinkRIV",@"MetrolinkSB",@"MetrolinkVC",@"Metrolink91"];
         self.navBarItem.title = _choice;
@@ -63,6 +70,100 @@
         _metroLinkUsers = @[@"metrolaalerts"];
         self.navBarItem.title = _choice;
     }
+    
+    if(_dataSource.count == 0 || !_dataSource) {
+        Reachability *reach = [Reachability reachabilityWithHostname:@"www.google.com"];
+        
+        reach.reachableBlock = ^(Reachability*reach)
+        {
+            [self getTimeLine];
+        };
+        
+        reach.unreachableBlock = ^(Reachability*reach)
+        {
+            UIAlertView *alertView = [[UIAlertView alloc]
+                                      initWithTitle:@"Sorry"
+                                      message:@"An internet connection is needed to obtain news feed"
+                                      delegate:self
+                                      cancelButtonTitle:@"OK"
+                                      otherButtonTitles:nil];
+            
+            [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+            [alertView show];
+            self.statusView.hidden = YES;
+            self.activityIndicator.hidden = YES;
+        };
+        
+        // Start the notifier, which will cause the reachability object to retain itself!
+        [reach startNotifier];
+        
+        
+    } else {
+        self.statusView.hidden = YES;
+        self.activityIndicator.hidden = YES;
+    }
+    
+    //[self getTimeLine];
+    
+	// Do any additional setup after loading the view.
+}
+- (void)viewWillAppear:(BOOL)animated{
+    /*
+    _tweets = [[NSArray alloc]init];
+    self.isError = NO;
+    self.statusView.hidden = NO;
+    self.activityIndicator.hidden = NO;
+    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+    
+    
+    
+    
+    //self.activityIndicator.hidden = YES;
+    if([_choice isEqualToString:@"Metrolink"]) {
+        _metroLinkUsers = @[@"MetrolinkANT",@"MetrolinkIEOC",@"MetrolinkOC",@"MetrolinkRIV",@"MetrolinkSB",@"MetrolinkVC",@"Metrolink91"];
+        self.navBarItem.title = _choice;
+    } else if([_choice isEqualToString:@"Amtrak"]) {
+        _metroLinkUsers = @[@"PACSurfliners"];
+        self.navBarItem.title = _choice;
+    } else {
+        _metroLinkUsers = @[@"metrolaalerts"];
+        self.navBarItem.title = _choice;
+    }
+    
+    if(_dataSource.count == 0 || !_dataSource) {
+        Reachability *reach = [Reachability reachabilityWithHostname:@"www.google.com"];
+        
+        reach.reachableBlock = ^(Reachability*reach)
+        {
+            [self getTimeLine];
+        };
+        
+        reach.unreachableBlock = ^(Reachability*reach)
+        {
+            UIAlertView *alertView = [[UIAlertView alloc]
+                                      initWithTitle:@"Sorry"
+                                      message:@"An internet connection is needed to obtain news feed"
+                                      delegate:self
+                                      cancelButtonTitle:@"OK"
+                                      otherButtonTitles:nil];
+            
+            [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+            [alertView show];
+            self.statusView.hidden = YES;
+            self.activityIndicator.hidden = YES;
+        };
+        
+        // Start the notifier, which will cause the reachability object to retain itself!
+        [reach startNotifier];
+
+        
+    } else {
+        self.statusView.hidden = YES;
+        self.activityIndicator.hidden = YES;
+    }
+    
+    */
+    
     self.view.layer.shadowOpacity = 0.75f;
     self.view.layer.shadowRadius = 10.0f;
     self.view.layer.shadowColor = [UIColor blackColor].CGColor;
@@ -81,6 +182,12 @@
     }
     _revealButton.target = self;
     _revealButton.action = @selector(revealMenu:);
+}
+
+-(void)viewWillDisappear:(BOOL)animated {
+    self.statusView.hidden = YES;
+    self.activityIndicator.hidden = YES;
+    
 }
 
 -(void)viewDidAppear:(BOOL)animated {
@@ -176,8 +283,11 @@
                  if ([arrayOfAccounts count] > 0)
                  {
                      ACAccount *twitterAccount = [arrayOfAccounts lastObject];
+                     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
                      
                      NSURL *requestURL = [NSURL URLWithString:@"https://api.twitter.com/1.1/statuses/user_timeline.json"];
+                     
+                     
                      for (NSString *user in _metroLinkUsers){
                          NSMutableDictionary *parameters =
                          [[NSMutableDictionary alloc] init];
@@ -196,21 +306,43 @@
                             *urlResponse, NSError *error)
                           {
                               
-                              _tweets = [NSJSONSerialization
-                                         JSONObjectWithData:responseData
-                                         options:NSJSONReadingMutableLeaves
-                                         error:&error];
-                              
-                              if (_tweets.count != 0) {
-                                  [self.dataSource addObject:_tweets];
-                                  if (_dataSource.count != 0) {
-                                      dispatch_async(dispatch_get_main_queue(), ^{
-                                          [self.tweetTableView reloadData];
-                                          
-                                      });
+                              if ([urlResponse statusCode] == 200) {
+                                  self.isError = NO;
+                                  
+                                  _tweets = [NSJSONSerialization
+                                             JSONObjectWithData:responseData
+                                             options:NSJSONReadingMutableLeaves
+                                             error:&error];
+                                  
+                                  if (_tweets.count != 0) {
+                                      [self.dataSource addObject:_tweets];
+                                      if (_dataSource.count != 0) {
+                                          dispatch_async(dispatch_get_main_queue(), ^{
+                                              [self.tweetTableView reloadData];
+                                              self.statusView.hidden = YES;
+                                              self.activityIndicator.hidden = YES;
+                                              [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+                                          });
+                                      }
                                   }
+                              } else {
+                                  self.isError = YES;
                               }
+                              
                           }];
+                         if (self.isError == YES) {
+                             UIAlertView *alertView = [[UIAlertView alloc]
+                                                       initWithTitle:@"Sorry"
+                                                       message:@"Unable to obtain news feed"
+                                                       delegate:self
+                                                       cancelButtonTitle:@"OK"
+                                                       otherButtonTitles:nil];
+                             self.statusView.hidden = YES;
+                             self.activityIndicator.hidden = YES;
+                             [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+                             [alertView show];
+                             break;
+                         }
                      }
                      
                  }
@@ -221,6 +353,9 @@
                                            delegate:self
                                            cancelButtonTitle:@"OK"
                                            otherButtonTitles:nil];
+                 self.statusView.hidden = YES;
+                 self.activityIndicator.hidden = YES;
+                 [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
                  [alertView show];
              }
              
@@ -230,6 +365,7 @@
         [fbCompose setInitialText:@""];
         [self presentViewController:fbCompose animated:YES completion:nil];
     }
+    
 
 }
 

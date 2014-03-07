@@ -15,5 +15,6 @@
 @synthesize tripHeadsign = _tripHeadsign;
 @synthesize tripId = _tripId;
 @synthesize stopSequence = _stopSequence;
+@synthesize tripShortName = _tripShortName;
 
 @end

@@ -113,7 +113,8 @@
     route = self.routeList[indexPath.row];
     
     cell.stationLabel.text = route.routeName;
-    cell.imageView.image = [UIImage imageNamed:route.routeImg];
+    NSString *image = [NSString stringWithFormat:@"%@_img",route.routeImg];
+    cell.imageView.image = [UIImage imageNamed:image];
     
     return cell;
 }
@@ -127,6 +128,7 @@
         StopsViewController *stopController = [segue destinationViewController];
         stopController.stop = stop;
         stopController.stop.agencyId = self.route.agencyId;
+        stopController.stop.routeImg = stop.routeImg;
         stopController.navBarItem.title = stop.routeName;
     }
 }

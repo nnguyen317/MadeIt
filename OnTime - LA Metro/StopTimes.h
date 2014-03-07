@@ -16,5 +16,6 @@
 @property (nonatomic, strong) NSString *tripHeadsign;
 @property (nonatomic, strong) NSString *tripId;
 @property (nonatomic, strong) NSString *stopSequence;
+@property (nonatomic, strong) NSString *tripShortName;
 
 @end

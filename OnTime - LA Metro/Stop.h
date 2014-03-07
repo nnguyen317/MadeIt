@@ -14,4 +14,6 @@
 @property (nonatomic, strong) NSString *stopName;
 @property (nonatomic, strong) NSString *stopId;
 @property (nonatomic, strong) NSString *tripId;
+
+
 @end
